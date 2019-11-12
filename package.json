@@ -1,26 +1,21 @@
 {
-  "name": "links",
+  "name": "occupoint",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
-    "aws-amplify": "^1.2.4",
-    "babel-plugin-relay": "^7.1.0",
     "farce": "^0.2.8",
     "found": "^0.4.9",
-    "found-relay": "^0.5.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-relay": "^7.1.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {
     "start": "react-scripts start --no-cache",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "relay": "relay-compiler --config relay.config.json --watch"
+    "test": "react-scripts test"
   },
   "husky": {
     "hooks": {
@@ -43,11 +38,8 @@
     ]
   },
   "devDependencies": {
-    "graphql": "^14.5.8",
     "husky": "^3.0.9",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1",
-    "relay-compiler": "^7.1.0",
-    "relay-config": "^7.1.0"
+    "pretty-quick": "^2.0.1"
   }
 }
