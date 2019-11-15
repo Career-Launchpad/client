@@ -22,7 +22,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "jest && pretty-quick --staged"
+      "pre-commit": "CI=true npm test && relay-compiler --config relay.config.json && pretty-quick --staged"
     }
   },
   "eslintConfig": {

@@ -8,22 +8,12 @@ import AddLink from "./AddLink";
 import LinkList from "./LinkList";
 import styles from "./LinksPage.module.css";
 
-const query = graphql`
-  query LinksPage_Query {
-    store {
-      links {
-        ...LinkList_links
-      }
-    }
-  }
-`;
-
 const LinksPage = () => {
   return (
     <QueryRenderer
       environment={environment}
       query={query}
-      render={({ error, retry, props }) => {
+      render={({ props }) => {
         if (!props) return <LinearProgress color="secondary" />;
         return (
           <div className={styles.content}>
@@ -35,5 +25,15 @@ const LinksPage = () => {
     />
   );
 };
+
+const query = graphql`
+  query LinksPage_Query {
+    store {
+      links {
+        ...LinkList_links
+      }
+    }
+  }
+`;
 
 export default LinksPage;

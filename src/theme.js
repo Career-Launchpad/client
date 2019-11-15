@@ -1,5 +1,8 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
+const light = "light";
+const dark = "dark";
+
 const palette = {
   primary: {
     light: "#E6EEF8",
@@ -19,15 +22,28 @@ const palette = {
 const lightTheme = createMuiTheme({
   palette: {
     ...palette,
-    type: "light"
+    type: light
   }
 });
 
 const darkTheme = createMuiTheme({
   palette: {
     ...palette,
-    type: "dark"
+    type: dark
   }
 });
 
-export { lightTheme, darkTheme };
+const themeKey = "career-debut-theme";
+
+const toggleTheme = (storage = localStorage) => {
+  if (storage.getItem(themeKey) === dark) storage.setItem(themeKey, light);
+  else storage.setItem(themeKey, dark);
+};
+
+const getCurrentTheme = (storage = localStorage) => {
+  return (storage.getItem(themeKey) || light) === light
+    ? lightTheme
+    : darkTheme;
+};
+
+export { toggleTheme, getCurrentTheme };

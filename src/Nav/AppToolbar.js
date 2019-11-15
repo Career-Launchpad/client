@@ -5,22 +5,17 @@ import Icon from "@material-ui/core/Icon";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-const AppToolbar = ({ styles }) => {
-  const themeKey = "career-debut-theme";
-  const currentTheme = localStorage.getItem(themeKey);
-  const toggleTheme = () => {
-    if (currentTheme === "dark") localStorage.setItem(themeKey, "light");
-    else localStorage.setItem(themeKey, "dark");
-    window.location.reload();
-  };
+import { getCurrentTheme, toggleTheme } from "../theme";
 
+const AppToolbar = ({ styles }) => {
+  const currentTheme = getCurrentTheme().palette.type;
   return (
     <AppBar position="fixed" className={styles.appBar}>
       <Toolbar className={styles.toolbar}>
         <Typography variant="h6" noWrap>
           Career Debut
         </Typography>
-        <Fab size="small" onClick={toggleTheme}>
+        <Fab size="small" onClick={() => toggleTheme()}>
           <Icon>{currentTheme === "dark" ? "nights_stay" : "wb_sunny"}</Icon>
         </Fab>
       </Toolbar>

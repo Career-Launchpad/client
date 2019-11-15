@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { commitMutation, createFragmentContainer } from "react-relay";
+import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import environment from "../../environment";
 
-const commit = (environment, input) => {
+const commit = input => {
   commitMutation(environment, {
     mutation: graphql`
       mutation AddLink_Mutation($input: CreateLinkInput!) {
@@ -26,7 +26,7 @@ const AddLink = () => {
   const [title, setTitle] = useState("");
   const addLinkHandler = e => {
     e.preventDefault();
-    commit(environment, { title, url });
+    commit({ title, url });
     setUrl("");
     setTitle("");
   };
@@ -62,4 +62,4 @@ const AddLink = () => {
   );
 };
 
-export default createFragmentContainer(AddLink, {});
+export default AddLink;
