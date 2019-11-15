@@ -23,16 +23,11 @@ const styles = makeStyles(theme => ({
   main: {
     flexGrow: 1
   },
-  content: {
-    padding: theme.spacing(3)
-  },
   routeActive: {
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "light" ? 300 : 700]
   },
-  toolbarSpace: theme.mixins.toolbar,
-  hidden: {
-    visibility: "hidden"
-  }
+  toolbarSpace: theme.mixins.toolbar
 }));
 
 export default styles;

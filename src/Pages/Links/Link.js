@@ -1,12 +1,13 @@
 import React from "react";
 import { commitMutation, createFragmentContainer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-
-import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
+import IconButton from "@material-ui/core/IconButton";
+
+import environment from "../../environment";
 import styles from "./Link.module.css";
 
-const commit = (environment, input) =>
+const commit = input =>
   commitMutation(environment, {
     mutation: graphql`
       mutation Link_Mutation($input: DeleteLinkInput!) {
@@ -20,9 +21,9 @@ const commit = (environment, input) =>
     onError: err => console.log(err)
   });
 
-const Link = ({ link, relay }) => {
+const Link = ({ link }) => {
   const deleteLinkHandler = () => {
-    commit(relay.environment, { id: link.id, title: link.title });
+    commit({ id: link.id, title: link.title });
   };
 
   return (

@@ -1,26 +1,39 @@
 import React from "react";
-import { createFragmentContainer } from "react-relay";
+import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import Nav from "../../Nav/Nav";
+import environment from "../../environment";
 import AddLink from "./AddLink";
 import LinkList from "./LinkList";
+import styles from "./LinksPage.module.css";
 
-const LinksPage = ({ store }) => {
-  return (
-    <Nav>
-      <LinkList links={store.links} />
-      <AddLink parentID={store.id} />
-    </Nav>
-  );
-};
-
-export default createFragmentContainer(LinksPage, {
-  store: graphql`
-    fragment LinksPage_store on Store {
+const query = graphql`
+  query LinksPage_Query {
+    store {
       links {
         ...LinkList_links
       }
     }
-  `
-});
+  }
+`;
+
+const LinksPage = () => {
+  return (
+    <QueryRenderer
+      environment={environment}
+      query={query}
+      render={({ error, retry, props }) => {
+        if (!props) return <LinearProgress color="secondary" />;
+        return (
+          <div className={styles.content}>
+            <LinkList links={props.store.links} />
+            <AddLink parentID={props.store.id} />
+          </div>
+        );
+      }}
+    />
+  );
+};
+
+export default LinksPage;

@@ -7,16 +7,14 @@ const palette = {
     dark: "#001025"
   },
   secondary: {
-    light: "#72BBD8",
-    main: "#F1F8FB",
+    light: "#F1F8FB",
+    main: "#72BBD8",
     dark: "#17252B"
   },
   error: {
     main: "#FF350C"
   }
 };
-
-const isDark = theme => theme.palette.type === "dark";
 
 const lightTheme = createMuiTheme({
   palette: {
@@ -32,4 +30,4 @@ const darkTheme = createMuiTheme({
   }
 });
 
-export { isDark, lightTheme, darkTheme };
+export { lightTheme, darkTheme };

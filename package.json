@@ -8,8 +8,6 @@
     "aws-amplify": "^1.2.4",
     "babel-plugin-relay": "^7.1.0",
     "farce": "^0.2.8",
-    "found": "^0.4.9",
-    "found-relay": "^0.5.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-relay": "^7.1.0",

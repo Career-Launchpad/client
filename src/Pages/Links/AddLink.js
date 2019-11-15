@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { commitMutation, createFragmentContainer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+
+import environment from "../../environment";
 
 const commit = (environment, input) => {
   commitMutation(environment, {
@@ -20,12 +21,12 @@ const commit = (environment, input) => {
   });
 };
 
-const AddLink = ({ relay }) => {
+const AddLink = () => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const addLinkHandler = e => {
     e.preventDefault();
-    commit(relay.environment, { title, url });
+    commit(environment, { title, url });
     setUrl("");
     setTitle("");
   };

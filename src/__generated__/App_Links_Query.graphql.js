@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 700cd41cb55ad8b4489b1f2b0133b5b2
+ * @relayHash 98717f99771db0b8ce75170e024ed64b
  */
 
 /* eslint-disable */
@@ -10,20 +10,20 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type LinksPage_store$ref = any;
-export type router_Links_QueryVariables = {||};
-export type router_Links_QueryResponse = {|
+export type App_Links_QueryVariables = {||};
+export type App_Links_QueryResponse = {|
   +store: ?{|
     +$fragmentRefs: LinksPage_store$ref
   |}
 |};
-export type router_Links_Query = {|
-  variables: router_Links_QueryVariables,
-  response: router_Links_QueryResponse,
+export type App_Links_Query = {|
+  variables: App_Links_QueryVariables,
+  response: App_Links_QueryResponse,
 |};
 */
 
 /*
-query router_Links_Query {
+query App_Links_Query {
   store {
     ...LinksPage_store
   }
@@ -53,7 +53,7 @@ const node /*: ConcreteRequest*/ = {
   kind: "Request",
   fragment: {
     kind: "Fragment",
-    name: "router_Links_Query",
+    name: "App_Links_Query",
     type: "Query",
     metadata: null,
     argumentDefinitions: [],
@@ -78,7 +78,7 @@ const node /*: ConcreteRequest*/ = {
   },
   operation: {
     kind: "Operation",
-    name: "router_Links_Query",
+    name: "App_Links_Query",
     argumentDefinitions: [],
     selections: [
       {
@@ -139,13 +139,13 @@ const node /*: ConcreteRequest*/ = {
   },
   params: {
     operationKind: "query",
-    name: "router_Links_Query",
+    name: "App_Links_Query",
     id: null,
     text:
-      "query router_Links_Query {\n  store {\n    ...LinksPage_store\n  }\n}\n\nfragment LinkList_links on LinkConnection {\n  items {\n    id\n    ...Link_link\n  }\n}\n\nfragment Link_link on Link {\n  id\n  title\n  url\n}\n\nfragment LinksPage_store on Store {\n  links {\n    ...LinkList_links\n  }\n}\n",
+      "query App_Links_Query {\n  store {\n    ...LinksPage_store\n  }\n}\n\nfragment LinkList_links on LinkConnection {\n  items {\n    id\n    ...Link_link\n  }\n}\n\nfragment Link_link on Link {\n  id\n  title\n  url\n}\n\nfragment LinksPage_store on Store {\n  links {\n    ...LinkList_links\n  }\n}\n",
     metadata: {}
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = 'b3427701d6918baab077f658871d442f';
+(node/*: any*/).hash = '6434d664783ad475d27b6f387d77d204';
 module.exports = node;
