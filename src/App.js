@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import AppNavBar from "./Nav/AppNavbar";
 import AppToolbar from "./Nav/AppToolbar";
 import HomePage from "./Pages/Home/HomePage";
-import LinksPage from "./Pages/Links/LinksPage";
+import AddStudentPage from "./Pages/AddStudent/AddStudentPage";
 import useStyles from "./App.styles";
 
 const routes = [
@@ -15,10 +15,10 @@ const routes = [
     icon: "home"
   },
   {
-    name: "Links",
-    path: "/links",
-    component: LinksPage,
-    icon: "link"
+    name: "Add Student",
+    path: "/add-student",
+    component: AddStudentPage,
+    icon: "add"
   }
 ];
 
