@@ -4,7 +4,7 @@
 
 /* eslint-disable */
 
-"use strict";
+'use strict';
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
@@ -26,33 +26,34 @@ export type LinkList_links$key = {
 };
 */
 
-const node /*: ReaderFragment*/ = {
-  kind: "Fragment",
-  name: "LinkList_links",
-  type: "LinkConnection",
-  metadata: null,
-  argumentDefinitions: [],
-  selections: [
+
+const node/*: ReaderFragment*/ = {
+  "kind": "Fragment",
+  "name": "LinkList_links",
+  "type": "LinkConnection",
+  "metadata": null,
+  "argumentDefinitions": [],
+  "selections": [
     {
-      kind: "LinkedField",
-      alias: null,
-      name: "items",
-      storageKey: null,
-      args: null,
-      concreteType: "Link",
-      plural: true,
-      selections: [
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "items",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "Link",
+      "plural": true,
+      "selections": [
         {
-          kind: "ScalarField",
-          alias: null,
-          name: "id",
-          args: null,
-          storageKey: null
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "id",
+          "args": null,
+          "storageKey": null
         },
         {
-          kind: "FragmentSpread",
-          name: "Link_link",
-          args: null
+          "kind": "FragmentSpread",
+          "name": "Link_link",
+          "args": null
         }
       ]
     }

@@ -9,13 +9,17 @@ import { getCurrentTheme, toggleTheme } from "../theme";
 
 const AppToolbar = ({ styles }) => {
   const currentTheme = getCurrentTheme().palette.type;
+  const handleThemeToggle = () => {
+    toggleTheme();
+    window.location.reload();
+  };
   return (
     <AppBar position="fixed" className={styles.appBar}>
       <Toolbar className={styles.toolbar}>
         <Typography variant="h6" noWrap>
           Career Debut
         </Typography>
-        <Fab size="small" onClick={() => toggleTheme()}>
+        <Fab size="small" onClick={handleThemeToggle}>
           <Icon>{currentTheme === "dark" ? "nights_stay" : "wb_sunny"}</Icon>
         </Fab>
       </Toolbar>
