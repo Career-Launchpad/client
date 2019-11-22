@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "38rem",
     padding: "2rem",
     margin: "auto",
-    marginTop: "15vh",
-    marginBottom: "20vh",
+    marginTop: "15vmin",
+    marginBottom: "10vh",
     display: "flex",
     flexDirection: "column"
   }
