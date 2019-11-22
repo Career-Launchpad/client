@@ -1,19 +1,29 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
+import * as cx from "classnames";
 import * as yup from "yup";
 
 const useStyles = makeStyles(theme => ({
   form: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    margin: "0 -10px"
   },
-  textField: {
-    width: 260
+  field: {
+    margin: "10px"
+  },
+  smallField: {
+    minWidth: 260,
+    flexGrow: 1
   },
   button: {
     marginLeft: "auto"
@@ -26,6 +36,15 @@ const studentSchema = yup.object().shape({
   major: yup.string().required("Required"),
   academicYear: yup.string().required("Required")
 });
+
+const academicYears = [
+  "Freshman",
+  "Junior",
+  "Sophomore",
+  "Senior",
+  "Masters",
+  "PhD"
+];
 
 const AddStudentForm = ({ onSubmit }) => {
   const styles = useStyles();
@@ -57,8 +76,8 @@ const AddStudentForm = ({ onSubmit }) => {
               label="First Name"
               name="firstName"
               margin="normal"
-              className={styles.textField}
               variant="filled"
+              className={cx(styles.smallField, styles.field)}
               value={values.firstName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -67,8 +86,8 @@ const AddStudentForm = ({ onSubmit }) => {
               label="Last Name"
               name="lastName"
               margin="normal"
-              className={styles.textField}
               variant="filled"
+              className={cx(styles.smallField, styles.field)}
               value={values.lastName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -76,24 +95,34 @@ const AddStudentForm = ({ onSubmit }) => {
             <TextField
               label="Major"
               name="major"
-              fullWidth
               margin="normal"
               variant="filled"
+              fullWidth
               value={values.major}
+              className={styles.field}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <TextField
-              label="Academic Year"
-              name="academicYear"
-              helperText="Freshman, Junior, Sophomore, Senior, Masters, PhD"
-              fullWidth
+            <FormControl
               margin="normal"
               variant="filled"
-              value={values.academicYear}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
+              className={cx(styles.smallField, styles.field)}
+            >
+              <InputLabel>Academic Year</InputLabel>
+              <Select
+                name="academicYear"
+                value={values.academicYear}
+                onBlur={handleBlur}
+                onChange={handleChange}
+              >
+                {academicYears.map(year => (
+                  <MenuItem key={year} value={year}>
+                    {year}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <div className={cx(styles.smallField, styles.field)}></div>
             <Button
               variant="contained"
               type="submit"
