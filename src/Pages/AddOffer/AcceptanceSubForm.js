@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 const AcceptanceSubForm = ({ styles, values, handleBlur, handleChange }) => {
   const formatDate = date =>
-    `${date.month()}/${("0" + date.day()).slice(-2)}/${date.year()}`;
+    `${date.month()+1}/${("0" + date.date()).slice(-2)}/${date.year()}`;
 
   return (
     <>
