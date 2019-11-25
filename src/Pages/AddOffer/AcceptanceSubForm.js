@@ -4,6 +4,9 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 import Typography from "@material-ui/core/Typography";
 
 const AcceptanceSubForm = ({ styles, values, handleBlur, handleChange }) => {
+  const formatDate = date =>
+    `${date.month()}/${("0" + date.day()).slice(-2)}/${date.year()}`;
+
   return (
     <>
       <Typography variant="h6" className={styles.subtitle}>
@@ -19,11 +22,12 @@ const AcceptanceSubForm = ({ styles, values, handleBlur, handleChange }) => {
         inputVariant="outlined"
         format="MM/dd/yyyy"
         value={values.extended}
-        onChange={handleChange}
+        onChange={(date, value) => handleChange(value || "")}
         onBlur={handleBlur}
         KeyboardButtonProps={{
           "aria-label": "change date"
         }}
+        labelFunc={formatDate}
       />
       <KeyboardDatePicker
         label="Acceptance Deadline"
@@ -35,11 +39,12 @@ const AcceptanceSubForm = ({ styles, values, handleBlur, handleChange }) => {
         inputVariant="outlined"
         format="MM/dd/yyyy"
         value={values.deadline}
-        onChange={handleChange}
+        onChange={(date, value) => handleChange(value || "")}
         onBlur={handleBlur}
         KeyboardButtonProps={{
           "aria-label": "change date"
         }}
+        labelFunc={formatDate}
       />
     </>
   );
