@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginLeft: "auto",
-    marginRight: "10px"
+    marginRight: "10px",
+    marginTop: "10px"
   }
 }));
 
