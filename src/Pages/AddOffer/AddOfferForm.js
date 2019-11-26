@@ -28,10 +28,13 @@ const useStyles = makeStyles(theme => ({
     minWidth: 260,
     flexGrow: 1
   },
-  button: {
+  buttonSubmit: {
     marginLeft: "auto",
     marginRight: "10px",
     marginTop: "10px"
+  },
+  buttonAddOffer: {
+    marginLeft: "10px",
   }
 }));
 
@@ -123,7 +126,7 @@ const AddOfferForm = ({ onSubmit }) => {
               variant="contained"
               type="submit"
               color="primary"
-              className={styles.button}
+              className={styles.buttonSubmit}
               disabled={!dirty || !isValid || isSubmitting}
             >
               done

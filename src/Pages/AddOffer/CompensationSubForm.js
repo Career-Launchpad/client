@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
+import BonusesSubForm from "./BonusesSubForm"
 
 const compensationTypes = ["Salary", "Hourly", "On-completion"];
 
@@ -43,6 +44,12 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
         value={values.compensation.value}
         onChange={handleChange}
         onBlur={handleBlur}
+      />
+      <BonusesSubForm
+        styles={styles}
+        values={values}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
       />
     </>
   );
