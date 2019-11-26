@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 import * as cx from "classnames";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 import PositionSubForm from "./PositionSubForm";
 import CompensationSubForm from "./CompensationSubForm";
@@ -36,12 +36,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const studentSchema = yup.object().shape({
-  firstName: yup.string().required("Required"),
-  lastName: yup.string().required("Required"),
-  major: yup.string().required("Required"),
-  academicYear: yup.string().required("Required")
-});
+// const studentSchema = yup.object().shape({
+//   firstName: yup.string().required("Required"),
+//   lastName: yup.string().required("Required"),
+//   major: yup.string().required("Required"),
+//   academicYear: yup.string().required("Required")
+// });
 
 const AddOfferForm = ({ onSubmit }) => {
   const styles = useStyles();
@@ -70,7 +70,7 @@ const AddOfferForm = ({ onSubmit }) => {
           extended: moment(),
           deadline: moment()
         }}
-        validationSchema={studentSchema}
+        // validationSchema={studentSchema}
         onSubmit={onSubmit}
       >
         {({
@@ -108,7 +108,7 @@ const AddOfferForm = ({ onSubmit }) => {
               type="submit"
               color="primary"
               className={styles.button}
-              disabled={!dirty || !isValid || isSubmitting}
+              // disabled={!dirty || !isValid || isSubmitting}
             >
               done
             </Button>

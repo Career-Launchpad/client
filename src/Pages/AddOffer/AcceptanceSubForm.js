@@ -1,50 +1,28 @@
 import React from "react";
 import * as cx from "classnames";
-import { KeyboardDatePicker } from "@material-ui/pickers";
 import Typography from "@material-ui/core/Typography";
+import { Field } from "formik";
+import DatePickerField from "../../Shared/DatePickerField";
+import moment from "moment";
 
-const AcceptanceSubForm = ({ styles, values, handleBlur, handleChange }) => {
-  const formatDate = date =>
-    `${date.month()+1}/${("0" + date.date()).slice(-2)}/${date.year()}`;
-
+const AcceptanceSubForm = ({ styles, values }) => {
   return (
     <>
       <Typography variant="h6" className={styles.subtitle}>
         Offer Acceptance
       </Typography>
-      <KeyboardDatePicker
+      <Field
         label="Date Extended"
         name="extended"
-        margin="normal"
-        disableToolbar
-        variant="inline"
+        component={DatePickerField}
         className={cx(styles.smallField, styles.field)}
-        inputVariant="outlined"
-        format="MM/dd/yyyy"
-        value={values.extended}
-        onChange={(date, value) => handleChange(value || "")}
-        onBlur={handleBlur}
-        KeyboardButtonProps={{
-          "aria-label": "change date"
-        }}
-        labelFunc={formatDate}
       />
-      <KeyboardDatePicker
+      <Field
         label="Acceptance Deadline"
         name="deadline"
-        margin="normal"
-        disableToolbar
-        variant="inline"
+        shouldDisableDate={day => moment(day).isBefore(values.extended)}
+        component={DatePickerField}
         className={cx(styles.smallField, styles.field)}
-        inputVariant="outlined"
-        format="MM/dd/yyyy"
-        value={values.deadline}
-        onChange={(date, value) => handleChange(value || "")}
-        onBlur={handleBlur}
-        KeyboardButtonProps={{
-          "aria-label": "change date"
-        }}
-        labelFunc={formatDate}
       />
     </>
   );
