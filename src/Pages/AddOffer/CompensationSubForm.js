@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 
 const compensationTypes = ["Salary", "Hourly", "On-completion"];
 
-const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
+const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
   return (
     <>
       <Typography variant="h6" className={styles.subtitle}>
@@ -48,4 +48,4 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
   );
 };
 
-export default PositionSubForm;
+export default CompensationSubForm;

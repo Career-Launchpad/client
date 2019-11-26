@@ -11,12 +11,12 @@ const DatePickerField = ({ field, form, ...other }) => {
       value={field.value}
       variant="inline"
       inputVariant="filled"
-      format="L"
+      format="MM/dd/yyyy"
       margin="normal"
       disableToolbar
       onError={error => {
         // handle as a side effect
-        if (error !== currentError) {
+        if (error && error !== currentError) {
           form.setFieldError(field.name, error);
         }
       }}

@@ -1,6 +1,4 @@
 import React from "react";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
 import { Redirect } from "react-router-dom";
 
 import FormPage from "../../Shared/FormPage";
@@ -22,9 +20,7 @@ const AddOfferPage = () => {
     <>
       {navigate && <Redirect to="/" />}
       <FormPage onClose={handleClose}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <AddOfferForm onSubmit={handleFormSubmit} />
-        </MuiPickersUtilsProvider>
+        <AddOfferForm onSubmit={handleFormSubmit} />
       </FormPage>
     </>
   );

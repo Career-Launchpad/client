@@ -2,8 +2,8 @@ import React from "react";
 import * as cx from "classnames";
 import Typography from "@material-ui/core/Typography";
 import { Field } from "formik";
+import { isBefore } from "date-fns";
 import DatePickerField from "../../Shared/DatePickerField";
-import moment from "moment";
 
 const AcceptanceSubForm = ({ styles, values }) => {
   return (
@@ -20,7 +20,7 @@ const AcceptanceSubForm = ({ styles, values }) => {
       <Field
         label="Acceptance Deadline"
         name="deadline"
-        shouldDisableDate={day => moment(day).isBefore(values.extended)}
+        shouldDisableDate={day => isBefore(new Date(day), values.extended)}
         component={DatePickerField}
         className={cx(styles.smallField, styles.field)}
       />
