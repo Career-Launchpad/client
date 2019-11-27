@@ -2,9 +2,9 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { Field, FieldArray } from "formik";
 import TextField from "@material-ui/core/TextField";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 import * as cx from "classnames";
 
 const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
@@ -45,7 +45,7 @@ const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
             <Button
               variant="text"
               color="primary"
-              onClick={() => arrayHelpers.push({ name: '', age: '' })}
+              onClick={() => arrayHelpers.push({ type: '', value: '' })}
             >
               add bonus
             </Button>
