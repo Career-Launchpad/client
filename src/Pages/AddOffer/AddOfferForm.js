@@ -33,8 +33,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: "10px",
     marginTop: "10px"
   },
-  buttonAddOffer: {
-    marginLeft: "10px",
+  buttonDeleteIcon: {
+    alignSelf: "center",
+  },
+  bonus: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   }
 }));
 
