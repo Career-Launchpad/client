@@ -12,7 +12,7 @@ const positionTypes = ["Full time", "Part time", "Internship", "Contractor"];
 const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
   return (
     <>
-      <Typography variant="h6" className={styles.subtitle}>
+      <Typography variant="h5" className={styles.subtitle}>
         Position
       </Typography>
       <TextField

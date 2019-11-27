@@ -8,7 +8,7 @@ import DatePickerField from "../../Shared/DatePickerField";
 const AcceptanceSubForm = ({ styles, values }) => {
   return (
     <>
-      <Typography variant="h6" className={styles.subtitle}>
+      <Typography variant="h5" className={styles.subtitle}>
         Offer Acceptance
       </Typography>
       <Field

@@ -42,6 +42,9 @@ const FormPage = ({ onClose, ...props }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleExited = () => {
     onClose();
   };
 
@@ -50,7 +53,7 @@ const FormPage = ({ onClose, ...props }) => {
       fullScreen
       open={open}
       onClose={handleClose}
-      onExited={handleClose}
+      onExited={handleExited}
       TransitionComponent={Transition}
       disableEscapeKeyDown
     >

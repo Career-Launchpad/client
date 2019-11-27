@@ -32,14 +32,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "auto",
     marginRight: "10px",
     marginTop: "10px"
-  },
-  buttonDeleteIcon: {
-    alignSelf: "center",
-  },
-  bonus: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
   }
 }));
 
