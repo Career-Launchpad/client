@@ -11,6 +11,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
+import DollarsIntegerInput from "../../Shared/DollarsIntegerInput";
 import * as cx from "classnames";
 
 const useStyles = makeStyles(theme => ({
@@ -89,6 +90,9 @@ const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
                     className={cx(styles.bonusValue, styles.bonusField)}
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    InputProps={{
+                      inputComponent: DollarsIntegerInput,
+                    }}
                   />
                   <IconButton onClick={() => arrayHelpers.remove(index)}>
                     <DeleteIcon />
