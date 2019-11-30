@@ -1,10 +1,7 @@
 import React from "react";
 import * as cx from "classnames";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import BonusesSubForm from "./BonusesSubForm";
 import NumberFormat from 'react-number-format';
@@ -17,25 +14,23 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
       <Typography variant="h5" className={styles.subtitle}>
         Compensation
       </Typography>
-      <FormControl
+      <TextField
         margin="normal"
         variant="filled"
         className={cx(styles.smallField, styles.field)}
+        select
+        label="Compensation Type"
+        name="compensation.type"
+        value={values.compensation.type}
+        onBlur={handleBlur}
+        onChange={handleChange}
       >
-        <InputLabel>Compensation Type</InputLabel>
-        <Select
-          name="compensation.type"
-          value={values.compensation.type}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        >
-          {compensationTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+        {compensationTypes.map(type => (
+          <MenuItem key={type} value={type}>
+            {type}
+          </MenuItem>
+        ))}
+      </TextField>
       <NumberFormat
         thousandSeparator
         prefix="$"

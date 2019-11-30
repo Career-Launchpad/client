@@ -5,9 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -61,25 +58,22 @@ const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
           <>
             {values.compensation.bonuses.map((_, index) => (
               <div className={styles.bonus} key={index}>
-                <FormControl
+                <Field
+                  as={TextField}
                   margin="normal"
                   variant="filled"
                   className={cx(styles.bonusField, styles.field)}
+                  label="Bonus Type"
+                  name={`compensation.bonuses[${index}].type`}
+                  value={values.compensation.bonuses[index].type}
+                  select
                 >
-                  <InputLabel>Bonus Type</InputLabel>
-                  <Select
-                    name={`compensation.bonuses[${index}].type`}
-                    value={values.compensation.bonuses[index].type}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  >
-                    {bonusTypes.map(type => (
-                      <MenuItem key={type} value={type}>
-                        {type}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                  {bonusTypes.map(type => (
+                    <MenuItem key={type} value={type}>
+                      {type}
+                    </MenuItem>
+                  ))}
+                </Field>
                 <div className={cx(styles.field, styles.bonusValueWrapper)}>
                   <Field
                     name={`compensation.bonuses[${index}].value`}

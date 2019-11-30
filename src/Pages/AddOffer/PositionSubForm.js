@@ -1,10 +1,7 @@
 import React from "react";
 import * as cx from "classnames";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 
 const positionTypes = ["Full time", "Part time", "Internship", "Contractor"];
@@ -25,25 +22,23 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <FormControl
+      <TextField
         margin="normal"
         variant="filled"
         className={cx(styles.smallField, styles.field)}
+        select
+        label="Position Type"
+        value={values.type}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        name="type"
       >
-        <InputLabel>Position Type</InputLabel>
-        <Select
-          name="type"
-          value={values.type}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        >
-          {positionTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+        {positionTypes.map(type => (
+          <MenuItem key={type} value={type}>
+          {type}
+          </MenuItem>
+        ))}
+      </TextField>
       <TextField
         label="Company"
         name="company"

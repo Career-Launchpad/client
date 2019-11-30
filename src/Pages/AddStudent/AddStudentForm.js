@@ -1,10 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
@@ -104,25 +101,23 @@ const AddStudentForm = ({ onSubmit }) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <FormControl
+            <TextField
               margin="normal"
               variant="filled"
+              select
               className={cx(styles.smallField, styles.field)}
+              name="academicYear"
+              label="Academic Year"
+              value={values.academicYear}
+              onBlur={handleBlur}
+              onChange={handleChange}
             >
-              <InputLabel>Academic Year</InputLabel>
-              <Select
-                name="academicYear"
-                value={values.academicYear}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              >
-                {academicYears.map(year => (
-                  <MenuItem key={year} value={year}>
-                    {year}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+              {academicYears.map(year => (
+                <MenuItem key={year} value={year}>
+                  {year}
+                </MenuItem>
+              ))}
+            </TextField>
             <div className={cx(styles.smallField, styles.field)}></div>
             <Button
               variant="contained"
