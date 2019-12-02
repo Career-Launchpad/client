@@ -1,29 +1,21 @@
 import React from "react";
+import { useField } from "formik";
 import { TextField as MuiTextField } from "@material-ui/core";
 
-const TextField = ({ field, form, children, ...other }) => {
-  const { errors, touched } = field.name.split(".").reduce((obj, level) => {
-    let [attribute, index] = level.split("[");
-    const errors = obj.errors ? obj.errors[attribute] : "";
-    const touched = obj.touched ? obj.touched[attribute] : false;
-    if (index) {
-      index = Number(index.remove("]"));
-      return { errors: errors[index], touched: touched[index] };
-    }
-    return { errors, touched };
-  }, form);
-  const error = !!touched && !!errors;
-  const helperText = error ? errors : " ";
+const TextField = ({ field, children, ...other }) => {
+  const [config, meta] = useField(field.name);
+  const error = !!meta.touched && !!meta.error;
+  const helperText = error ? meta.error : " ";
   return (
     <MuiTextField
-      name={field.name}
-      value={field.value}
+      name={config.name}
+      value={config.value}
       margin="normal"
       variant="filled"
       error={error}
       helperText={helperText}
-      onBlur={field.onBlur}
-      onChange={field.onChange}
+      onBlur={config.onBlur}
+      onChange={config.onChange}
       {...other}
     >
       {children}
