@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { Field, FieldArray } from "formik";
+import { FieldArray } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -9,8 +9,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import * as cx from "classnames";
 
-import MoneyField from "../../Shared/MoneyField";
-import TextField from "../../Shared/TextField";
+import MoneyField from "../../Shared/Formik/MoneyField";
+import TextField from "../../Shared/Formik/TextField";
 
 const useStyles = makeStyles(theme => ({
   bonus: {
@@ -61,24 +61,22 @@ const BonusesSubForm = ({ styles, values }) => {
           <>
             {values.bonuses.map((_, index) => (
               <div className={styles.bonus} key={index}>
-                <Field
-                  component={TextField}
-                  className={cx(styles.bonusField, styles.field)}
+                <TextField
+                  select
                   label="Bonus Type"
                   name={`bonuses[${index}].type`}
-                  select
+                  className={cx(styles.bonusField, styles.field)}
                 >
                   {bonusTypes.map(type => (
                     <MenuItem key={type} value={type}>
                       {type}
                     </MenuItem>
                   ))}
-                </Field>
+                </TextField>
                 <div className={cx(styles.field, styles.bonusValueWrapper)}>
-                  <Field
+                  <MoneyField
                     label="Value"
                     name={`bonuses[${index}].value`}
-                    component={MoneyField}
                     className={cx(styles.bonusValue, styles.bonusField)}
                   />
                   <IconButton onClick={() => arrayHelpers.remove(index)}>

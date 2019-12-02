@@ -3,10 +3,10 @@ import * as cx from "classnames";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Field } from "formik";
 import { isBefore } from "date-fns";
-import DatePickerField from "../../Shared/DatePickerField";
 import { makeStyles } from "@material-ui/core";
+
+import DatePicker from "../../Shared/Formik/DatePicker";
 
 const useStyles = makeStyles(theme => ({
   checkbox: {
@@ -21,18 +21,16 @@ const AcceptanceSubForm = ({ styles, values, handleChange }) => {
       <Typography variant="h5" className={styles.subtitle}>
         Offer Acceptance
       </Typography>
-      <Field
+      <DatePicker
         label="Date Extended"
         name="extended"
-        component={DatePickerField}
         className={cx(styles.smallField, styles.field)}
       />
-      <Field
+      <DatePicker
         label="Acceptance Deadline"
         name="deadline"
-        shouldDisableDate={day => isBefore(new Date(day), values.extended)}
-        component={DatePickerField}
         className={cx(styles.smallField, styles.field)}
+        shouldDisableDate={day => isBefore(new Date(day), values.extended)}
       />
       <FormControlLabel
         className={styles.checkbox}

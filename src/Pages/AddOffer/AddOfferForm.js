@@ -101,8 +101,6 @@ const AddOfferForm = ({ onSubmit }) => {
           values,
           errors,
           touched,
-          dirty,
-          isValid,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -135,7 +133,7 @@ const AddOfferForm = ({ onSubmit }) => {
               type="submit"
               color="primary"
               className={styles.buttonSubmit}
-              // disabled={!dirty || !isValid || isSubmitting}
+              disabled={isSubmitting}
             >
               done
             </Button>

@@ -3,10 +3,9 @@ import * as cx from "classnames";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import BonusesSubForm from "./BonusesSubForm";
-import { Field } from "formik";
 
-import MoneyField from "../../Shared/MoneyField";
-import TextField from "../../Shared/TextField";
+import TextField from "../../Shared/Formik/TextField";
+import MoneyField from "../../Shared/Formik/MoneyField";
 
 const compensationTypes = ["Salary", "Hourly", "On-completion"];
 
@@ -16,23 +15,21 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
       <Typography variant="h5" className={styles.subtitle}>
         Compensation
       </Typography>
-      <Field
-        component={TextField}
-        className={cx(styles.smallField, styles.field)}
+      <TextField
         select
         label="Wage Type"
         name="wage_type"
+        className={cx(styles.smallField, styles.field)}
       >
         {compensationTypes.map(type => (
           <MenuItem key={type} value={type}>
             {type}
           </MenuItem>
         ))}
-      </Field>
-      <Field
+      </TextField>
+      <MoneyField
         label="Wage Value"
         name="wage_value"
-        component={MoneyField}
         className={cx(styles.smallField, styles.field)}
       />
       <BonusesSubForm
