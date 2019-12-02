@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import BonusesSubForm from "./BonusesSubForm";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 
 const compensationTypes = ["Salary", "Hourly", "On-completion"];
 
@@ -19,9 +19,9 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
         variant="filled"
         className={cx(styles.smallField, styles.field)}
         select
-        label="Compensation Type"
-        name="compensation.type"
-        value={values.compensation.type}
+        label="Wage Type"
+        name="wage_type"
+        value={values.wage_type}
         onBlur={handleBlur}
         onChange={handleChange}
       >
@@ -35,12 +35,12 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
         thousandSeparator
         prefix="$"
         customInput={TextField}
-        label="Compensation Value"
-        name="compensation.value"
+        label="Wage Value"
+        name="wage_value"
         margin="normal"
         variant="filled"
         className={cx(styles.smallField, styles.field)}
-        value={values.compensation.value}
+        value={values.wage_value}
         onChange={handleChange}
         onBlur={handleBlur}
       />

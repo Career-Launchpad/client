@@ -29,19 +29,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const studentSchema = yup.object().shape({
-  firstName: yup.string().required("Required"),
-  lastName: yup.string().required("Required"),
+  firstname: yup.string().required("Required"),
+  lastname: yup.string().required("Required"),
   major: yup.string().required("Required"),
-  academicYear: yup.string().required("Required")
+  academic_year: yup.string().required("Required")
 });
 
-const academicYears = [
-  "Freshman",
+const academic_years = [
+  "PhD",
+  "Masters",
+  "Senior",
   "Junior",
   "Sophomore",
-  "Senior",
-  "Masters",
-  "PhD"
+  "Freshman"
 ];
 
 const AddStudentForm = ({ onSubmit }) => {
@@ -51,10 +51,10 @@ const AddStudentForm = ({ onSubmit }) => {
       <Typography variant="h4">Personal Information</Typography>
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
+          firstname: "",
+          lastname: "",
           major: "",
-          academicYear: ""
+          academic_year: ""
         }}
         validationSchema={studentSchema}
         onSubmit={onSubmit}
@@ -72,21 +72,21 @@ const AddStudentForm = ({ onSubmit }) => {
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
               label="First Name"
-              name="firstName"
+              name="firstname"
               margin="normal"
               variant="filled"
               className={cx(styles.smallField, styles.field)}
-              value={values.firstName}
+              value={values.firstname}
               onChange={handleChange}
               onBlur={handleBlur}
             />
             <TextField
               label="Last Name"
-              name="lastName"
+              name="lastname"
               margin="normal"
               variant="filled"
               className={cx(styles.smallField, styles.field)}
-              value={values.lastName}
+              value={values.lastname}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -106,13 +106,13 @@ const AddStudentForm = ({ onSubmit }) => {
               variant="filled"
               select
               className={cx(styles.smallField, styles.field)}
-              name="academicYear"
+              name="academic_year"
               label="Academic Year"
-              value={values.academicYear}
+              value={values.academic_year}
               onBlur={handleBlur}
               onChange={handleChange}
             >
-              {academicYears.map(year => (
+              {academic_years.map(year => (
                 <MenuItem key={year} value={year}>
                   {year}
                 </MenuItem>

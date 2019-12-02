@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   button: {
-    marginLeft: "auto",
-    marginRight: "10px"
+    margin: 10,
+    marginLeft: "auto"
   }
 }));
 

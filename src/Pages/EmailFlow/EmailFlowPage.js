@@ -8,9 +8,19 @@ import ThankYouDialog from "./ThankYouDialog";
 import AddStudentForm from "../AddStudent/AddStudentForm";
 import AddOfferForm from "../AddOffer/AddOfferForm";
 
+const Pages = [
+  { name: "IntroDialog", component: IntroDialog },
+  { name: "AddStudentForm", component: AddStudentForm },
+  { name: "HasOfferDialog", component: HasOfferDialog },
+  { name: "AddOfferForm", component: AddOfferForm },
+  { name: "ThankYouDialog", component: ThankYouDialog }
+];
+
 const EmailFlowPage = () => {
-  const [result, setResult] = React.useState({});
-  const [idx, setIdx] = React.useState(0);
+  const [result, setResult] = React.useState({
+    student: { college_id: "byu_cpms" }
+  });
+  const [current, setCurrent] = React.useState("IntroDialog");
   const [navigate, setNavigate] = React.useState(false);
 
   const handleClose = () => {
@@ -19,23 +29,22 @@ const EmailFlowPage = () => {
   };
 
   const handleFormSubmit = (id, data, forward = true) => {
-    const direction = forward ? 1 : -1;
     switch (id) {
-      case "intro":
-        setIdx(idx + direction);
+      case "IntroDialog":
+        forward ? setCurrent("AddStudentForm") : handleClose();
         break;
-      case "add-student":
-        setIdx(idx + direction);
-        setResult({ ...result, student: data });
+      case "AddStudentForm":
+        setResult({ ...result, student: { ...result.student, ...data } });
+        setCurrent(forward ? "HasOfferDialog" : "IntroDialog");
         break;
-      case "has-offer":
-        data ? setIdx(idx + direction) : handleClose();
+      case "HasOfferDialog":
+        setCurrent(data ? "AddOfferForm" : "ThankYouDialog");
         break;
-      case "add-offer":
-        setIdx(idx + direction);
-        setResult({ ...result, offer: data });
+      case "AddOfferForm":
+        setResult({ ...result, offer: { ...result.offer, ...data } });
+        setCurrent(forward ? "ThankYouDialog" : "HasOfferDialog");
         break;
-      case "thanks":
+      case "ThankYouDialog":
         handleClose();
         break;
       default:
@@ -47,27 +56,12 @@ const EmailFlowPage = () => {
     <>
       {navigate && <Redirect to="/" />}
       <FormPage onClose={handleClose}>
-        {idx === 0 && (
-          <IntroDialog onSubmit={() => handleFormSubmit("intro")} />
-        )}
-        {idx === 1 && (
-          <AddStudentForm
-            onSubmit={student => handleFormSubmit("add-student", student)}
+        {Pages.filter(page => page.name === current).map((page, i) => (
+          <page.component
+            key={page.name}
+            onSubmit={data => handleFormSubmit(page.name, data)}
           />
-        )}
-        {idx === 2 && (
-          <HasOfferDialog
-            onSubmit={hasOffer => handleFormSubmit("has-offer", hasOffer)}
-          />
-        )}
-        {idx === 3 && (
-          <AddOfferForm
-            onSubmit={offer => handleFormSubmit("add-offer", offer)}
-          />
-        )}
-        {idx === 4 && (
-          <ThankYouDialog onSubmit={() => handleFormSubmit("thanks")} />
-        )}
+        ))}
       </FormPage>
     </>
   );

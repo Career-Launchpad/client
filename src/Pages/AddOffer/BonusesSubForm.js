@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import * as cx from "classnames";
 
 const useStyles = makeStyles(theme => ({
@@ -43,20 +43,20 @@ const useStyles = makeStyles(theme => ({
 
 const bonusTypes = ["Cash", "Equity (RSU)", "Equity (Options)", "Relocation"];
 
-const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
+const BonusesSubForm = ({ styles, values }) => {
   styles = { ...styles, ...useStyles() };
   return (
     <>
-      {values.compensation.bonuses.length !== 0 && (
+      {values.bonuses.length !== 0 && (
         <Typography variant="h6" className={styles.subtitle}>
           Bonuses
         </Typography>
       )}
       <FieldArray
-        name="compensation.bonuses"
+        name="bonuses"
         render={arrayHelpers => (
           <>
-            {values.compensation.bonuses.map((_, index) => (
+            {values.bonuses.map((_, index) => (
               <div className={styles.bonus} key={index}>
                 <Field
                   as={TextField}
@@ -64,8 +64,8 @@ const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
                   variant="filled"
                   className={cx(styles.bonusField, styles.field)}
                   label="Bonus Type"
-                  name={`compensation.bonuses[${index}].type`}
-                  value={values.compensation.bonuses[index].type}
+                  name={`bonuses[${index}].type`}
+                  value={values.bonuses[index].type}
                   select
                 >
                   {bonusTypes.map(type => (
@@ -76,8 +76,8 @@ const BonusesSubForm = ({ styles, values, handleBlur, handleChange }) => {
                 </Field>
                 <div className={cx(styles.field, styles.bonusValueWrapper)}>
                   <Field
-                    name={`compensation.bonuses[${index}].value`}
-                    value={values.compensation.bonuses[index].value}
+                    name={`bonuses[${index}].value`}
+                    value={values.bonuses[index].value}
                     as={NumberFormat}
                     thousandSeparator
                     prefix="$"

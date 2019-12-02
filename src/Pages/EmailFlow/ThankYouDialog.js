@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   button: {
-    marginLeft: "auto",
-    marginRight: "10px"
+    margin: 10,
+    marginLeft: "auto"
   }
 }));
 
@@ -30,7 +30,7 @@ const ThankYouDialog = ({ onSubmit }) => {
     <div className={styles.form}>
       <Typography variant="h5">Thank you!</Typography>
       <Typography variant="body1">
-        You can update information about your offers by going to your dashboard.
+        You can add or update your offers by going to your dashboard.
       </Typography>
       <div className={cx(styles.smallField, styles.field)}></div>
       <Button

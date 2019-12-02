@@ -36,26 +36,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const offerSchema = yup.object().shape({
-  title: yup.string().required("Required"),
-  type: yup.string().required("Required"),
-  company: yup.string().required("Required"),
+  position_title: yup.string().required("Required"),
+  position_type: yup.string().required("Required"),
+  company_name: yup.string().required("Required"),
   location: yup.object().shape({
     city: yup.string().required("Required"),
     state: yup.string().required("Required"),
     country: yup.string().required("Required")
   }),
-  compensation: yup.object().shape({
-    type: yup.string().required("Required"),
-    value: yup.string().required("Required"),
-    bonuses: yup.array().of(
-      yup.object().shape({
-        type: yup.string().required("Required"),
-        value: yup.string().required("Required")
-      })
-    )
-  }),
+  wage_type: yup.string().required("Required"),
+  wage_value: yup.string().required("Required"),
+  bonuses: yup.array().of(
+    yup.object().shape({
+      type: yup.string().required("Required"),
+      value: yup.string().required("Required"),
+      repeat_interval: yup.string(),
+      repeat_count: yup.number(),
+      one_time: yup.bool(),
+      description: yup.string()
+    })
+  ),
   extended: yup.date().default(() => new Date()),
-  deadline: yup.date().default(() => new Date())
+  deadline: yup.date().default(() => new Date()),
+  accepted: yup.bool()
 });
 
 const AddOfferForm = ({ onSubmit }) => {
@@ -69,21 +72,20 @@ const AddOfferForm = ({ onSubmit }) => {
       </Typography>
       <Formik
         initialValues={{
-          title: "",
-          type: "",
-          company: "",
+          position_title: "",
+          position_type: "",
+          company_name: "",
           location: {
             city: "",
             state: "",
             country: ""
           },
-          compensation: {
-            type: "",
-            value: "",
-            bonuses: []
-          },
+          wage_type: "",
+          wage_value: "",
+          bonuses: [],
           extended: new Date(),
-          deadline: new Date()
+          deadline: new Date(),
+          accepted: false
         }}
         validationSchema={offerSchema}
         onSubmit={onSubmit}

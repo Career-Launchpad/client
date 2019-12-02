@@ -14,11 +14,11 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
       </Typography>
       <TextField
         label="Position Title"
-        name="title"
+        name="position_title"
         margin="normal"
         variant="filled"
         className={cx(styles.smallField, styles.field)}
-        value={values.title}
+        value={values.position_title}
         onChange={handleChange}
         onBlur={handleBlur}
       />
@@ -28,24 +28,24 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
         className={cx(styles.smallField, styles.field)}
         select
         label="Position Type"
-        value={values.type}
+        value={values.position_type}
         onBlur={handleBlur}
         onChange={handleChange}
-        name="type"
+        name="position_type"
       >
         {positionTypes.map(type => (
           <MenuItem key={type} value={type}>
-          {type}
+            {type}
           </MenuItem>
         ))}
       </TextField>
       <TextField
         label="Company"
-        name="company"
+        name="company_name"
         margin="normal"
         variant="filled"
         fullWidth
-        value={values.company}
+        value={values.company_name}
         className={styles.field}
         onChange={handleChange}
         onBlur={handleBlur}
