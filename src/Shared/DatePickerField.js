@@ -14,6 +14,8 @@ const DatePickerField = ({ field, form, ...other }) => {
       format="MM/dd/yyyy"
       margin="normal"
       disableToolbar
+      helperText={form.touched[field.name] ? form.errors[field.name] : " "}
+      error={!!form.touched[field.name] && !!form.errors[field.name]}
       onError={error => {
         // handle as a side effect
         if (error && error !== currentError) {
