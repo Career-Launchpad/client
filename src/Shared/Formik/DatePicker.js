@@ -22,7 +22,7 @@ const DatePicker = props => {
       onChange={date =>
         field.onChange({
           target: {
-            value: date.getTime(),
+            value: date? date.getTime() : NaN,
             name: field.name
           }
         })
