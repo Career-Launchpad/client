@@ -1,0 +1,119 @@
+schema {
+  query: query
+  mutation: mutation
+}
+
+type bonus {
+  value: Float
+  type: String
+  repeat_interval: String
+  repeat_count: Int
+  one_time: Boolean
+  description: String
+}
+
+input bonusInput {
+  value: Float
+  type: String
+  repeat_interval: String
+  repeat_count: Int
+  one_time: Boolean
+  description: String
+}
+
+type location {
+  city: String
+  state: String
+  country: String
+}
+
+input locationInput {
+  city: String
+  state: String
+  country: String
+}
+
+type mutation {
+  """The ID of an object"""
+  id: ID!
+  student(student: studentInput): student
+  offer(offer: offerInput): offer
+}
+
+type offer {
+  id: String
+  position_type: String
+  position_title: String
+  accepted: Boolean
+  extended: Int
+  deadline: Int
+  academic_year: String
+  company_name: String
+  flag: Boolean
+  student_id: String
+  location: location
+  wage_value: Float
+  wage_type: String
+  bonuses: [bonus]
+}
+
+input offerInput {
+  offer: offerInput2
+}
+
+input offerInput2 {
+  student_id: String
+  position_type: String
+  position_title: String
+  accepted: Boolean
+  extended: Int
+  deadline: Int
+  company_name: String
+  location: locationInput
+  wage_value: Float
+  wage_type: String
+  bonuses: [bonusInput]
+}
+
+type query {
+  """The ID of an object"""
+  id: ID!
+  store: store
+}
+
+type store {
+  """The ID of an object"""
+  id: ID!
+  student(id: String): student
+  offer(id: String): offer
+  offers: [offer]
+  students(gender: String): [student]
+}
+
+type student {
+  id: String
+  email: String
+  firstname: String
+  lastname: String
+  college_name: String
+  academic_year: String
+  major: String
+  gender: String
+  last_authentication: String
+  security_level: String
+  ethnicity: String
+  offers(student_id: String): [offer]
+}
+
+input studentInput {
+  email: String
+  firstname: String
+  lastname: String
+  college_id: String
+  academic_year: String
+  major: String
+  gender: String
+  ethnicity: String
+  last_authentication: String
+}
+

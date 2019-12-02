@@ -25,11 +25,12 @@
     "start": "react-scripts start --no-cache",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "relay": "relay-compiler --config relay.config.json --watch"
+    "update-schema": "get-graphql-schema https://fg6fakt6fk.execute-api.us-east-1.amazonaws.com/dev/graphql > src/graphql/schema.graphql",
+    "relay": "npm run update-schema && relay-compiler --config relay.config.json"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "CI=true npm test && relay-compiler --config relay.config.json && pretty-quick --staged"
+      "pre-commit": "CI=true npm test && npm run relay && pretty-quick --staged"
     }
   },
   "eslintConfig": {
