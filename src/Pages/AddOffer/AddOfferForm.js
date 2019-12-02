@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     margin: "10px"
   },
   field: {
-    margin: "10px"
+    margin: "5px 10px"
   },
   smallField: {
     minWidth: 260,
