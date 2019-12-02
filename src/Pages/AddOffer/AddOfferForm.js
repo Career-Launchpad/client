@@ -56,8 +56,8 @@ const offerSchema = yup.object().shape({
       description: yup.string()
     })
   ),
-  extended: yup.number().required("Required"),
-  deadline: yup.number().required("Required"),
+  extended: yup.number().typeError("Required"),
+  deadline: yup.number().typeError("Required"),
   accepted: yup.bool()
 });
 
