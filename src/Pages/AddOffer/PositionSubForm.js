@@ -1,28 +1,35 @@
 import React from "react";
 import * as cx from "classnames";
-import TextField from "@material-ui/core/TextField";
+import { TextField as MuiTextField } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
+import { Field } from "formik";
+
+import TextField from "../../Shared/TextField";
 
 const positionTypes = ["Full time", "Part time", "Internship", "Contractor"];
 
-const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
+const PositionSubForm = ({
+  styles,
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange
+}) => {
+  console.log(errors);
   return (
     <>
       <Typography variant="h5" className={styles.subtitle}>
         Position
       </Typography>
-      <TextField
+      <Field
+        component={TextField}
         label="Position Title"
         name="position_title"
-        margin="normal"
-        variant="filled"
         className={cx(styles.smallField, styles.field)}
-        value={values.position_title}
-        onChange={handleChange}
-        onBlur={handleBlur}
       />
-      <TextField
+      <MuiTextField
         margin="normal"
         variant="filled"
         className={cx(styles.smallField, styles.field)}
@@ -38,8 +45,8 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
             {type}
           </MenuItem>
         ))}
-      </TextField>
-      <TextField
+      </MuiTextField>
+      <MuiTextField
         label="Company"
         name="company_name"
         margin="normal"
@@ -50,7 +57,7 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <TextField
+      <MuiTextField
         label="City"
         name="location.city"
         margin="normal"
@@ -60,7 +67,7 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <TextField
+      <MuiTextField
         label="State"
         name="location.state"
         margin="normal"
@@ -70,7 +77,7 @@ const PositionSubForm = ({ styles, values, handleBlur, handleChange }) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <TextField
+      <MuiTextField
         label="Country"
         name="location.country"
         margin="normal"

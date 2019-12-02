@@ -41,7 +41,7 @@ const offerSchema = yup.object().shape({
   company_name: yup.string().required("Required"),
   location: yup.object().shape({
     city: yup.string().required("Required"),
-    state: yup.string().required("Required"),
+    state: yup.string(),
     country: yup.string().required("Required")
   }),
   wage_type: yup.string().required("Required"),
@@ -56,8 +56,8 @@ const offerSchema = yup.object().shape({
       description: yup.string()
     })
   ),
-  extended: yup.date().default(() => new Date()),
-  deadline: yup.date().default(() => new Date()),
+  extended: yup.number().required("Required"),
+  deadline: yup.number().required("Required"),
   accepted: yup.bool()
 });
 
@@ -83,16 +83,24 @@ const AddOfferForm = ({ onSubmit }) => {
           wage_type: "",
           wage_value: "",
           bonuses: [],
-          extended: new Date(),
-          deadline: new Date(),
+          extended: new Date().getTime(),
+          deadline: new Date().getTime(),
           accepted: false
         }}
         validationSchema={offerSchema}
-        onSubmit={onSubmit}
+        onSubmit={(values, { isValid, setSubmitting }) => {
+          setTimeout(() => {
+            if (isValid) {
+              onSubmit(values);
+            }
+            setSubmitting(false);
+          }, 400);
+        }}
       >
         {({
           values,
           errors,
+          touched,
           dirty,
           isValid,
           handleChange,
@@ -105,6 +113,7 @@ const AddOfferForm = ({ onSubmit }) => {
               styles={styles}
               values={values}
               errors={errors}
+              touched={touched}
               handleBlur={handleBlur}
               handleChange={handleChange}
             />
@@ -126,7 +135,7 @@ const AddOfferForm = ({ onSubmit }) => {
               type="submit"
               color="primary"
               className={styles.buttonSubmit}
-              disabled={!dirty || !isValid || isSubmitting}
+              // disabled={!dirty || !isValid || isSubmitting}
             >
               done
             </Button>

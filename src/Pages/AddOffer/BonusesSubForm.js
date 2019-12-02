@@ -8,8 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import NumberFormat from "react-number-format";
 import * as cx from "classnames";
+
+import MoneyField from "../../Shared/MoneyField";
 
 const useStyles = makeStyles(theme => ({
   bonus: {
@@ -24,7 +25,8 @@ const useStyles = makeStyles(theme => ({
   },
   bonusField: {
     minWidth: 220,
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop: 10
   },
   bonusValueWrapper: {
     display: "flex",
@@ -76,14 +78,9 @@ const BonusesSubForm = ({ styles, values }) => {
                 </Field>
                 <div className={cx(styles.field, styles.bonusValueWrapper)}>
                   <Field
-                    name={`bonuses[${index}].value`}
-                    value={values.bonuses[index].value}
-                    as={NumberFormat}
-                    thousandSeparator
-                    prefix="$"
-                    customInput={TextField}
                     label="Value"
-                    variant="filled"
+                    name={`bonuses[${index}].value`}
+                    component={MoneyField}
                     className={cx(styles.bonusValue, styles.bonusField)}
                   />
                   <IconButton onClick={() => arrayHelpers.remove(index)}>
