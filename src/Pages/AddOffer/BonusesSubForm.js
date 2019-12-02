@@ -2,7 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { Field, FieldArray } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -11,6 +10,7 @@ import AddIcon from "@material-ui/icons/Add";
 import * as cx from "classnames";
 
 import MoneyField from "../../Shared/MoneyField";
+import TextField from "../../Shared/TextField";
 
 const useStyles = makeStyles(theme => ({
   bonus: {
@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     border: `2px ${theme.palette.grey[300]} solid`,
     borderRadius: "5px",
     width: "100%",
-    margin: 10
+    margin: 10,
+    paddingTop: 10
   },
   bonusField: {
     minWidth: 220,
@@ -61,13 +62,10 @@ const BonusesSubForm = ({ styles, values }) => {
             {values.bonuses.map((_, index) => (
               <div className={styles.bonus} key={index}>
                 <Field
-                  as={TextField}
-                  margin="normal"
-                  variant="filled"
+                  component={TextField}
                   className={cx(styles.bonusField, styles.field)}
                   label="Bonus Type"
                   name={`bonuses[${index}].type`}
-                  value={values.bonuses[index].type}
                   select
                 >
                   {bonusTypes.map(type => (

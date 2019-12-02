@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import TextField from "./TextField";
 import NumberFormat from "react-number-format";
 
 const MoneyField = ({ field, form, ...other }) => {
@@ -13,6 +13,8 @@ const MoneyField = ({ field, form, ...other }) => {
       prefix="$"
       thousandSeparator
       customInput={TextField}
+      field={field}
+      form={form}
       onValueChange={({ floatValue }) =>
         form.setFieldValue(field.name, floatValue)
       }
