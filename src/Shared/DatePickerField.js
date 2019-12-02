@@ -1,21 +1,25 @@
 import React from "react";
+import { useField } from "formik";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
-const DatePickerField = ({ field, form, ...other }) => {
-  const currentError = form.errors[field.name];
+const DatePickerField = ({form, field, ...other }) => {
+  const [config, meta] = useField(field.name);
+  const error = !!meta.touched && !!meta.error;
+  const currentError = meta.error;
+  const helperText = error ? meta.error : " ";
 
   return (
     <KeyboardDatePicker
       autoOk
-      name={field.name}
-      value={field.value}
+      name={config.name}
+      value={config.value}
       variant="inline"
       inputVariant="filled"
       format="MM/dd/yyyy"
       margin="normal"
       disableToolbar
-      helperText={form.touched[field.name] ? form.errors[field.name] : " "}
-      error={!!form.touched[field.name] && !!form.errors[field.name]}
+      helperText={helperText}
+      error={error}
       onError={error => {
         // handle as a side effect
         if (error && error !== currentError) {
@@ -23,8 +27,8 @@ const DatePickerField = ({ field, form, ...other }) => {
         }
       }}
       // if you are using custom validation schema you probably want to pass `true` as third argument
-      onChange={date => form.setFieldValue(field.name, date.getTime(), true)}
-      onBlur={field.onBlur}
+      onChange={date => form.setFieldValue(config.name, date.getTime(), true)}
+      onBlur={config.onBlur}
       KeyboardButtonProps={{
         "aria-label": "change date"
       }}
