@@ -13,6 +13,7 @@ const MoneyField = props => {
       value={field.value}
       variant="filled"
       margin="normal"
+      color="secondary"
       prefix="$"
       thousandSeparator
       customInput={TextField}

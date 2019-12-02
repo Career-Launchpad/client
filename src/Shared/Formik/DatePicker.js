@@ -15,6 +15,7 @@ const DatePicker = props => {
       inputVariant="filled"
       format="MM/dd/yyyy"
       margin="normal"
+      color="secondary"
       disableToolbar
       helperText={helperText}
       error={error}

@@ -87,7 +87,7 @@ const BonusesSubForm = ({ styles, values }) => {
             ))}
             <Button
               variant="text"
-              color="primary"
+              color="secondary"
               className={styles.addButton}
               startIcon={<AddIcon />}
               onClick={() => arrayHelpers.push({ type: "", value: "" })}

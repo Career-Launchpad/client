@@ -1,12 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 import * as cx from "classnames";
 import * as yup from "yup";
+
+import TextField from "../../Shared/Formik/TextField";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     margin: "0 -10px"
   },
   field: {
-    margin: "10px"
+    margin: "5px 10px"
   },
   smallField: {
     minWidth: 260,
@@ -57,60 +58,36 @@ const AddStudentForm = ({ onSubmit }) => {
           academic_year: ""
         }}
         validationSchema={studentSchema}
-        onSubmit={onSubmit}
+        onSubmit={(values, { isValid, setSubmitting }) => {
+          setTimeout(() => {
+            isValid && onSubmit(values);
+            setSubmitting(false);
+          }, 400);
+        }}
       >
-        {({
-          values,
-          errors,
-          dirty,
-          isValid,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting
-        }) => (
+        {({ handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
               label="First Name"
               name="firstname"
-              margin="normal"
-              variant="filled"
               className={cx(styles.smallField, styles.field)}
-              value={values.firstname}
-              onChange={handleChange}
-              onBlur={handleBlur}
             />
             <TextField
               label="Last Name"
               name="lastname"
-              margin="normal"
-              variant="filled"
               className={cx(styles.smallField, styles.field)}
-              value={values.lastname}
-              onChange={handleChange}
-              onBlur={handleBlur}
             />
             <TextField
+              fullWidth
               label="Major"
               name="major"
-              margin="normal"
-              variant="filled"
-              fullWidth
-              value={values.major}
               className={styles.field}
-              onChange={handleChange}
-              onBlur={handleBlur}
             />
             <TextField
-              margin="normal"
-              variant="filled"
               select
-              className={cx(styles.smallField, styles.field)}
               name="academic_year"
               label="Academic Year"
-              value={values.academic_year}
-              onBlur={handleBlur}
-              onChange={handleChange}
+              className={cx(styles.smallField, styles.field)}
             >
               {academic_years.map(year => (
                 <MenuItem key={year} value={year}>
@@ -124,7 +101,7 @@ const AddStudentForm = ({ onSubmit }) => {
               type="submit"
               color="primary"
               className={styles.button}
-              disabled={!dirty || !isValid || isSubmitting}
+              disabled={isSubmitting}
             >
               done
             </Button>

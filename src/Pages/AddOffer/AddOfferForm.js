@@ -90,9 +90,7 @@ const AddOfferForm = ({ onSubmit }) => {
         validationSchema={offerSchema}
         onSubmit={(values, { isValid, setSubmitting }) => {
           setTimeout(() => {
-            if (isValid) {
-              onSubmit(values);
-            }
+            isValid && onSubmit(values);
             setSubmitting(false);
           }, 400);
         }}

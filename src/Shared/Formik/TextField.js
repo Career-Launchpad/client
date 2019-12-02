@@ -12,6 +12,7 @@ const TextField = props => {
       value={field.value}
       margin="normal"
       variant="filled"
+      color="secondary"
       error={error}
       helperText={helperText}
       onBlur={field.onBlur}
