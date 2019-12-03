@@ -21,18 +21,6 @@ const routes = [
     path: "/email",
     component: EmailFlowPage,
     icon: "email"
-  },
-  {
-    name: "Add Student",
-    path: "/add-student",
-    component: AddStudentPage,
-    icon: "add"
-  },
-  {
-    name: "Add Offer",
-    path: "/add-offer",
-    component: AddOfferPage,
-    icon: "add"
   }
 ];
 
@@ -53,6 +41,8 @@ const App = () => {
               exact
             />
           ))}
+          <Route path="/add-offer" component={AddOfferPage} />
+          <Route path="/add-student" component={AddStudentPage} />
           <Redirect to="/" />
         </Switch>
       </main>

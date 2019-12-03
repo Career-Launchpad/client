@@ -32,7 +32,6 @@ const OfferTable = ({ offers }) => {
             <TableCell>Type</TableCell>
             <TableCell>Compensation Type</TableCell>
             <TableCell>Compensation Value</TableCell>
-            <TableCell>Academic Year</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,7 +50,6 @@ const OfferTable = ({ offers }) => {
                     prefix="$"
                   />
                 </TableCell>
-                <TableCell>{offer.academic_year}</TableCell>
               </TableRow>
             ))}
         </TableBody>
