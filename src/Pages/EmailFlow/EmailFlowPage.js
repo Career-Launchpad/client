@@ -34,14 +34,18 @@ const EmailFlowPage = () => {
         forward ? setCurrent("AddStudentForm") : handleClose();
         break;
       case "AddStudentForm":
-        setResult({ ...result, student: { ...result.student, ...data } });
+        setResult({
+          ...result,
+          student: { ...result.student, ...data.student }
+        });
+        console.log(data);
         setCurrent(forward ? "HasOfferDialog" : "IntroDialog");
         break;
       case "HasOfferDialog":
         setCurrent(data ? "AddOfferForm" : "ThankYouDialog");
         break;
       case "AddOfferForm":
-        setResult({ ...result, offer: { ...result.offer, ...data } });
+        setResult({ ...result, offer: { ...result.offer, ...data.offer } });
         setCurrent(forward ? "ThankYouDialog" : "HasOfferDialog");
         break;
       case "ThankYouDialog":
@@ -59,6 +63,7 @@ const EmailFlowPage = () => {
         {Pages.filter(page => page.name === current).map((page, i) => (
           <page.component
             key={page.name}
+            studentId={result.student.id}
             onSubmit={data => handleFormSubmit(page.name, data)}
           />
         ))}
