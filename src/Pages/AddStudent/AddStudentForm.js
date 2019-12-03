@@ -1,4 +1,6 @@
 import React from "react";
+import { commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +10,7 @@ import * as cx from "classnames";
 import * as yup from "yup";
 
 import TextField from "../../Shared/Formik/TextField";
+import environment from "../../environment";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -45,8 +48,34 @@ const academic_years = [
   "Freshman"
 ];
 
+const commit = (input, callback) => {
+  commitMutation(environment, {
+    mutation: graphql`
+      mutation AddStudentForm_Mutation($input: createStudentInput!) {
+        student(student: $input) {
+          id
+          firstname
+          lastname
+          major
+          college_name
+          gender
+        }
+      }
+    `,
+    variables: { input },
+    onCompleted: res => callback(res),
+    onError: err => callback(null, err)
+  });
+};
+
 const AddStudentForm = ({ onSubmit }) => {
   const styles = useStyles();
+  const handleSubmit = (values, { setSubmitting }) => {
+    commit(values, (res, err) => {
+      setSubmitting(false);
+      onSubmit(res);
+    });
+  };
   return (
     <>
       <Typography variant="h4">Personal Information</Typography>
@@ -58,12 +87,7 @@ const AddStudentForm = ({ onSubmit }) => {
           academic_year: ""
         }}
         validationSchema={studentSchema}
-        onSubmit={(values, { isValid, setSubmitting }) => {
-          setTimeout(() => {
-            isValid && onSubmit(values);
-            setSubmitting(false);
-          }, 400);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>

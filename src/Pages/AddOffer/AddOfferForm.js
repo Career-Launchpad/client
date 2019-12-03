@@ -1,4 +1,6 @@
 import React from "react";
+import { commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,6 +11,7 @@ import * as yup from "yup";
 import PositionSubForm from "./PositionSubForm";
 import CompensationSubForm from "./CompensationSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
+import environment from "../../environment";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -36,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const offerSchema = yup.object().shape({
+  student_id: yup.string().required("Required"),
   position_title: yup.string().required("Required"),
   position_type: yup.string().required("Required"),
   company_name: yup.string().required("Required"),
@@ -61,8 +65,39 @@ const offerSchema = yup.object().shape({
   accepted: yup.bool()
 });
 
-const AddOfferForm = ({ onSubmit }) => {
+const commit = (input, callback) => {
+  commitMutation(environment, {
+    mutation: graphql`
+      mutation AddOfferForm_Mutation($input: createOfferInput!) {
+        offer(offer: $input) {
+          id
+          position_type
+          position_title
+          wage_value
+          wage_type
+          location {
+            city
+            state
+            country
+          }
+        }
+      }
+    `,
+    variables: { input },
+    onCompleted: res => callback(res),
+    onError: err => callback(null, err)
+  });
+};
+
+const AddOfferForm = ({ studentId, onSubmit }) => {
   const styles = useStyles();
+  const handleSubmit = (values, { setSubmitting }) => {
+    commit(values, (res, err) => {
+      console.log(res);
+      setSubmitting(false);
+      onSubmit(res);
+    });
+  };
   return (
     <>
       <Typography variant="h4">Add Offer</Typography>
@@ -72,6 +107,7 @@ const AddOfferForm = ({ onSubmit }) => {
       </Typography>
       <Formik
         initialValues={{
+          student_id: studentId,
           position_title: "",
           position_type: "",
           company_name: "",
@@ -88,12 +124,7 @@ const AddOfferForm = ({ onSubmit }) => {
           accepted: false
         }}
         validationSchema={offerSchema}
-        onSubmit={(values, { isValid, setSubmitting }) => {
-          setTimeout(() => {
-            isValid && onSubmit(values);
-            setSubmitting(false);
-          }, 400);
-        }}
+        onSubmit={handleSubmit}
       >
         {({
           values,

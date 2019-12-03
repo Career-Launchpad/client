@@ -17,16 +17,20 @@
     "react-dom": "^16.11.0",
     "react-number-format": "^4.3.1",
     "react-relay": "^7.1.0",
+    "react-relay-network-modern": "^4.3.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "uuid": "^3.3.3",
     "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start --no-cache",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "update-schema": "get-graphql-schema https://fg6fakt6fk.execute-api.us-east-1.amazonaws.com/dev/graphql > src/graphql/schema.graphql",
-    "relay": "npm run update-schema && relay-compiler --config relay.config.json"
+    "update-schema": "get-graphql-schema https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev/graphql > src/graphql/schema.graphql",
+    "update-schema-local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
+    "relay": "npm run update-schema && relay-compiler --config relay.config.json",
+    "relay-local": "npm run update-schema-local && relay-compiler --config relay.config.json"
   },
   "husky": {
     "hooks": {

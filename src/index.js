@@ -5,14 +5,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import Amplify from "aws-amplify";
 
 import { getCurrentTheme } from "./theme";
-import awsconfig from "./aws-exports";
-import "./index.css";
 import App from "./App";
-
-Amplify.configure(awsconfig);
+import "./index.css";
 
 const Root = () => {
   const theme = getCurrentTheme();

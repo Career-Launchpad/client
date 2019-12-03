@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import AppNavBar from "./Nav/AppNavbar";
 import AppToolbar from "./Nav/AppToolbar";
-import HomePage from "./Pages/Home/HomePage";
+import OffersPage from "./Pages/Offers/OffersPage";
 import AddStudentPage from "./Pages/AddStudent/AddStudentPage";
 import AddOfferPage from "./Pages/AddOffer/AddOfferPage";
 import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
@@ -11,9 +11,9 @@ import useStyles from "./App.styles";
 
 const routes = [
   {
-    name: "Home",
+    name: "Offers",
     path: "/",
-    component: HomePage,
+    component: OffersPage,
     icon: "home"
   },
   {

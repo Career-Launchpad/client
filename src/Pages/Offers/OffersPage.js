@@ -1,24 +1,30 @@
 import React from "react";
+import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import LinearProgress from "@material-ui/core/LinearProgress";
-
 import environment from "../../environment";
-import AddLink from "./AddLink";
-import LinkList from "./LinkList";
-import styles from "./LinksPage.module.css";
+import { LinearProgress } from "@material-ui/core";
 
-const LinksPage = () => {
+import OfferTable from "./OfferTable";
+
+const useStyles = makeStyles(theme => ({
+  content: {
+    margin: 20
+  }
+}));
+
+const OffersPage = () => {
+  const styles = useStyles();
   return (
     <QueryRenderer
       environment={environment}
       query={query}
+      cacheConfig={{ force: true }}
       render={({ props }) => {
         if (!props) return <LinearProgress color="secondary" />;
         return (
           <div className={styles.content}>
-            <LinkList links={props.store.links} />
-            <AddLink parentID={props.store.id} />
+            <OfferTable offers={props.store.offers} />
           </div>
         );
       }}
@@ -27,13 +33,13 @@ const LinksPage = () => {
 };
 
 const query = graphql`
-  query LinksPage_Query {
+  query OffersPage_Query {
     store {
-      links {
-        ...LinkList_links
+      offers {
+        ...OfferTable_offers
       }
     }
   }
 `;
 
-export default LinksPage;
+export default OffersPage;
