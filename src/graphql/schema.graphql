@@ -85,6 +85,10 @@ type offer {
   bonuses: [bonus]
 }
 
+type offerConnection {
+  edges: [offer]
+}
+
 type query {
   """
   The ID of an object
@@ -100,7 +104,7 @@ type store {
   id: ID!
   student(id: String): student
   offer(id: String): offer
-  offers: [offer]
+  offers: offerConnection
   students(gender: String): [student]
 }
 

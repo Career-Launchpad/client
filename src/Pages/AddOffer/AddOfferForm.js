@@ -93,11 +93,11 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
   const styles = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
     commit(values, (res, err) => {
+      console.log(res);
       setSubmitting(false);
       onSubmit(res);
     });
   };
-  console.log(studentId);
   return (
     <>
       <Typography variant="h4">Add Offer</Typography>
