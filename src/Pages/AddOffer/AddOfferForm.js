@@ -83,7 +83,7 @@ const commit = (input, callback) => {
         }
       }
     `,
-    variables: { input },
+    variables: { input: {...input, accepted: input.accepted === "Yes"} },
     onCompleted: res => callback(res),
     onError: err => callback(null, err)
   });
