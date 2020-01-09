@@ -121,7 +121,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
           bonuses: [],
           extended: new Date().getTime(),
           deadline: new Date().getTime(),
-          accepted: false
+          accepted: ""
         }}
         validationSchema={offerSchema}
         onSubmit={handleSubmit}
