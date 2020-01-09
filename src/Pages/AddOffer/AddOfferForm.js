@@ -13,6 +13,8 @@ import CompensationSubForm from "./CompensationSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../environment";
 
+const acceptedOptions = ["Yes", "No"];
+
 const useStyles = makeStyles(theme => ({
   form: {
     display: "flex",
@@ -62,7 +64,7 @@ const offerSchema = yup.object().shape({
   ),
   extended: yup.number().typeError("Invalid Date"),
   deadline: yup.number().typeError("Invalid Date"),
-  accepted: yup.bool()
+  accepted: yup.string().required("Required")
 });
 
 const commit = (input, callback) => {
@@ -83,7 +85,7 @@ const commit = (input, callback) => {
         }
       }
     `,
-    variables: { input },
+    variables: { input: {...input, accepted: input.accepted === "Yes"} },
     onCompleted: res => callback(res),
     onError: err => callback(null, err)
   });
