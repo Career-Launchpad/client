@@ -30,6 +30,7 @@ export type OfferTable_offers$data = OfferTable_offers;
 export type OfferTable_offers$key = {
   +$data?: OfferTable_offers$data,
   +$fragmentRefs: OfferTable_offers$ref,
+  ...
 };
 */
 
