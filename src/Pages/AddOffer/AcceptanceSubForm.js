@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const acceptedOptions = ["Yes", "No"];
+const acceptedOptions = ["Yes", "No", "Pending"];
 
 const AcceptanceSubForm = ({ styles, values, handleChange }) => {
   styles = { ...styles, ...useStyles() };
