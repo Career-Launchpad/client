@@ -7,6 +7,7 @@ import OffersPage from "./Pages/Offers/OffersPage";
 import AddStudentPage from "./Pages/AddStudent/AddStudentPage";
 import AddOfferPage from "./Pages/AddOffer/AddOfferPage";
 import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
+import PrivacyPolicyPage from "./Pages/PrivacyPolicy/PrivacyPolicyPage";
 import useStyles from "./App.styles";
 
 const routes = [
@@ -21,6 +22,12 @@ const routes = [
     path: "/email",
     component: EmailFlowPage,
     icon: "email"
+  },
+  {
+    name: "Privacy Policy",
+    path: "/privacy-policy",
+    component: PrivacyPolicyPage,
+    icon: "info"
   }
 ];
 
