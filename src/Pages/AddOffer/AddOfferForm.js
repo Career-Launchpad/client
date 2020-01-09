@@ -13,8 +13,6 @@ import CompensationSubForm from "./CompensationSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../environment";
 
-const acceptedOptions = ["Yes", "No"];
-
 const useStyles = makeStyles(theme => ({
   form: {
     display: "flex",
