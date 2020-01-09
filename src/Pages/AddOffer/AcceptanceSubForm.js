@@ -2,7 +2,6 @@ import React from "react";
 import * as cx from "classnames";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { isBefore } from "date-fns";
 import { makeStyles } from "@material-ui/core";
 
