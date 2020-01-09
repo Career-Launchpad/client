@@ -62,7 +62,7 @@ const offerSchema = yup.object().shape({
   ),
   extended: yup.number().typeError("Invalid Date"),
   deadline: yup.number().typeError("Invalid Date"),
-  accepted: yup.bool()
+  accepted: yup.string().required("Required")
 });
 
 const commit = (input, callback) => {
@@ -83,7 +83,7 @@ const commit = (input, callback) => {
         }
       }
     `,
-    variables: { input },
+    variables: { input: {...input, accepted: input.accepted === "Yes"} },
     onCompleted: res => callback(res),
     onError: err => callback(null, err)
   });
@@ -121,7 +121,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
           bonuses: [],
           extended: new Date().getTime(),
           deadline: new Date().getTime(),
-          accepted: false
+          accepted: ""
         }}
         validationSchema={offerSchema}
         onSubmit={handleSubmit}
