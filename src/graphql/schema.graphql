@@ -26,8 +26,8 @@ input createOfferInput {
   position_type: String
   position_title: String
   accepted: Boolean
-  extended: Timestamp
-  deadline: Timestamp
+  extended: String
+  deadline: String
   company_name: String
   location: locationInput
   wage_value: Float
@@ -44,7 +44,7 @@ input createStudentInput {
   major: String
   gender: String
   ethnicity: String
-  last_authentication: Timestamp
+  last_authentication: String
 }
 
 type location {
@@ -73,8 +73,8 @@ type offer {
   position_type: String
   position_title: String
   accepted: Boolean
-  extended: Timestamp
-  deadline: Timestamp
+  extended: String
+  deadline: String
   academic_year: String
   company_name: String
   flag: Boolean
@@ -117,13 +117,8 @@ type student {
   academic_year: String
   major: String
   gender: String
-  last_authentication: Timestamp
+  last_authentication: String
   security_level: String
   ethnicity: String
   offers(student_id: String): [offer]
 }
-
-"""
-The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
-"""
-scalar Timestamp

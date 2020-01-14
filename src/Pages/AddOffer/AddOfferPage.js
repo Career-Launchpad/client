@@ -12,7 +12,6 @@ const AddOfferPage = () => {
   };
 
   const handleFormSubmit = offer => {
-    console.log(offer);
     handleClose();
   };
 
