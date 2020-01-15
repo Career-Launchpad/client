@@ -12,16 +12,7 @@ const BenefitsSubForm = ({ styles, values, handleBlur, handleChange }) => {
         Benefits
       </Typography>
       <Typography variant="caption" className={styles.field}>
-          Describe any additional benefits offered at this position.
-           {/* 
-           TODO: Information about what kind of information to include here (modal?)
-           Some examples of benefits that you might consider describing are: 
-          <ul>
-            <li>401k plan and contribution</li>
-            <li>free meals</li>
-            <li>medical/dental insurance</li>
-            <li>etc.</li>
-          </ul> */}
+          Describe any additional benefits offered at this position (eg. retirement matching, free food, medical/dental insurance, etc...)
       </Typography>
       <TextField
         multiline
