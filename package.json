@@ -34,7 +34,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "CI=true npm test && npm run relay && pretty-quick --staged"
+      "pre-commit": "npm test -- --watchAll=false && npm run relay && git add . && pretty-quick --staged"
     }
   },
   "eslintConfig": {

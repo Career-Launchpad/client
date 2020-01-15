@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8a0cdc73d73fbf79585e5d02b0ba2c31
+ * @relayHash 07df15f925380713287f960893ed4bde
  */
 
 /* eslint-disable */
@@ -14,8 +14,8 @@ export type createOfferInput = {|
   position_type?: ?string,
   position_title?: ?string,
   accepted?: ?boolean,
-  extended?: ?any,
-  deadline?: ?any,
+  extended?: ?string,
+  deadline?: ?string,
   company_name?: ?string,
   location?: ?locationInput,
   wage_value?: ?number,
