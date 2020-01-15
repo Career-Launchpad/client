@@ -34,7 +34,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run relay && pretty-quick --staged && git add ."
+      "pre-commit": "npm run relay && pretty-quick --staged && git add src/**/*.graphql*"
     }
   },
   "eslintConfig": {
