@@ -1,11 +1,11 @@
 import React from "react";
 import * as cx from "classnames";
+import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { isBefore } from "date-fns";
 import { makeStyles } from "@material-ui/core";
 
+import TextField from "../../Shared/Formik/TextField";
 import DatePicker from "../../Shared/Formik/DatePicker";
 
 const useStyles = makeStyles(theme => ({
@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     margin: 0
   }
 }));
+
+
+const acceptedOptions = ["Yes", "No"];
 
 const AcceptanceSubForm = ({ styles, values, handleChange }) => {
   styles = { ...styles, ...useStyles() };
@@ -32,17 +35,18 @@ const AcceptanceSubForm = ({ styles, values, handleChange }) => {
         className={cx(styles.smallField, styles.field)}
         shouldDisableDate={day => isBefore(new Date(day), values.extended)}
       />
-      <FormControlLabel
-        className={styles.checkbox}
-        control={
-          <Checkbox
-            name="accepted"
-            checked={values.accepted}
-            onChange={handleChange}
-          />
-        }
+      <TextField
+        select
         label="Accepted"
-      />
+        name="accepted"
+        className={cx(styles.smallField, styles.field)}
+      >
+        {acceptedOptions.map(entry => (
+          <MenuItem key={entry} value={entry}>
+            {entry}
+          </MenuItem>
+        ))}
+      </TextField>
     </>
   );
 };
