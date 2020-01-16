@@ -60,9 +60,7 @@ input locationInput {
 }
 
 type mutation {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(student: createStudentInput): student
   offer(offer: createOfferInput): offer
@@ -90,17 +88,13 @@ type offerConnection {
 }
 
 type query {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   store: store
 }
 
 type store {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(id: String): student
   offer(id: String): offer

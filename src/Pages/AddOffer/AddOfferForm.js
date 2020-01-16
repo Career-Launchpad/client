@@ -10,6 +10,7 @@ import * as yup from "yup";
 
 import PositionSubForm from "./PositionSubForm";
 import CompensationSubForm from "./CompensationSubForm";
+import BenefitsSubForm from "./BenefitsSubForm"
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../environment";
 
@@ -118,6 +119,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
           wage_type: "",
           wage_value: "",
           bonuses: [],
+          benefits_description: "",
           extended: new Date().getTime(),
           deadline: new Date().getTime(),
           accepted: ""
@@ -144,6 +146,12 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
               handleChange={handleChange}
             />
             <CompensationSubForm
+              styles={styles}
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <BenefitsSubForm
               styles={styles}
               values={values}
               handleBlur={handleBlur}
