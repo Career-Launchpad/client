@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7f001bd26be9809512d36b8d710376d0
+ * @relayHash 3391cfac471847865f2ad1ca5fa50e1d
  */
 
 /* eslint-disable */
@@ -18,7 +18,7 @@ export type createStudentInput = {|
   major?: ?string,
   gender?: ?string,
   ethnicity?: ?string,
-  last_authentication?: ?any,
+  last_authentication?: ?string,
 |};
 export type AddStudentForm_MutationVariables = {|
   input: createStudentInput
