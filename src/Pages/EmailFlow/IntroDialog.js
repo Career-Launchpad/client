@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   button: {
     margin: 10,
     marginLeft: "auto"
+  },
+  link: {
+    textDecoration: "underline",
+    color: theme.palette.primary.main
   }
 }));
 
@@ -30,7 +34,12 @@ const IntroDialog = ({ onSubmit }) => {
     <div className={styles.form}>
       <Typography variant="body1">
         Your school has requested that you input information regarding your job
-        hunt. Please click "BEGIN" to continue.
+        hunt. Please click "BEGIN" to continue. Your information will be used in
+        accordance with our{" "}
+        <a className={styles.link} href="/privacy-policy" target="blank">
+          privacy policy
+        </a>
+        . By proceeding, you agree to the terms of this policy.
       </Typography>
       <div className={cx(styles.smallField, styles.field)}></div>
       <Button
