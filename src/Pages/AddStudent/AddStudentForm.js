@@ -64,7 +64,7 @@ const commit = (input, callback) => {
     `,
     variables: { input },
     onCompleted: res => callback(res),
-    onError: err => callback(null, err)
+    onError: err => callback({}, err)
   });
 };
 

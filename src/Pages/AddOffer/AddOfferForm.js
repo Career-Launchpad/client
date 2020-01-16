@@ -84,9 +84,9 @@ const commit = (input, callback) => {
         }
       }
     `,
-    variables: { input: {...input, accepted: input.accepted === "Yes"} },
+    variables: { input: { ...input, accepted: input.accepted === "Yes" } },
     onCompleted: res => callback(res),
-    onError: err => callback(null, err)
+    onError: err => callback({}, err)
   });
 };
 
@@ -94,7 +94,6 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
   const styles = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
     commit(values, (res, err) => {
-      console.log(res);
       setSubmitting(false);
       onSubmit(res);
     });

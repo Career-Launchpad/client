@@ -116,4 +116,3 @@ type student {
   ethnicity: String
   offers(student_id: String): [offer]
 }
-
