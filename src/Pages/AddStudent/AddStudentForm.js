@@ -102,7 +102,9 @@ const AddStudentForm = ({ onSubmit }) => {
           firstname: "",
           lastname: "",
           major: "",
-          academic_year: ""
+          academic_year: "",
+          gender: "",
+          ethnicity: ""
         }}
         validationSchema={studentSchema}
         onSubmit={handleSubmit}
