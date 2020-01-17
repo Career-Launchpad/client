@@ -104,7 +104,9 @@ const BonusesSubForm = ({ styles, values }) => {
               color="secondary"
               className={styles.addButton}
               startIcon={<AddIcon />}
-              onClick={() => arrayHelpers.push({ type: "", value: "" })}
+              onClick={() =>
+                arrayHelpers.push({ type: "", value: "", description: "" })
+              }
             >
               add bonus
             </Button>
