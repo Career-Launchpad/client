@@ -13,6 +13,9 @@ import TextField from "../../Shared/Formik/TextField";
 import environment from "../../environment";
 
 const useStyles = makeStyles(theme => ({
+  title: {
+    marginBottom: 20
+  },
   form: {
     display: "flex",
     flexWrap: "wrap",
@@ -36,7 +39,9 @@ const studentSchema = yup.object().shape({
   firstname: yup.string().required("Required"),
   lastname: yup.string().required("Required"),
   major: yup.string().required("Required"),
-  academic_year: yup.string().required("Required")
+  academic_year: yup.string().required("Required"),
+  gender: yup.string().required("Required"),
+  ethnicity: yup.string().required("Required")
 });
 
 const academic_years = [
@@ -46,6 +51,17 @@ const academic_years = [
   "Junior",
   "Sophomore",
   "Freshman"
+];
+
+const genders = ["Male", "Female", "Other"];
+
+const ethnicities = [
+  "White",
+  "Hispanic or Latino",
+  "Black or African American",
+  "Native American or American Indian",
+  "Asian / Pacific Islander",
+  "Other"
 ];
 
 const commit = (input, callback) => {
@@ -78,13 +94,17 @@ const AddStudentForm = ({ onSubmit }) => {
   };
   return (
     <>
-      <Typography variant="h4">Personal Information</Typography>
+      <Typography variant="h4" className={styles.title}>
+        Personal Information
+      </Typography>
       <Formik
         initialValues={{
           firstname: "",
           lastname: "",
           major: "",
-          academic_year: ""
+          academic_year: "",
+          gender: "",
+          ethnicity: ""
         }}
         validationSchema={studentSchema}
         onSubmit={handleSubmit}
@@ -102,10 +122,9 @@ const AddStudentForm = ({ onSubmit }) => {
               className={cx(styles.smallField, styles.field)}
             />
             <TextField
-              fullWidth
               label="Major"
               name="major"
-              className={styles.field}
+              className={cx(styles.smallField, styles.field)}
             />
             <TextField
               select
@@ -116,6 +135,30 @@ const AddStudentForm = ({ onSubmit }) => {
               {academic_years.map(year => (
                 <MenuItem key={year} value={year}>
                   {year}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              name="gender"
+              label="Gender"
+              className={cx(styles.smallField, styles.field)}
+            >
+              {genders.map(g => (
+                <MenuItem key={g} value={g}>
+                  {g}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              name="ethnicity"
+              label="Ethnicity"
+              className={cx(styles.smallField, styles.field)}
+            >
+              {ethnicities.map(e => (
+                <MenuItem key={e} value={e}>
+                  {e}
                 </MenuItem>
               ))}
             </TextField>
