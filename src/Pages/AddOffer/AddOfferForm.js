@@ -93,8 +93,13 @@ const commit = (input, callback) => {
 const AddOfferForm = ({ studentId, onSubmit }) => {
   const styles = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
+    values.extended = String(values.extended);
+    values.deadline = String(values.deadline);
     commit(values, (res, err) => {
       setSubmitting(false);
+      if (err) {
+        return;
+      }
       onSubmit(res);
     });
   };
