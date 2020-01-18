@@ -10,6 +10,14 @@ import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
 import LoginPage from "./Pages/Login/LoginForm";
 import useStyles from "./App.styles";
 
+import withFirebaseAuth from "react-with-firebase-auth";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import firebaseConfig from "./firebaseConfig";
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseAppAuth = firebaseApp.auth();
+
 const routes = [
   {
     name: "Offers",
@@ -57,4 +65,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default withFirebaseAuth({
+  firebaseAppAuth
+})(App);
