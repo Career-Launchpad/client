@@ -47,9 +47,7 @@ export const getCurrentUser = async () => {
       email: rawUser.email,
       emailVerified: rawUser.emailVerified,
       phoneNumber: rawUser.phoneNumber,
-      isAnonymous: rawUser.isAnonymous,
-      uid: rawUser.uid,
-      uid: rawUser.uid
+      isAnonymous: rawUser.isAnonymous
     } || {}
   );
 };
