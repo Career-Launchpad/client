@@ -10,25 +10,11 @@ import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
 import LoginPage from "./Pages/Login/LoginForm";
 import useStyles from "./App.styles";
 
-import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import firebaseConfig from "./firebaseConfig";
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const firebaseAppAuth = firebaseApp.auth();
-
 const routes = [
   {
     name: "Offers",
     path: "/",
     component: OffersPage,
-    icon: "home"
-  },
-  {
-    name: "Login",
-    path: "/login",
-    component: LoginPage,
     icon: "home"
   },
   {
@@ -58,13 +44,12 @@ const App = () => {
           ))}
           <Route path="/add-offer" component={AddOfferPage} />
           <Route path="/add-student" component={AddStudentPage} />
-          <Redirect to="/" />
+          <Route path="/login" component={LoginPage} />
+          <Redirect to="/login" />
         </Switch>
       </main>
     </div>
   );
 };
 
-export default withFirebaseAuth({
-  firebaseAppAuth
-})(App);
+export default App;

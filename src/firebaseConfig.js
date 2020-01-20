@@ -1,12 +1,15 @@
-const config = {
-  apiKey: "AIzaSyA6jt4dyojkJjB00V3Sr9v6O0TqvX_UYL8",
-  authDomain: "careerdebut.firebaseapp.com",
-  databaseURL: "https://careerdebut.firebaseio.com",
-  projectId: "careerdebut",
-  storageBucket: "careerdebut.appspot.com",
-  messagingSenderId: "784269484523",
-  appId: "1:784269484523:web:325cafb61a5c45c686b9ae",
-  measurementId: "G-4VK8VC4Q0T"
-};
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
-export default config;
+const app = firebase.initializeApp({
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+});
+
+export default app;
