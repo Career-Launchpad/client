@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import * as cx from "classnames";
 import * as yup from "yup";
 import TextField from "../../Shared/Formik/TextField";
-import { loginUser } from "./LoginUtils";
+import { loginUser, logout, getCurrentUser } from "./AuthUtils";
 
 const useStyles = makeStyles(theme => ({
   form: {

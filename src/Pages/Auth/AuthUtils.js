@@ -32,3 +32,24 @@ export const loginUser = async values => {
       return e.message;
     });
 };
+
+export const logout = async () => {
+  return await app.auth().signOut();
+};
+
+export const getCurrentUser = async () => {
+  let rawUser = await app.auth().currentUser;
+  return (
+    {
+      uid: rawUser.uid,
+      displayName: rawUser.displayName,
+      photoURL: rawUser.photoURL,
+      email: rawUser.email,
+      emailVerified: rawUser.emailVerified,
+      phoneNumber: rawUser.phoneNumber,
+      isAnonymous: rawUser.isAnonymous,
+      uid: rawUser.uid,
+      uid: rawUser.uid
+    } || {}
+  );
+};

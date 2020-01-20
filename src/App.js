@@ -7,7 +7,7 @@ import OffersPage from "./Pages/Offers/OffersPage";
 import AddStudentPage from "./Pages/AddStudent/AddStudentPage";
 import AddOfferPage from "./Pages/AddOffer/AddOfferPage";
 import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
-import LoginPage from "./Pages/Login/LoginForm";
+import LoginPage from "./Pages/Auth/LoginForm";
 import useStyles from "./App.styles";
 
 const routes = [
