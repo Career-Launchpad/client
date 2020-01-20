@@ -8,6 +8,7 @@ import AddStudentPage from "./Pages/AddStudent/AddStudentPage";
 import AddOfferPage from "./Pages/AddOffer/AddOfferPage";
 import EmailFlowPage from "./Pages/EmailFlow/EmailFlowPage";
 import LoginPage from "./Pages/Auth/LoginForm";
+import CreateAccount from "./Pages/Auth/CreateAccountForm";
 import useStyles from "./App.styles";
 
 const routes = [
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/add-offer" component={AddOfferPage} />
           <Route path="/add-student" component={AddStudentPage} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/create" component={CreateAccount} />
           <Redirect to="/login" />
         </Switch>
       </main>

@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import * as cx from "classnames";
 import * as yup from "yup";
 import TextField from "../../Shared/Formik/TextField";
-import { loginUser } from "./AuthUtils";
+import { createNewUser } from "./AuthUtils";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -26,12 +26,12 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("Required")
 });
 
-const Login = ({ onSubmit }) => {
+const CreateAccount = ({ onSubmit }) => {
   const styles = useStyles();
   let errorMessage;
 
   const handleSubmit = async values => {
-    errorMessage = await loginUser(values);
+    errorMessage = await createNewUser(values);
   };
 
   return (
@@ -70,7 +70,7 @@ const Login = ({ onSubmit }) => {
               color="primary"
               className={styles.button}
             >
-              Login
+              Create Account
             </Button>
           </form>
         )}
@@ -79,4 +79,4 @@ const Login = ({ onSubmit }) => {
   );
 };
 
-export default withRouter(Login);
+export default withRouter(CreateAccount);
