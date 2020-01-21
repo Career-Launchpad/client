@@ -6,12 +6,14 @@ import AddStudentForm from "../AddStudent/AddStudentForm";
 import AddOfferForm from "../AddOffer/AddOfferForm";
 import Dialog from "./Dialog";
 
+const introPrompt = `
+Your school has requested that you input information regarding your job hunt. Please click "BEGIN" to continue.
+
+Your information will be used in accordance with our [Privacy Policy](https://meetprospect.now.sh/privacy).
+`;
+
 const IntroDialog = ({ onSubmit }) => (
-  <Dialog
-    onSubmit={onSubmit}
-    prompt='Your school has requested that you input information regarding your job hunt. Please click "BEGIN" to continue.'
-    submitText="Begin"
-  />
+  <Dialog onSubmit={onSubmit} prompt={introPrompt} submitText="Begin" />
 );
 
 const HasOfferDialog = ({ onSubmit }) => (
