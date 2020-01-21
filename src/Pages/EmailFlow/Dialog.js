@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end"
   },
   button: {
-    margin: "30px 0 0 20px"
+    margin: "20px 0 0 20px"
   }
 }));
 
@@ -32,7 +32,11 @@ const Dialog = ({ onSubmit, cancelText, submitText, prompt }) => {
   return (
     <div className={styles.form}>
       <Typography variant="body1">
-        <ReactMarkdown source={prompt} linkTarget="_blank" />
+        <ReactMarkdown
+          className="markdown"
+          source={prompt}
+          linkTarget="_blank"
+        />
       </Typography>
       <div className={styles.buttonContainer}>
         {cancelText && (
