@@ -16,3 +16,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.markdown a {
+  text-decoration: underline;
+  color: #0251b7;
+}
+
+.markdown a:visited {
+  color: #2f6dbf;
+}
+
+.markdown p {
+  margin-top: 0;
+}
