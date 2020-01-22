@@ -34,7 +34,7 @@ const PositionSubForm = ({ styles }) => {
       <AutocompleteTextField
         label="Company"
         name="company_name"
-        className={styles.field}
+        className={cx(styles.smallField, styles.field)}
       />
       <TextField
         label="City"

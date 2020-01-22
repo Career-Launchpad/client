@@ -20,7 +20,7 @@ const EmailFlowPage = () => {
   const [result, setResult] = React.useState({
     student: { college_id: "byu_cpms" }
   });
-  const [current, setCurrent] = React.useState("IntroDialog");
+  const [current, setCurrent] = React.useState("AddOfferForm");
   const [navigate, setNavigate] = React.useState(false);
 
   const handleClose = () => {
