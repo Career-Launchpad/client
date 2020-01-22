@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 07df15f925380713287f960893ed4bde
+ * @relayHash 72541a556ef01fdc190d0983fe6de95b
  */
 
 /* eslint-disable */
@@ -13,6 +13,7 @@ export type createOfferInput = {|
   student_id?: ?string,
   position_type?: ?string,
   position_title?: ?string,
+  benefits_description?: ?string,
   accepted?: ?boolean,
   extended?: ?string,
   deadline?: ?string,

@@ -25,6 +25,7 @@ input createOfferInput {
   student_id: String
   position_type: String
   position_title: String
+  benefits_description: String
   accepted: Boolean
   extended: String
   deadline: String
@@ -71,6 +72,7 @@ type offer {
   position_type: String
   position_title: String
   accepted: Boolean
+  benefits_description: String
   extended: String
   deadline: String
   academic_year: String
