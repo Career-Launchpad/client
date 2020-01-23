@@ -30,6 +30,7 @@ const AutocompleteTextField = props => {
         "Proofpoint"
       ]}
       onChange={field.onChange}
+      onBlur={field.onBlur}
       name={field.name}
       value={field.value}
       renderInput={params => (
@@ -45,6 +46,8 @@ const AutocompleteTextField = props => {
           value={field.value}
           helperText={helperText}
           error={error}
+          onChange={field.onChange}
+          onBlur={field.onBlur}
         />
       )}
       {...props}
