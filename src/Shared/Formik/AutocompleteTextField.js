@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AutocompleteTextField = props => {
-  const [field, meta] = useField(props);
+  const [field, meta, helpers] = useField(props.name);
   const classes = useStyles();
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
@@ -20,16 +20,19 @@ const AutocompleteTextField = props => {
       className={props.className}
       margin="normal"
       freeSolo
+      filterOptions={(o) => o.filter(o => o.startsWith(field.value))}
       disableClearable
       options={[
         "Brevium",
         "Qualtrics",
         "Simplifile",
         "Lucid",
+        "Plaid",
+        "Podium",
         "Chief Architect",
         "Proofpoint"
       ]}
-      onChange={field.onChange}
+      onChange={(e, v) => helpers.setValue(v)}
       onBlur={field.onBlur}
       name={field.name}
       value={field.value}
