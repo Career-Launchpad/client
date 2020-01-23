@@ -44,7 +44,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const bonusTypes = ["Cash", "Equity (RSU)", "Equity (Options)", "Relocation"];
+const bonusTypes = [
+  "Signing Bonus (Cash)",
+  "Equity (RSU)",
+  "Equity (Options)",
+  "Relocation",
+  "Other"
+];
 
 const BonusesSubForm = ({ styles, values }) => {
   styles = { ...styles, ...useStyles() };
@@ -59,8 +65,9 @@ const BonusesSubForm = ({ styles, values }) => {
         name="bonuses"
         render={arrayHelpers => (
           <>
-            {values.bonuses.map((_, index) => (
+            {values.bonuses.map((bonus, index) => (
               <div className={styles.bonus} key={index}>
+                <div></div>
                 <TextField
                   select
                   label="Bonus Type"
@@ -83,6 +90,13 @@ const BonusesSubForm = ({ styles, values }) => {
                     <DeleteIcon />
                   </IconButton>
                 </div>
+                {bonus.type === "Other" && (
+                  <TextField
+                    label="Description"
+                    name={`bonuses[${index}].description`}
+                    className={cx(styles.bonusField, styles.field)}
+                  />
+                )}
               </div>
             ))}
             <Button
@@ -90,7 +104,9 @@ const BonusesSubForm = ({ styles, values }) => {
               color="secondary"
               className={styles.addButton}
               startIcon={<AddIcon />}
-              onClick={() => arrayHelpers.push({ type: "", value: "" })}
+              onClick={() =>
+                arrayHelpers.push({ type: "", value: "", description: "" })
+              }
             >
               add bonus
             </Button>

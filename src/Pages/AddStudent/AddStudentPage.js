@@ -12,7 +12,6 @@ const AddStudentPage = () => {
   };
 
   const handleFormSubmit = student => {
-    console.log(student);
     handleClose();
   };
 
