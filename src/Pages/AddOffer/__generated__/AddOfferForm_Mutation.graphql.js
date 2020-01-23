@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 72541a556ef01fdc190d0983fe6de95b
+ * @relayHash dd51b28351008a654fdb6015278f20de
  */
 
 /* eslint-disable */
@@ -41,7 +41,7 @@ export type AddOfferForm_MutationVariables = {|
 |};
 export type AddOfferForm_MutationResponse = {|
   +offer: ?{|
-    +id: ?string,
+    +offer_id: ?string,
     +position_type: ?string,
     +position_title: ?string,
     +wage_value: ?number,
@@ -65,7 +65,7 @@ mutation AddOfferForm_Mutation(
   $input: createOfferInput!
 ) {
   offer(offer: $input) {
-    id
+    offer_id
     position_type
     position_title
     wage_value
@@ -107,7 +107,7 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "id",
+        "name": "offer_id",
         "args": null,
         "storageKey": null
       },
@@ -194,11 +194,11 @@ return {
     "operationKind": "mutation",
     "name": "AddOfferForm_Mutation",
     "id": null,
-    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    id\n    position_type\n    position_title\n    wage_value\n    wage_type\n    location {\n      city\n      state\n      country\n    }\n  }\n}\n",
+    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    offer_id\n    position_type\n    position_title\n    wage_value\n    wage_type\n    location {\n      city\n      state\n      country\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'df373d4b80aba61feda7342d6ddd170a';
+(node/*: any*/).hash = '8ce3c260772be4549dab28230f66dd13';
 module.exports = node;

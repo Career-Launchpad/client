@@ -53,7 +53,7 @@ const academic_years = [
   "Freshman"
 ];
 
-const genders = ["Male", "Female", "Other"];
+const genders = ["Male", "Female", "Other", "Prefer not to answer"];
 
 const ethnicities = [
   "White",
@@ -61,7 +61,8 @@ const ethnicities = [
   "Black or African American",
   "Native American or American Indian",
   "Asian / Pacific Islander",
-  "Other"
+  "Other",
+  "Prefer not to answer"
 ];
 
 const commit = (input, callback) => {

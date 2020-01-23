@@ -13,7 +13,7 @@ declare export opaque type OfferTable_offers$ref: FragmentReference;
 declare export opaque type OfferTable_offers$fragmentType: OfferTable_offers$ref;
 export type OfferTable_offers = {|
   +edges: ?$ReadOnlyArray<?{|
-    +id: ?string,
+    +offer_id: ?string,
     +position_type: ?string,
     +position_title: ?string,
     +location: ?{|
@@ -54,7 +54,7 @@ const node/*: ReaderFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "id",
+          "name": "offer_id",
           "args": null,
           "storageKey": null
         },
@@ -123,5 +123,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ea87abcbd71e88c676896a08b97bdd1e';
+(node/*: any*/).hash = 'ced5c8cbe9c512d74e72827a155ec643';
 module.exports = node;
