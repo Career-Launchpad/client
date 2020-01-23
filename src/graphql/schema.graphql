@@ -25,6 +25,7 @@ input createOfferInput {
   student_id: String
   position_type: String
   position_title: String
+  benefits_description: String
   accepted: Boolean
   extended: String
   deadline: String
@@ -60,17 +61,20 @@ input locationInput {
 }
 
 type mutation {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
   student(student: createStudentInput): student
   offer(offer: createOfferInput): offer
 }
 
 type offer {
-  id: String
+  offer_id: String
   position_type: String
   position_title: String
   accepted: Boolean
+  benefits_description: String
   extended: String
   deadline: String
   academic_year: String
@@ -88,13 +92,17 @@ type offerConnection {
 }
 
 type query {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
   store: store
 }
 
 type store {
-  """The ID of an object"""
+  """
+  The ID of an object
+  """
   id: ID!
   student(id: String): student
   offer(id: String): offer
@@ -116,4 +124,3 @@ type student {
   ethnicity: String
   offers(student_id: String): [offer]
 }
-

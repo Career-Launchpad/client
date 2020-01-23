@@ -10,7 +10,7 @@ import * as yup from "yup";
 
 import PositionSubForm from "./PositionSubForm";
 import CompensationSubForm from "./CompensationSubForm";
-import BenefitsSubForm from "./BenefitsSubForm"
+import BenefitsSubForm from "./BenefitsSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../environment";
 
@@ -71,7 +71,7 @@ const commit = (input, callback) => {
     mutation: graphql`
       mutation AddOfferForm_Mutation($input: createOfferInput!) {
         offer(offer: $input) {
-          id
+          offer_id
           position_type
           position_title
           wage_value
