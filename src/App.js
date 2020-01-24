@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -9,15 +8,14 @@ import { Routes, DEFAULT } from "./utils/routes";
 import PrivateRoute from "./components/PrivateRoute";
 
 import { AuthProvider } from "./utils/auth";
-import { getCurrentTheme } from "./utils/theme";
+import { ThemeProvider } from "./utils/theme";
 import "./index.css";
 
 const App = () => {
-  const theme = getCurrentTheme();
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider>
           <AuthProvider>
             <CssBaseline />
             <Switch>
@@ -35,8 +33,8 @@ const App = () => {
               </PrivateRoute>
             </Switch>
           </AuthProvider>
-        </MuiPickersUtilsProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
     </BrowserRouter>
   );
 };

@@ -105,9 +105,9 @@ const AuthProvider = ({ children }) => {
     Auth.firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setValue({ user, state: AUTH_STATE.AUTHENTICATED });
-      } else {
-        setValue({ user: undefined, state: AUTH_STATE.NOT_AUTHENTICATED });
+        return;
       }
+      setValue({ user: undefined, state: AUTH_STATE.NOT_AUTHENTICATED });
     });
   });
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -115,4 +115,4 @@ const AuthProvider = ({ children }) => {
 
 const AuthConsumer = AuthContext.Consumer;
 
-export { Auth as default, AuthProvider, AuthConsumer, AUTH_STATE };
+export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer };

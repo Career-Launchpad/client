@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: drawerWidth
   },
+  list: {
+    padding: 0
+  },
   routeActive: {
     backgroundColor:
       theme.palette.grey[theme.palette.type === "light" ? 300 : 700]
@@ -39,7 +42,7 @@ const Navbar = () => {
       classes={{ paper: styles.drawerPaper }}
     >
       <div className={styles.toolbarSpace} />
-      <List>
+      <List className={styles.list}>
         {Routes.filter(route => route.name).map(route => (
           <NavLink key={route.name} to={route.path}>
             <ListItem

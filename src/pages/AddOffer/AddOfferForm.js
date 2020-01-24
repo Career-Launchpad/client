@@ -139,7 +139,8 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
+          submitForm
         }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <PositionSubForm
@@ -175,6 +176,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
               color="primary"
               className={styles.buttonSubmit}
               disabled={isSubmitting}
+              onClick={submitForm}
             >
               done
             </Button>

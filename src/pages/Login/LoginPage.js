@@ -8,7 +8,7 @@ import * as cx from "classnames";
 import * as yup from "yup";
 
 import TextField from "../../components/formik/TextField";
-import Auth, { AuthConsumer, AUTH_STATE } from "../../utils/auth";
+import Auth, { AUTH_STATE, AuthConsumer } from "../../utils/auth";
 import { DEFAULT } from "../../utils/routes";
 
 const useStyles = makeStyles(theme => ({

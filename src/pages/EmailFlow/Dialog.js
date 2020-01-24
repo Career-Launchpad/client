@@ -1,7 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -31,13 +30,7 @@ const Dialog = ({ onSubmit, cancelText, submitText, prompt }) => {
   const styles = useStyles();
   return (
     <div className={styles.form}>
-      <Typography variant="body1">
-        <ReactMarkdown
-          className="markdown"
-          source={prompt}
-          linkTarget="_blank"
-        />
-      </Typography>
+      <ReactMarkdown className="markdown" source={prompt} linkTarget="_blank" />
       <div className={styles.buttonContainer}>
         {cancelText && (
           <Button
