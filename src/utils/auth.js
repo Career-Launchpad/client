@@ -8,6 +8,12 @@ const AUTH_STATE = {
   NOT_AUTHENTICATED: "NOT_AUTHENTICATED"
 };
 
+let eligibleDomainList = [];
+
+fetch('https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev/verify')
+      .then(response => response.json())
+      .then(data => this.eligibleDomainList = data);
+
 class AuthService {
   static INSTANCE = undefined;
   firebase = undefined;
@@ -31,7 +37,13 @@ class AuthService {
     if (!user) {
       return;
     }
-    // async ask server if domain is valid
+    const userEmailDomain = user.emailAddress.split('@')[1];
+    const validDomain = this.eligibleDomainList.some((domain) => {
+      domain === userEmailDomain;
+    })
+    if (!validDomain) {
+      return 'It looks like your domain (@xxx.xx) is not valid, reach out to your school\'s administration'
+    }
     return await this.firebase
       .auth()
       .createUserWithEmailAndPassword(user.emailAddress, user.password)
