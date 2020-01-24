@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import Layout from "../../components/Layout";
 import FormPage from "../../components/FormPage";
 import AddStudentForm from "../AddStudent/AddStudentForm";
 import AddOfferForm from "../AddOffer/AddOfferForm";
@@ -94,7 +93,7 @@ const EmailFlowPage = () => {
   };
 
   return (
-    <Layout>
+    <>
       {navigate && <Redirect to="/" />}
       <FormPage onClose={handleClose}>
         {Pages.filter(page => page.name === current).map(page => (
@@ -105,7 +104,7 @@ const EmailFlowPage = () => {
           />
         ))}
       </FormPage>
-    </Layout>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import MuiToolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   home: { cursor: "pointer" }
 }));
 
-const Toolbar = () => {
+const Toolbar = ({ loading }) => {
   const styles = useStyles();
   return (
     <ThemeConsumer>
@@ -40,6 +41,10 @@ const Toolbar = () => {
               <Button onClick={Auth.logout}>Logout</Button>
             </div>
           </MuiToolbar>
+          <LinearProgress
+            color="secondary"
+            style={{ visibility: loading ? "visible" : "hidden" }}
+          />
         </AppBar>
       )}
     </ThemeConsumer>

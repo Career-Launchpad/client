@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import Layout from "../../components/Layout";
 import AddStudentForm from "./AddStudentForm";
 import FormPage from "../../components/FormPage";
 
@@ -18,12 +17,10 @@ const AddStudentPage = () => {
 
   return (
     <>
-      {navigate && <Redirect to="/" />}
-      <Layout>
-        <FormPage onClose={handleClose}>
-          <AddStudentForm onSubmit={handleFormSubmit} />
-        </FormPage>
-      </Layout>
+      {navigate && <Redirect to="/" />}{" "}
+      <FormPage onClose={handleClose}>
+        <AddStudentForm onSubmit={handleFormSubmit} />
+      </FormPage>
     </>
   );
 };
