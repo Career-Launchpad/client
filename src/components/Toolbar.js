@@ -27,27 +27,25 @@ const Toolbar = ({ loading }) => {
   return (
     <ThemeConsumer>
       {({ theme, toggleTheme }) => (
-        <>
-          <AppBar position="fixed" className={styles.appBar} color="default">
-            <MuiToolbar className={styles.toolbar}>
-              <Typography variant="h6" noWrap className={styles.home}>
-                Prospect
-              </Typography>
-              <div>
-                <IconButton size="small" onClick={() => toggleTheme()}>
-                  <Icon>
-                    {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
-                  </Icon>
-                </IconButton>
-                <Button onClick={Auth.logout}>Logout</Button>
-              </div>
-            </MuiToolbar>
-            <LinearProgress
-              color="secondary"
-              style={{ visibility: loading ? "visible" : "hidden" }}
-            />
-          </AppBar>
-        </>
+        <AppBar position="fixed" className={styles.appBar} color="default">
+          <MuiToolbar className={styles.toolbar}>
+            <Typography variant="h6" noWrap className={styles.home}>
+              Prospect
+            </Typography>
+            <div>
+              <IconButton size="small" onClick={() => toggleTheme()}>
+                <Icon>
+                  {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
+                </Icon>
+              </IconButton>
+              <Button onClick={Auth.logout}>Logout</Button>
+            </div>
+          </MuiToolbar>
+          <LinearProgress
+            color="secondary"
+            style={{ visibility: loading ? "visible" : "hidden" }}
+         />
+        </AppBar>
       )}
     </ThemeConsumer>
   );

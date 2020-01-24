@@ -3,6 +3,7 @@ import * as cx from "classnames";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 
+import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
 import TextField from "../../components/formik/TextField";
 
 const positionTypes = ["Full time", "Part time", "Internship", "Contractor"];
@@ -30,11 +31,20 @@ const PositionSubForm = ({ styles }) => {
           </MenuItem>
         ))}
       </TextField>
-      <TextField
-        fullWidth
+      <AutocompleteTextField
         label="Company"
         name="company_name"
-        className={styles.field}
+        className={cx(styles.smallField, styles.field)}
+        options={[
+          "Brevium",
+          "Qualtrics",
+          "Simplifile",
+          "Lucid",
+          "Plaid",
+          "Podium",
+          "Chief Architect",
+          "Proofpoint"
+        ]}
       />
       <TextField
         label="City"
