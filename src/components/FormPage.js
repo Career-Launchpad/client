@@ -4,6 +4,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Paper from "@material-ui/core/Paper";
 import Slide from "@material-ui/core/Slide";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   paper: {
+    width: "fit-content",
     maxWidth: "38rem",
     padding: "2rem",
     margin: "auto",
@@ -36,8 +38,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FormPage = ({ onClose, ...props }) => {
-  const classes = useStyles();
+const FormPage = ({ onClose, children, transition, loading }) => {
+  const styles = useStyles();
   const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
@@ -54,26 +56,32 @@ const FormPage = ({ onClose, ...props }) => {
       open={open}
       onClose={handleClose}
       onExited={handleExited}
-      TransitionComponent={Transition}
+      TransitionComponent={transition && Transition}
       disableEscapeKeyDown
     >
-      <AppBar className={classes.appBar}>
+      <AppBar className={styles.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Career Debut
+          {onClose && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+          )}
+          <Typography variant="h6" className={styles.title}>
+            Prospect
           </Typography>
         </Toolbar>
+        <LinearProgress
+          color="secondary"
+          style={{ visibility: loading ? "visible" : "hidden" }}
+        />
       </AppBar>
-      <DialogContent className={classes.dialogContent}>
-        <Paper className={classes.paper}>{props.children}</Paper>
+      <DialogContent className={styles.dialogContent}>
+        <Paper className={styles.paper}>{children}</Paper>
       </DialogContent>
     </Dialog>
   );

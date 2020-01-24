@@ -14,11 +14,11 @@ const useStyles = makeStyles(theme => ({
   toolbarSpace: theme.mixins.toolbar
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ children, loading }) => {
   const styles = useStyles();
   return (
     <div className={styles.app}>
-      <AppToolbar />
+      <AppToolbar loading={loading} />
       <AppNavBar />
       <main className={styles.main}>
         <div className={styles.toolbarSpace} />
