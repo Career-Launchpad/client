@@ -35,6 +35,16 @@ const PositionSubForm = ({ styles }) => {
         label="Company"
         name="company_name"
         className={cx(styles.smallField, styles.field)}
+        options={[
+          "Brevium",
+          "Qualtrics",
+          "Simplifile",
+          "Lucid",
+          "Plaid",
+          "Podium",
+          "Chief Architect",
+          "Proofpoint"
+        ]}
       />
       <TextField
         label="City"
