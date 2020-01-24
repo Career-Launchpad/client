@@ -20,7 +20,7 @@ const AutocompleteTextField = props => {
       className={props.className}
       margin="normal"
       freeSolo
-      filterOptions={(o) => o.filter(o => o.startsWith(field.value))}
+      filterOptions={o => o.filter(o => o.startsWith(field.value))}
       disableClearable
       options={[
         "Brevium",
