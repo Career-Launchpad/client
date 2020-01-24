@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "build": {
+    "env": {
+      "REACT_APP_FIREBASE_APP_ID": "@react_app_firebase_app_id",
+      "REACT_APP_FIREBASE_DATABASE": "@react_app_firebase_database",
+      "REACT_APP_FIREBASE_DOMAIN": "@react_app_firebase_domain",
+      "REACT_APP_FIREBASE_KEY": "@react_app_firebase_key",
+      "REACT_APP_FIREBASE_MEASUREMENT_ID": "@react_app_firebase_measurement_id",
+      "REACT_APP_FIREBASE_PROJECT_ID": "@react_app_firebase_project_id",
+      "REACT_APP_FIREBASE_SENDER_ID": "@react_app_firebase_sender_id",
+      "REACT_APP_FIREBASE_STORAGE_BUCKET": "@react_app_firebase_storage_bucket"
+    }
+  }
+}

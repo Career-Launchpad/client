@@ -25,4 +25,4 @@ yarn-error.log*
 #amplify
 /amplify
 
-*.env
+.env*
