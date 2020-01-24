@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Icon from "@material-ui/core/Icon";
 import List from "@material-ui/core/List";
@@ -22,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth
   },
   list: {
-    padding: 0
+    paddingTop: 5
   },
   routeActive: {
     backgroundColor:
@@ -57,7 +56,6 @@ const Navbar = () => {
           </NavLink>
         ))}
       </List>
-      <Divider />
     </Drawer>
   );
 };

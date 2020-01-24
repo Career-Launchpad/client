@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import Layout from "../../components/Layout";
 import FormPage from "../../components/FormPage";
 import AddOfferForm from "./AddOfferForm";
 
@@ -19,11 +18,9 @@ const AddOfferPage = () => {
   return (
     <>
       {navigate && <Redirect to="/" />}
-      <Layout>
-        <FormPage onClose={handleClose}>
-          <AddOfferForm onSubmit={handleFormSubmit} />
-        </FormPage>
-      </Layout>
+      <FormPage onClose={handleClose}>
+        <AddOfferForm onSubmit={handleFormSubmit} />
+      </FormPage>
     </>
   );
 };
