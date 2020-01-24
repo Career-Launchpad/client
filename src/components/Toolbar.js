@@ -44,7 +44,7 @@ const Toolbar = ({ loading }) => {
           <LinearProgress
             color="secondary"
             style={{ visibility: loading ? "visible" : "hidden" }}
-         />
+          />
         </AppBar>
       )}
     </ThemeConsumer>
