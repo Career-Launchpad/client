@@ -28,18 +28,15 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "now dev",
+    "start": "env-cmd -f ./.env.build react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "prettier --check \"**/*.+(js|jsx|json|css|md)\"",
+    "lint:fix": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "update-schema": "get-graphql-schema https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev/graphql > src/graphql/schema.graphql",
     "update-schema-local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
     "relay": "npm run update-schema && relay-compiler --config relay.config.json",
     "relay-local": "npm run update-schema-local && relay-compiler --config relay.config.json"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run relay && pretty-quick --staged && git add src/**/*graphql*"
-    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,12 +54,10 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^10.0.1",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^14.5.8",
-    "husky": "^3.0.9",
-    "now": "^16.7.3",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1",
     "relay-compiler": "^8.0.0",
     "relay-config": "^7.1.0"
   }
