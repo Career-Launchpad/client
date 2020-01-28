@@ -70,7 +70,7 @@ type mutation {
 }
 
 type offer {
-  offer_id: String
+  id: String
   position_type: String
   position_title: String
   accepted: Boolean

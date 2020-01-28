@@ -37,7 +37,7 @@ query OffersPage_Query {
 
 fragment OfferTable_offers on offerConnection {
   edges {
-    offer_id
+    id
     position_type
     position_title
     location {
@@ -124,7 +124,7 @@ const node/*: ConcreteRequest*/ = {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "offer_id",
+                    "name": "id",
                     "args": null,
                     "storageKey": null
                   },
@@ -207,7 +207,7 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "OffersPage_Query",
     "id": null,
-    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    offer_id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company_name\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
+    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company_name\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };

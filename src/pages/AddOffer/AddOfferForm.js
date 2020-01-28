@@ -71,7 +71,7 @@ const commit = (input, callback) => {
     mutation: graphql`
       mutation AddOfferForm_Mutation($input: createOfferInput!) {
         offer(offer: $input) {
-          offer_id
+          id
           position_type
           position_title
           wage_value

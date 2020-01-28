@@ -41,7 +41,7 @@ export type AddOfferForm_MutationVariables = {|
 |};
 export type AddOfferForm_MutationResponse = {|
   +offer: ?{|
-    +offer_id: ?string,
+    +id: ?string,
     +position_type: ?string,
     +position_title: ?string,
     +wage_value: ?number,
@@ -65,7 +65,7 @@ mutation AddOfferForm_Mutation(
   $input: createOfferInput!
 ) {
   offer(offer: $input) {
-    offer_id
+    id
     position_type
     position_title
     wage_value
@@ -107,7 +107,7 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "offer_id",
+        "name": "id",
         "args": null,
         "storageKey": null
       },
@@ -194,7 +194,7 @@ return {
     "operationKind": "mutation",
     "name": "AddOfferForm_Mutation",
     "id": null,
-    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    offer_id\n    position_type\n    position_title\n    wage_value\n    wage_type\n    location {\n      city\n      state\n      country\n    }\n  }\n}\n",
+    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    id\n    position_type\n    position_title\n    wage_value\n    wage_type\n    location {\n      city\n      state\n      country\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
