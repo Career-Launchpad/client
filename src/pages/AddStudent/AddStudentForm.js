@@ -2,13 +2,13 @@ import React from "react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Formik } from "formik";
 import * as cx from "classnames";
 import * as yup from "yup";
 
+import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
 import TextField from "../../components/formik/TextField";
 import environment from "../../utils/environment";
 
@@ -127,42 +127,24 @@ const AddStudentForm = ({ onSubmit }) => {
               name="major"
               className={cx(styles.smallField, styles.field)}
             />
-            <TextField
-              select
+            <AutocompleteTextField
               name="academic_year"
               label="Academic Year"
               className={cx(styles.smallField, styles.field)}
-            >
-              {academic_years.map(year => (
-                <MenuItem key={year} value={year}>
-                  {year}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
+              options={academic_years}
+            />
+            <AutocompleteTextField
               name="gender"
               label="Gender"
               className={cx(styles.smallField, styles.field)}
-            >
-              {genders.map(g => (
-                <MenuItem key={g} value={g}>
-                  {g}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
+              options={genders}
+            />
+            <AutocompleteTextField
               name="ethnicity"
               label="Ethnicity"
               className={cx(styles.smallField, styles.field)}
-            >
-              {ethnicities.map(e => (
-                <MenuItem key={e} value={e}>
-                  {e}
-                </MenuItem>
-              ))}
-            </TextField>
+              options={ethnicities}
+            />
             <div className={cx(styles.smallField, styles.field)}></div>
             <Button
               variant="contained"

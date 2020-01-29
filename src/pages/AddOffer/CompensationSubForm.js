@@ -1,10 +1,9 @@
 import React from "react";
 import * as cx from "classnames";
-import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import BonusesSubForm from "./BonusesSubForm";
 
-import TextField from "../../components/formik/TextField";
+import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
 import MoneyField from "../../components/formik/MoneyField";
 
 const compensationTypes = ["Salary", "Hourly", "On-completion"];
@@ -15,18 +14,12 @@ const CompensationSubForm = ({ styles, values, handleBlur, handleChange }) => {
       <Typography variant="h5" className={styles.subtitle}>
         Compensation
       </Typography>
-      <TextField
-        select
+      <AutocompleteTextField
         label="Wage Type"
         name="wage_type"
         className={cx(styles.smallField, styles.field)}
-      >
-        {compensationTypes.map(type => (
-          <MenuItem key={type} value={type}>
-            {type}
-          </MenuItem>
-        ))}
-      </TextField>
+        options={compensationTypes}
+      />
       <MoneyField
         label="Wage Value"
         name="wage_value"

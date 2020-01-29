@@ -1,11 +1,10 @@
 import React from "react";
 import * as cx from "classnames";
-import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import { isBefore } from "date-fns";
 import { makeStyles } from "@material-ui/core";
 
-import TextField from "../../components/formik/TextField";
+import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
 import DatePicker from "../../components/formik/DatePicker";
 
 const useStyles = makeStyles(theme => ({
@@ -34,18 +33,12 @@ const AcceptanceSubForm = ({ styles, values, handleChange }) => {
         className={cx(styles.smallField, styles.field)}
         shouldDisableDate={day => isBefore(new Date(day), values.extended)}
       />
-      <TextField
-        select
+      <AutocompleteTextField
         label="Accepted"
         name="accepted"
         className={cx(styles.smallField, styles.field)}
-      >
-        {acceptedOptions.map(entry => (
-          <MenuItem key={entry} value={entry}>
-            {entry}
-          </MenuItem>
-        ))}
-      </TextField>
+        options={acceptedOptions}
+      />
     </>
   );
 };
