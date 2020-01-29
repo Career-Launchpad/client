@@ -45,6 +45,7 @@ const PositionSubForm = ({ styles }) => {
           "Chief Architect",
           "Proofpoint"
         ]}
+        freeSolo
       />
       <TextField
         label="City"

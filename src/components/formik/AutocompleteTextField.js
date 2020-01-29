@@ -3,7 +3,7 @@ import { useField } from "formik";
 import { TextField as MuiTextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const AutocompleteTextField = ({ className, name, label, options }) => {
+const AutocompleteTextField = ({ className, name, label, options, freeSolo }) => {
   const [field, meta, helpers] = useField(name);
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
@@ -11,7 +11,7 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
     <Autocomplete
       className={className}
       margin="normal"
-      freeSolo
+      freeSolo={freeSolo}
       filterOptions={o => o.filter(o => o.startsWith(field.value))}
       disableClearable
       options={options}
@@ -32,7 +32,12 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
           helperText={helperText}
           error={error}
           onChange={field.onChange}
-          onBlur={field.onBlur}
+          onBlur={(e, value) => {
+            if (!freeSolo && !options.includes(field.value)) {
+              helpers.setValue("")
+            }
+            field.onBlur(e)
+          }}
         />
       )}
     />
