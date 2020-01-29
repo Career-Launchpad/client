@@ -1,6 +1,5 @@
 import React from "react";
 import * as cx from "classnames";
-import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 
 import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
@@ -19,18 +18,12 @@ const PositionSubForm = ({ styles }) => {
         name="position_title"
         className={cx(styles.smallField, styles.field)}
       />
-      <TextField
-        select
+      <AutocompleteTextField
         label="Position Type"
         name="position_type"
         className={cx(styles.smallField, styles.field)}
-      >
-        {positionTypes.map(type => (
-          <MenuItem key={type} value={type}>
-            {type}
-          </MenuItem>
-        ))}
-      </TextField>
+        options={positionTypes}
+      />
       <AutocompleteTextField
         label="Company"
         name="company_name"
