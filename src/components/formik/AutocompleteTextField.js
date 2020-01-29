@@ -34,7 +34,8 @@ const AutocompleteTextField = ({ className, name, label, options, freeSolo }) =>
           onChange={field.onChange}
           onBlur={(e, value) => {
             if (!freeSolo && !options.includes(field.value)) {
-              helpers.setValue("")
+              helpers.setValue("");
+              helpers.setTouched(true);
             }
             field.onBlur(e)
           }}
