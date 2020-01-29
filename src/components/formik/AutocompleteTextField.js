@@ -3,7 +3,13 @@ import { useField } from "formik";
 import { TextField as MuiTextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const AutocompleteTextField = ({ className, name, label, options, freeSolo }) => {
+const AutocompleteTextField = ({
+  className,
+  name,
+  label,
+  options,
+  freeSolo
+}) => {
   const [field, meta, helpers] = useField(name);
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
@@ -37,7 +43,7 @@ const AutocompleteTextField = ({ className, name, label, options, freeSolo }) =>
               helpers.setValue("");
               helpers.setTouched(true);
             }
-            field.onBlur(e)
+            field.onBlur(e);
           }}
         />
       )}
