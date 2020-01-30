@@ -1,7 +1,10 @@
 import React from "react";
 import * as cx from "classnames";
+import { QueryRenderer } from "react-relay";
+import graphql from "babel-plugin-relay/macro";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
+import environment from "../../utils/environment";
 
 import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
 import TextField from "../../components/formik/TextField";
@@ -31,20 +34,18 @@ const PositionSubForm = ({ styles }) => {
           </MenuItem>
         ))}
       </TextField>
-      <AutocompleteTextField
-        label="Company"
-        name="company_name"
-        className={cx(styles.smallField, styles.field)}
-        options={[
-          "Brevium",
-          "Qualtrics",
-          "Simplifile",
-          "Lucid",
-          "Plaid",
-          "Podium",
-          "Chief Architect",
-          "Proofpoint"
-        ]}
+      <QueryRenderer
+        environment={environment}
+        query={query}
+        render={({ props }) => {
+          let loading = !props;
+          return (<AutocompleteTextField
+            label="Company"
+            name="company_name"
+            className={cx(styles.smallField, styles.field)}
+            options={loading? [] : props.store.company_names}
+          />);
+        }}
       />
       <TextField
         label="City"
@@ -64,5 +65,13 @@ const PositionSubForm = ({ styles }) => {
     </>
   );
 };
+
+const query = graphql`
+  query PositionSubForm_Query {
+    store {
+      company_names
+    }
+  }
+`;
 
 export default PositionSubForm;
