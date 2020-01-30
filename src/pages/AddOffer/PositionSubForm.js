@@ -39,12 +39,14 @@ const PositionSubForm = ({ styles }) => {
         query={query}
         render={({ props }) => {
           let loading = !props;
-          return (<AutocompleteTextField
-            label="Company"
-            name="company_name"
-            className={cx(styles.smallField, styles.field)}
-            options={loading? [] : props.store.company_names}
-          />);
+          return (
+            <AutocompleteTextField
+              label="Company"
+              name="company_name"
+              className={cx(styles.smallField, styles.field)}
+              options={loading ? [] : props.store.company_names}
+            />
+          );
         }}
       />
       <TextField
