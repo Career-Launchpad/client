@@ -35,8 +35,9 @@ class AuthService {
     return await this.firebase
       .auth()
       .createUserWithEmailAndPassword(user.emailAddress, user.password)
-      .then(() => {
-        return { user };
+      .then(async () => {
+        await this.sendVerificationEmail();
+        throw new Error('Account created. Please verify your email address via the link sent to your inbox');
       })
       .catch(error => {
         return { error };
@@ -50,7 +51,11 @@ class AuthService {
     return await this.firebase
       .auth()
       .signInWithEmailAndPassword(user.emailAddress, user.password)
-      .then(() => {
+      .then(async() => {
+        let user = await this.getCurrentUser();
+        if (!user.emailVerified) {
+          throw new Error('You\'ll have to verify your email address first')
+        };
         return { user };
       })
       .catch(error => {
@@ -76,6 +81,12 @@ class AuthService {
     this.user = null;
     await this.firebase.auth().signOut();
   };
+
+  sendVerificationEmail = async() => {
+    let user = await this.firebase.auth().currentUser
+    user.sendEmailVerification();
+  }
+
 
   getCurrentUser = async () => {
     if (this.user) return this.user;
@@ -103,7 +114,7 @@ const AuthProvider = ({ children }) => {
   const [value, setValue] = useState({ state: AUTH_STATE.PENDING });
   useEffect(() => {
     Auth.firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      if (user && user.emailVerified) {
         setValue({ user, state: AUTH_STATE.AUTHENTICATED });
         return;
       }

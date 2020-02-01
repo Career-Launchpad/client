@@ -27,11 +27,17 @@ const Login = () => {
 
   const routerState = location.state;
   const redirectTo = routerState ? routerState.from.pathname : DEFAULT.path;
+  let emailVericationPrompt = false;
 
   const toggleIsLogin = () => {
     setError("");
     setIsLogin(!isLogin);
   };
+
+  const resendVerificationLink = async() => {
+    emailVericationPrompt = false;
+    await Auth.sendVerificationEmail();
+  }
 
   const handleSubmit = async values => {
     setError("");
@@ -41,6 +47,9 @@ const Login = () => {
       : await Auth.signup(values);
     setLoading(false);
     if (error) {
+      if (error.message === 'You\'ll have to verify your email address first') {
+        emailVericationPrompt = true;
+      }
       setError(error.message);
       return;
     }
@@ -77,6 +86,13 @@ const Login = () => {
                     >
                       {error}
                     </Typography>
+                    {emailVericationPrompt && <button
+                        type="button"
+                        className={styles.buttonLink}
+                        onClick={resendVerificationLink}
+                      >
+                      <Typography color="primary">{"Resend Verification Link"}</Typography>
+                      </button>}
                     <Typography variant="body1" className={styles.loginPrompt}>
                       If you {isLogin ? "don't yet" : "already"} have an account{" "}
                       <button
