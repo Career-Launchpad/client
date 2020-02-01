@@ -27,29 +27,22 @@ const Login = () => {
 
   const routerState = location.state;
   const redirectTo = routerState ? routerState.from.pathname : DEFAULT.path;
-  let emailVericationPrompt = false;
 
   const toggleIsLogin = () => {
     setError("");
     setIsLogin(!isLogin);
   };
 
-  const resendVerificationLink = async() => {
-    emailVericationPrompt = false;
+  const resendVerificationLink = async () => {
     await Auth.sendVerificationEmail();
-  }
+  };
 
   const handleSubmit = async values => {
     setError("");
     setLoading(true);
-    const { error } = isLogin
-      ? await Auth.login(values)
-      : await Auth.signup(values);
+    const { error } = isLogin ? await Auth.login(values) : await Auth.signup(values);
     setLoading(false);
     if (error) {
-      if (error.message === 'You\'ll have to verify your email address first') {
-        emailVericationPrompt = true;
-      }
       setError(error.message);
       return;
     }
@@ -59,9 +52,7 @@ const Login = () => {
     <AuthConsumer>
       {auth => (
         <FormPage loading={loading}>
-          {auth.state === AUTH_STATE.AUTHENTICATED && (
-            <Redirect to={redirectTo} />
-          )}
+          {auth.state === AUTH_STATE.AUTHENTICATED && <Redirect to={redirectTo} />}
           <div>
             <Formik
               initialValues={{
@@ -73,36 +64,29 @@ const Login = () => {
             >
               {({ handleSubmit }) => (
                 <form onSubmit={handleSubmit} className={styles.form}>
-                  <Typography variant="h4">
-                    {isLogin ? "Login" : "Sign Up"}
-                  </Typography>{" "}
+                  <Typography variant="h4">{isLogin ? "Login" : "Sign Up"}</Typography>{" "}
                   <TextField label="Email Address" name="emailAddress" />
                   <TextField label="Password" name="password" type="password" />
                   <div className={styles.buttonContainer}>
-                    <Typography
-                      variant="body1"
-                      color="error"
-                      className={styles.error}
-                    >
+                    <Typography variant="body1" color="error" className={styles.error}>
                       {error}
                     </Typography>
-                    {emailVericationPrompt && <button
-                        type="button"
-                        className={styles.buttonLink}
-                        onClick={resendVerificationLink}
-                      >
-                      <Typography color="primary">{"Resend Verification Link"}</Typography>
-                      </button>}
+                    {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
+                      <>
+                        <Typography variant="body1" className={styles.error}>
+                          {isLogin
+                            ? "Looks like you haven't verified your email yet"
+                            : "Account created. Please verify your email address via the link sent to your inbox"}
+                          <button type="button" className={styles.buttonLink} onClick={resendVerificationLink}>
+                            <Typography color="primary">{"Resend Verification Link"}</Typography>
+                          </button>
+                        </Typography>
+                      </>
+                    )}
                     <Typography variant="body1" className={styles.loginPrompt}>
                       If you {isLogin ? "don't yet" : "already"} have an account{" "}
-                      <button
-                        type="button"
-                        className={styles.buttonLink}
-                        onClick={toggleIsLogin}
-                      >
-                        <Typography color="primary">
-                          {isLogin ? "sign up" : "login"}
-                        </Typography>
+                      <button type="button" className={styles.buttonLink} onClick={toggleIsLogin}>
+                        <Typography color="primary">{isLogin ? "sign up" : "login"}</Typography>
                       </button>
                     </Typography>
                     <Button variant="contained" type="submit" color="primary">

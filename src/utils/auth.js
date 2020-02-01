@@ -4,6 +4,7 @@ import * as firebase from "firebase/app";
 
 const AUTH_STATE = {
   PENDING: "PENDING",
+  NEEDS_VERIFICATION: "NEEDS_VERIFICATION",
   AUTHENTICATED: "AUTHENTICATED",
   NOT_AUTHENTICATED: "NOT_AUTHENTICATED"
 };
@@ -37,7 +38,6 @@ class AuthService {
       .createUserWithEmailAndPassword(user.emailAddress, user.password)
       .then(async () => {
         await this.sendVerificationEmail();
-        throw new Error('Account created. Please verify your email address via the link sent to your inbox');
       })
       .catch(error => {
         return { error };
@@ -51,13 +51,6 @@ class AuthService {
     return await this.firebase
       .auth()
       .signInWithEmailAndPassword(user.emailAddress, user.password)
-      .then(async() => {
-        let user = await this.getCurrentUser();
-        if (!user.emailVerified) {
-          throw new Error('You\'ll have to verify your email address first')
-        };
-        return { user };
-      })
       .catch(error => {
         return { error };
       });
@@ -82,11 +75,10 @@ class AuthService {
     await this.firebase.auth().signOut();
   };
 
-  sendVerificationEmail = async() => {
-    let user = await this.firebase.auth().currentUser
+  sendVerificationEmail = async () => {
+    let user = await this.firebase.auth().currentUser;
     user.sendEmailVerification();
-  }
-
+  };
 
   getCurrentUser = async () => {
     if (this.user) return this.user;
@@ -114,11 +106,13 @@ const AuthProvider = ({ children }) => {
   const [value, setValue] = useState({ state: AUTH_STATE.PENDING });
   useEffect(() => {
     Auth.firebase.auth().onAuthStateChanged(user => {
+      let state = AUTH_STATE.NOT_AUTHENTICATED;
       if (user && user.emailVerified) {
-        setValue({ user, state: AUTH_STATE.AUTHENTICATED });
-        return;
+        state = AUTH_STATE.AUTHENTICATED;
+      } else if (user && !user.emailVerified) {
+        state = AUTH_STATE.NEEDS_VERIFICATION;
       }
-      setValue({ user: undefined, state: AUTH_STATE.NOT_AUTHENTICATED });
+      setValue({ user, state });
     });
   });
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

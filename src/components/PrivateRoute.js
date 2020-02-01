@@ -11,17 +11,16 @@ const PrivateRoute = ({ children, ...rest }) => {
       {...rest}
       render={({ location }) => (
         <AuthConsumer>
-          {({ state }) => (
-            <>
-              {state === AUTH_STATE.AUTHENTICATED && children}
-              {state === AUTH_STATE.PENDING && <Splash />}
-              {state === AUTH_STATE.NOT_AUTHENTICATED && (
-                <Redirect
-                  to={{ pathname: LOGIN.path, state: { from: location } }}
-                />
-              )}
-            </>
-          )}
+          {({ state }) => {
+            switch (state) {
+              case AUTH_STATE.AUTHENTICATED:
+                return children;
+              case AUTH_STATE.PENDING:
+                return <Splash />;
+              default:
+                return <Redirect to={{ pathname: LOGIN.path, state: { from: location } }} />;
+            }
+          }}
         </AuthConsumer>
       )}
     />
