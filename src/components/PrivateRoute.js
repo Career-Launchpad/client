@@ -18,7 +18,11 @@ const PrivateRoute = ({ children, ...rest }) => {
               case AUTH_STATE.PENDING:
                 return <Splash />;
               default:
-                return <Redirect to={{ pathname: LOGIN.path, state: { from: location } }} />;
+                return (
+                  <Redirect
+                    to={{ pathname: LOGIN.path, state: { from: location } }}
+                  />
+                );
             }
           }}
         </AuthConsumer>
