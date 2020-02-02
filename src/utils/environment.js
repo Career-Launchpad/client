@@ -37,7 +37,11 @@ const network = new RelayNetworkLayer(
       beforeRetry: ({ forceRetry, abort, delay, attempt, lastError, req }) => {
         if (attempt > 10) abort();
         window.forceRelayRetry = forceRetry;
-        console.log("call `forceRelayRetry()` for immediately retry! Or wait " + delay + " ms.");
+        console.log(
+          "call `forceRelayRetry()` for immediately retry! Or wait " +
+            delay +
+            " ms."
+        );
       },
       statusCodes: [500, 503, 504]
     }),
