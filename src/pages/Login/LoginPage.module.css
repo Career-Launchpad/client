@@ -30,6 +30,7 @@
 }
 
 .error {
+  color: red;
   font-size: smaller;
   text-align: center;
   width: 100%;
