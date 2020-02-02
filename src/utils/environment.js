@@ -9,21 +9,28 @@ import {
   cacheMiddleware
 } from "react-relay-network-modern";
 
-const base =
-  "https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev/graphql";
+const __DEV__ = process.env.NODE_ENV === "development";
+
+const baseLookup = {
+  development: "https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev",
+  production: "https://xhjdqriuvb.execute-api.us-east-1.amazonaws.com/prod"
+};
+
+const URL_BASE = baseLookup[process.env.NODE_ENV];
+
+const graphqlEndpoint = `${URL_BASE}/graphql`;
+
+console.log(process.env.NODE_ENV, URL_BASE);
 
 const network = new RelayNetworkLayer(
   [
     cacheMiddleware({ size: 100, ttl: 900000 }),
     urlMiddleware({
-      url: req => Promise.resolve(`${base}`)
+      url: req => Promise.resolve(`${graphqlEndpoint}`)
     }),
-    // __DEV__ ? loggerMiddleware() : null,
-    // __DEV__ ? errorMiddleware() : null,
-    // __DEV__ ? perfMiddleware() : null,
-    false && loggerMiddleware(),
-    false && perfMiddleware(),
-    errorMiddleware(),
+    __DEV__ ? loggerMiddleware() : null,
+    __DEV__ ? errorMiddleware() : null,
+    __DEV__ ? perfMiddleware() : null,
     retryMiddleware({
       fetchTimeout: 15000,
       retryDelays: attempt => Math.pow(2, attempt + 4) * 100, // or simple array [3200, 6400, 12800, 25600, 51200, 102400, 204800, 409600],
@@ -43,11 +50,7 @@ const network = new RelayNetworkLayer(
     next => async req => {
       req.fetchOpts.mode = "cors"; // allow cors requests
       req.fetchOpts.credentials = "same-origin"; // allow to send cookies (sending credentials to same domains)
-
-      // console.log('RelayRequest', req);
       const res = await next(req);
-      // console.log('RelayResponse', res);
-
       return res;
     }
   ],
@@ -64,4 +67,4 @@ const environment = new Environment({
   store
 });
 
-export default environment;
+export { environment as default, URL_BASE };
