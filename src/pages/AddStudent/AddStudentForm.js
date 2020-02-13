@@ -94,7 +94,6 @@ const AddStudentForm = ({ onSubmit }) => {
       ...values,
       id: user.uid
     };
-    console.log(student);
     commit(student, (res, err) => {
       setSubmitting(false);
       onSubmit(res);

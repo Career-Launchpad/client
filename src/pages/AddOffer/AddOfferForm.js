@@ -98,7 +98,6 @@ const AddOfferForm = ({ onSubmit }) => {
   const handleSubmit = (values, { setSubmitting }) => {
     const newOffer = {
       ...values,
-      student_id: user.uid,
       extended: String(values.extended),
       deadline: String(values.deadline)
     };
@@ -119,7 +118,7 @@ const AddOfferForm = ({ onSubmit }) => {
       </Typography>
       <Formik
         initialValues={{
-          student_id: studentId,
+          student_id: user.uid,
           position_title: "",
           position_type: "",
           company_name: "",

@@ -37,11 +37,10 @@ input createOfferInput {
 }
 
 input createStudentInput {
-  id: String
   email: String
   firstname: String
   lastname: String
-  college_name: String
+  college_id: String
   academic_year: String
   major: String
   gender: String
@@ -77,7 +76,7 @@ type offer {
   extended: String
   deadline: String
   academic_year: String
-  company_name: String
+  company_id: String
   flag: Boolean
   student_id: String
   location: location
@@ -115,9 +114,9 @@ type student {
   academic_year: String
   major: String
   gender: String
-  ethnicity: String
   last_authentication: String
   security_level: String
+  ethnicity: String
   offers(student_id: String): [offer]
 }
 
