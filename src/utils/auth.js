@@ -104,6 +104,12 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const [value, setValue] = useState({ state: AUTH_STATE.PENDING });
+  const safeSetValue = newValue => {
+    if (newValue.state !== value.state) {
+      setValue(newValue);
+    }
+  };
+
   useEffect(() => {
     Auth.firebase.auth().onAuthStateChanged(user => {
       let state = AUTH_STATE.NOT_AUTHENTICATED;
@@ -112,7 +118,7 @@ const AuthProvider = ({ children }) => {
       } else if (user && !user.emailVerified) {
         state = AUTH_STATE.NEEDS_VERIFICATION;
       }
-      setValue({ user, state });
+      safeSetValue({ user, state });
     });
   });
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -120,4 +126,4 @@ const AuthProvider = ({ children }) => {
 
 const AuthConsumer = AuthContext.Consumer;
 
-export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer };
+export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer, AuthContext };

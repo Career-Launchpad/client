@@ -13,6 +13,8 @@ import CompensationSubForm from "./CompensationSubForm";
 import BenefitsSubForm from "./BenefitsSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../utils/environment";
+import { useContext } from "react";
+import { AuthContext } from "../../utils/auth";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -90,12 +92,17 @@ const commit = (input, callback) => {
   });
 };
 
-const AddOfferForm = ({ studentId, onSubmit }) => {
+const AddOfferForm = ({ onSubmit }) => {
   const styles = useStyles();
+  const { user } = useContext(AuthContext);
   const handleSubmit = (values, { setSubmitting }) => {
-    values.extended = String(values.extended);
-    values.deadline = String(values.deadline);
-    commit(values, (res, err) => {
+    const newOffer = {
+      ...values,
+      student_id: user.uid,
+      extended: String(values.extended),
+      deadline: String(values.deadline)
+    };
+    commit(newOffer, (res, err) => {
       setSubmitting(false);
       if (err) {
         return;
@@ -107,8 +114,8 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
     <>
       <Typography variant="h4">Add Offer</Typography>
       <Typography variant="body1">
-        Please enter as much information as you can, as accurately as possible.
-        This will help your school know best how to help you.
+        Please enter as much information as you can, as accurately as possible. This will help your school know best how
+        to help you.
       </Typography>
       <Formik
         initialValues={{
@@ -132,16 +139,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
         validationSchema={offerSchema}
         onSubmit={handleSubmit}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          submitForm
-        }) => (
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, submitForm }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <PositionSubForm
               styles={styles}
@@ -151,24 +149,9 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
               handleBlur={handleBlur}
               handleChange={handleChange}
             />
-            <CompensationSubForm
-              styles={styles}
-              values={values}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <BenefitsSubForm
-              styles={styles}
-              values={values}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <AcceptanceSubForm
-              styles={styles}
-              values={values}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
+            <CompensationSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
+            <BenefitsSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
+            <AcceptanceSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
             <div className={cx(styles.smallField, styles.field)}></div>
             <Button
               variant="contained"

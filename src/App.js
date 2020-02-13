@@ -13,10 +13,10 @@ import "./index.css";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <ThemeProvider>
-          <AuthProvider>
+    <AuthProvider>
+      <BrowserRouter>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <ThemeProvider>
             <CssBaseline />
             <Switch>
               {Routes.map(route => {
@@ -32,10 +32,10 @@ const App = () => {
                 <Redirect to={DEFAULT.path} />
               </PrivateRoute>
             </Switch>
-          </AuthProvider>
-        </ThemeProvider>
-      </MuiPickersUtilsProvider>
-    </BrowserRouter>
+          </ThemeProvider>
+        </MuiPickersUtilsProvider>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

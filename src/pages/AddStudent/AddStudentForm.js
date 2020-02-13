@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,7 @@ import * as cx from "classnames";
 import * as yup from "yup";
 
 import TextField from "../../components/formik/TextField";
+import { AuthContext } from "../../utils/auth";
 import environment from "../../utils/environment";
 
 const useStyles = makeStyles(theme => ({
@@ -44,14 +45,7 @@ const studentSchema = yup.object().shape({
   ethnicity: yup.string().required("Required")
 });
 
-const academic_years = [
-  "PhD",
-  "Masters",
-  "Senior",
-  "Junior",
-  "Sophomore",
-  "Freshman"
-];
+const academic_years = ["PhD", "Masters", "Senior", "Junior", "Sophomore", "Freshman"];
 
 const genders = ["Male", "Female", "Other", "Prefer not to answer"];
 
@@ -87,8 +81,14 @@ const commit = (input, callback) => {
 
 const AddStudentForm = ({ onSubmit }) => {
   const styles = useStyles();
+  const { user } = useContext(AuthContext);
   const handleSubmit = (values, { setSubmitting }) => {
-    commit(values, (res, err) => {
+    const student = {
+      ...values,
+      id: user.uid
+    };
+    console.log(student)
+    commit(student, (res, err) => {
       setSubmitting(false);
       onSubmit(res);
     });
@@ -112,21 +112,9 @@ const AddStudentForm = ({ onSubmit }) => {
       >
         {({ handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextField
-              label="First Name"
-              name="firstname"
-              className={cx(styles.smallField, styles.field)}
-            />
-            <TextField
-              label="Last Name"
-              name="lastname"
-              className={cx(styles.smallField, styles.field)}
-            />
-            <TextField
-              label="Major"
-              name="major"
-              className={cx(styles.smallField, styles.field)}
-            />
+            <TextField label="First Name" name="firstname" className={cx(styles.smallField, styles.field)} />
+            <TextField label="Last Name" name="lastname" className={cx(styles.smallField, styles.field)} />
+            <TextField label="Major" name="major" className={cx(styles.smallField, styles.field)} />
             <TextField
               select
               name="academic_year"
@@ -139,24 +127,14 @@ const AddStudentForm = ({ onSubmit }) => {
                 </MenuItem>
               ))}
             </TextField>
-            <TextField
-              select
-              name="gender"
-              label="Gender"
-              className={cx(styles.smallField, styles.field)}
-            >
+            <TextField select name="gender" label="Gender" className={cx(styles.smallField, styles.field)}>
               {genders.map(g => (
                 <MenuItem key={g} value={g}>
                   {g}
                 </MenuItem>
               ))}
             </TextField>
-            <TextField
-              select
-              name="ethnicity"
-              label="Ethnicity"
-              className={cx(styles.smallField, styles.field)}
-            >
+            <TextField select name="ethnicity" label="Ethnicity" className={cx(styles.smallField, styles.field)}>
               {ethnicities.map(e => (
                 <MenuItem key={e} value={e}>
                   {e}
@@ -164,13 +142,7 @@ const AddStudentForm = ({ onSubmit }) => {
               ))}
             </TextField>
             <div className={cx(styles.smallField, styles.field)}></div>
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              className={styles.button}
-              disabled={isSubmitting}
-            >
+            <Button variant="contained" type="submit" color="primary" className={styles.button} disabled={isSubmitting}>
               done
             </Button>
           </form>

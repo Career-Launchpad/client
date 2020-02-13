@@ -13,10 +13,12 @@ const __DEV__ = process.env.NODE_ENV === "development";
 
 const baseLookup = {
   development: "https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev",
-  production: "https://xhjdqriuvb.execute-api.us-east-1.amazonaws.com/prod"
+  production: "https://xhjdqriuvb.execute-api.us-east-1.amazonaws.com/prod",
+  local: "http://127.0.0.1:8080"
 };
 
-const URL_BASE = baseLookup[process.env.NODE_ENV];
+// const URL_BASE = baseLookup[process.env.NODE_ENV];
+const URL_BASE = baseLookup["local"];
 
 const graphqlEndpoint = `${URL_BASE}/graphql`;
 
@@ -37,11 +39,7 @@ const network = new RelayNetworkLayer(
       beforeRetry: ({ forceRetry, abort, delay, attempt, lastError, req }) => {
         if (attempt > 10) abort();
         window.forceRelayRetry = forceRetry;
-        console.log(
-          "call `forceRelayRetry()` for immediately retry! Or wait " +
-            delay +
-            " ms."
-        );
+        console.log("call `forceRelayRetry()` for immediately retry! Or wait " + delay + " ms.");
       },
       statusCodes: [500, 503, 504]
     }),
