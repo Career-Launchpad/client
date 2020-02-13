@@ -13,6 +13,8 @@ import CompensationSubForm from "./CompensationSubForm";
 import BenefitsSubForm from "./BenefitsSubForm";
 import AcceptanceSubForm from "./AcceptanceSubForm";
 import environment from "../../utils/environment";
+import { useContext } from "react";
+import { AuthContext } from "../../utils/auth";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -90,12 +92,16 @@ const commit = (input, callback) => {
   });
 };
 
-const AddOfferForm = ({ studentId, onSubmit }) => {
+const AddOfferForm = ({ onSubmit }) => {
   const styles = useStyles();
+  const { user } = useContext(AuthContext);
   const handleSubmit = (values, { setSubmitting }) => {
-    values.extended = String(values.extended);
-    values.deadline = String(values.deadline);
-    commit(values, (res, err) => {
+    const newOffer = {
+      ...values,
+      extended: String(values.extended),
+      deadline: String(values.deadline)
+    };
+    commit(newOffer, (res, err) => {
       setSubmitting(false);
       if (err) {
         return;
@@ -112,7 +118,7 @@ const AddOfferForm = ({ studentId, onSubmit }) => {
       </Typography>
       <Formik
         initialValues={{
-          student_id: studentId,
+          student_id: user.uid,
           position_title: "",
           position_type: "",
           company_name: "",

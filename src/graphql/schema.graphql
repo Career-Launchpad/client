@@ -76,7 +76,7 @@ type offer {
   extended: String
   deadline: String
   academic_year: String
-  company_name: String
+  company_id: String
   flag: Boolean
   student_id: String
   location: location

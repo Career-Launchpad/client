@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f393b6a1a31f22ef2ef95a50fc0d10cd
+ * @relayHash 4783f04ec2ed34c744825b2448ceec93
  */
 
 /* eslint-disable */
@@ -43,7 +43,7 @@ fragment OfferTable_offers on offerConnection {
     location {
       state
     }
-    company_name
+    company_id
     academic_year
     wage_type
     wage_value
@@ -163,7 +163,7 @@ const node/*: ConcreteRequest*/ = {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "company_name",
+                    "name": "company_id",
                     "args": null,
                     "storageKey": null
                   },
@@ -207,7 +207,7 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "OffersPage_Query",
     "id": null,
-    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    offer_id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company_name\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
+    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    offer_id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company_id\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };

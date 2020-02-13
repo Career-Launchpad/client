@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,7 @@ import * as cx from "classnames";
 import * as yup from "yup";
 
 import TextField from "../../components/formik/TextField";
+import { AuthContext } from "../../utils/auth";
 import environment from "../../utils/environment";
 
 const useStyles = makeStyles(theme => ({
@@ -87,8 +88,13 @@ const commit = (input, callback) => {
 
 const AddStudentForm = ({ onSubmit }) => {
   const styles = useStyles();
+  const { user } = useContext(AuthContext);
   const handleSubmit = (values, { setSubmitting }) => {
-    commit(values, (res, err) => {
+    const student = {
+      ...values,
+      id: user.uid
+    };
+    commit(student, (res, err) => {
       setSubmitting(false);
       onSubmit(res);
     });

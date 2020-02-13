@@ -13,7 +13,8 @@ const __DEV__ = process.env.NODE_ENV === "development";
 
 const baseLookup = {
   development: "https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev",
-  production: "https://xhjdqriuvb.execute-api.us-east-1.amazonaws.com/prod"
+  production: "https://xhjdqriuvb.execute-api.us-east-1.amazonaws.com/prod",
+  local: "http://127.0.0.1:8080"
 };
 
 const URL_BASE = baseLookup[process.env.NODE_ENV];

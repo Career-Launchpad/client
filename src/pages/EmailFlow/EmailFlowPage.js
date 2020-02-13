@@ -99,7 +99,6 @@ const EmailFlowPage = () => {
         {Pages.filter(page => page.name === current).map(page => (
           <page.component
             key={page.name}
-            studentId={result.student.id}
             onSubmit={data => handleFormSubmit(page.name, data)}
           />
         ))}
