@@ -12,7 +12,9 @@ Your school has requested that you input information regarding your job hunt. Pl
 Your information will be used in accordance with our [Privacy Policy](https://meetprospect.now.sh/privacy).
 `;
 
-const IntroDialog = ({ onSubmit }) => <Dialog onSubmit={onSubmit} prompt={introPrompt} submitText="Begin" />;
+const IntroDialog = ({ onSubmit }) => (
+  <Dialog onSubmit={onSubmit} prompt={introPrompt} submitText="Begin" />
+);
 
 const HasOfferDialog = ({ onSubmit }) => (
   <Dialog
@@ -24,7 +26,12 @@ const HasOfferDialog = ({ onSubmit }) => (
 );
 
 const HasMoreDialog = ({ onSubmit }) => (
-  <Dialog onSubmit={onSubmit} prompt="Have you received any other offers?" submitText="Yes" cancelText="No" />
+  <Dialog
+    onSubmit={onSubmit}
+    prompt="Have you received any other offers?"
+    submitText="Yes"
+    cancelText="No"
+  />
 );
 
 const ThankYouDialog = ({ onSubmit }) => (
@@ -90,7 +97,10 @@ const EmailFlowPage = () => {
       {navigate && <Redirect to="/" />}
       <FormPage onClose={handleClose}>
         {Pages.filter(page => page.name === current).map(page => (
-          <page.component key={page.name} onSubmit={data => handleFormSubmit(page.name, data)} />
+          <page.component
+            key={page.name}
+            onSubmit={data => handleFormSubmit(page.name, data)}
+          />
         ))}
       </FormPage>
     </>

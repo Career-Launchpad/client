@@ -114,8 +114,8 @@ const AddOfferForm = ({ onSubmit }) => {
     <>
       <Typography variant="h4">Add Offer</Typography>
       <Typography variant="body1">
-        Please enter as much information as you can, as accurately as possible. This will help your school know best how
-        to help you.
+        Please enter as much information as you can, as accurately as possible.
+        This will help your school know best how to help you.
       </Typography>
       <Formik
         initialValues={{
@@ -139,7 +139,16 @@ const AddOfferForm = ({ onSubmit }) => {
         validationSchema={offerSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, submitForm }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          submitForm
+        }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <PositionSubForm
               styles={styles}
@@ -149,9 +158,24 @@ const AddOfferForm = ({ onSubmit }) => {
               handleBlur={handleBlur}
               handleChange={handleChange}
             />
-            <CompensationSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
-            <BenefitsSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
-            <AcceptanceSubForm styles={styles} values={values} handleBlur={handleBlur} handleChange={handleChange} />
+            <CompensationSubForm
+              styles={styles}
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <BenefitsSubForm
+              styles={styles}
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <AcceptanceSubForm
+              styles={styles}
+              values={values}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
             <div className={cx(styles.smallField, styles.field)}></div>
             <Button
               variant="contained"
