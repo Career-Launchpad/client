@@ -61,9 +61,7 @@ input locationInput {
 }
 
 type mutation {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(student: createStudentInput): student
   offer(offer: createOfferInput): offer
@@ -78,7 +76,7 @@ type offer {
   extended: String
   deadline: String
   academic_year: String
-  company_name: String
+  company_id: String
   flag: Boolean
   student_id: String
   location: location
@@ -92,22 +90,19 @@ type offerConnection {
 }
 
 type query {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   store: store
 }
 
 type store {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(id: String): student
   offer(id: String): offer
   offers: offerConnection
   students(gender: String): [student]
+  company_names: [String]
 }
 
 type student {
@@ -124,3 +119,4 @@ type student {
   ethnicity: String
   offers(student_id: String): [offer]
 }
+

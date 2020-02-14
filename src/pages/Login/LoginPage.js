@@ -33,6 +33,10 @@ const Login = () => {
     setIsLogin(!isLogin);
   };
 
+  const resendVerificationLink = async () => {
+    await Auth.sendVerificationEmail();
+  };
+
   const handleSubmit = async values => {
     setError("");
     setLoading(true);
@@ -77,6 +81,24 @@ const Login = () => {
                     >
                       {error}
                     </Typography>
+                    {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
+                      <>
+                        <Typography variant="body1" className={styles.error}>
+                          {isLogin
+                            ? "Looks like you haven't verified your email yet"
+                            : "Account created. Please verify your email address via the link sent to your inbox"}
+                          <button
+                            type="button"
+                            className={styles.buttonLink}
+                            onClick={resendVerificationLink}
+                          >
+                            <Typography color="primary">
+                              {"Resend Verification Link"}
+                            </Typography>
+                          </button>
+                        </Typography>
+                      </>
+                    )}
                     <Typography variant="body1" className={styles.loginPrompt}>
                       If you {isLogin ? "don't yet" : "already"} have an account{" "}
                       <button

@@ -39,7 +39,7 @@ const OfferTable = ({ offers }) => {
             offers.edges.map((offer, i) => (
               <TableRow key={offer.id || i}>
                 <TableCell>{offer.position_title}</TableCell>
-                <TableCell>{offer.company_name}</TableCell>
+                <TableCell>{offer.company_id}</TableCell>
                 <TableCell>{offer.position_type}</TableCell>
                 <TableCell>{offer.wage_type}</TableCell>
                 <TableCell>
@@ -68,7 +68,7 @@ export default createFragmentContainer(OfferTable, {
         location {
           state
         }
-        company_name
+        company_id
         academic_year
         wage_type
         wage_value
