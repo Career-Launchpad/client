@@ -19,7 +19,9 @@ export type OfferTable_offers = {|
     +location: ?{|
       +state: ?string
     |},
-    +company_id: ?string,
+    +company: ?{|
+      +name: ?string
+    |},
     +academic_year: ?string,
     +wage_type: ?string,
     +wage_value: ?number,
@@ -91,11 +93,22 @@ const node/*: ReaderFragment*/ = {
           ]
         },
         {
-          "kind": "ScalarField",
+          "kind": "LinkedField",
           "alias": null,
-          "name": "company_id",
+          "name": "company",
+          "storageKey": null,
           "args": null,
-          "storageKey": null
+          "concreteType": "company",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "name",
+              "args": null,
+              "storageKey": null
+            }
+          ]
         },
         {
           "kind": "ScalarField",
@@ -123,5 +136,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '927d9d194ee6488cf5cdc91454dc6780';
+(node/*: any*/).hash = '0ed422b719f57439df0575800fa0f83d';
 module.exports = node;
