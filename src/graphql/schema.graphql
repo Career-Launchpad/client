@@ -21,6 +21,11 @@ input bonusInput {
   description: String
 }
 
+type company {
+  id: String
+  name: String
+}
+
 input createOfferInput {
   student_id: String
   position_type: String
@@ -37,10 +42,11 @@ input createOfferInput {
 }
 
 input createStudentInput {
+  id: String
   email: String
   firstname: String
   lastname: String
-  college_id: String
+  college_name: String
   academic_year: String
   major: String
   gender: String
@@ -76,7 +82,7 @@ type offer {
   extended: String
   deadline: String
   academic_year: String
-  company_id: String
+  company: company
   flag: Boolean
   student_id: String
   location: location
@@ -103,6 +109,9 @@ type store {
   offers: offerConnection
   students(gender: String): [student]
   company_names: [String]
+  companies: [company]
+  company(id: String): company
+  majors: [String]
 }
 
 type student {
@@ -114,9 +123,9 @@ type student {
   academic_year: String
   major: String
   gender: String
+  ethnicity: String
   last_authentication: String
   security_level: String
-  ethnicity: String
   offers(student_id: String): [offer]
 }
 

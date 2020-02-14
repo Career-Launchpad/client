@@ -5,7 +5,6 @@ import {
   loggerMiddleware,
   errorMiddleware,
   perfMiddleware,
-  retryMiddleware,
   cacheMiddleware
 } from "react-relay-network-modern";
 
@@ -32,20 +31,6 @@ const network = new RelayNetworkLayer(
     __DEV__ ? loggerMiddleware() : null,
     __DEV__ ? errorMiddleware() : null,
     __DEV__ ? perfMiddleware() : null,
-    retryMiddleware({
-      fetchTimeout: 15000,
-      retryDelays: attempt => Math.pow(2, attempt + 4) * 100, // or simple array [3200, 6400, 12800, 25600, 51200, 102400, 204800, 409600],
-      beforeRetry: ({ forceRetry, abort, delay, attempt, lastError, req }) => {
-        if (attempt > 10) abort();
-        window.forceRelayRetry = forceRetry;
-        console.log(
-          "call `forceRelayRetry()` for immediately retry! Or wait " +
-            delay +
-            " ms."
-        );
-      },
-      statusCodes: [500, 503, 504]
-    }),
 
     // example of the custom inline middleware
     next => async req => {

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3391cfac471847865f2ad1ca5fa50e1d
+ * @relayHash af8ae5a067fc280b5e4a620eb7fe4f91
  */
 
 /* eslint-disable */
@@ -10,10 +10,11 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type createStudentInput = {|
+  id?: ?string,
   email?: ?string,
   firstname?: ?string,
   lastname?: ?string,
-  college_id?: ?string,
+  college_name?: ?string,
   academic_year?: ?string,
   major?: ?string,
   gender?: ?string,

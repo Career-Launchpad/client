@@ -21,6 +21,7 @@ jobs:
           npm ci
           npm test
           npm run lint
+          npm run relay-compile
           npm run build --if-present
         env:
           CI: true
