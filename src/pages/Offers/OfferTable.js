@@ -62,7 +62,7 @@ export default createFragmentContainer(OfferTable, {
   offers: graphql`
     fragment OfferTable_offers on offerConnection {
       edges {
-        offer_id
+        id
         position_type
         position_title
         location {

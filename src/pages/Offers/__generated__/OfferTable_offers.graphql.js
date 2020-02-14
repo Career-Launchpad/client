@@ -13,7 +13,7 @@ declare export opaque type OfferTable_offers$ref: FragmentReference;
 declare export opaque type OfferTable_offers$fragmentType: OfferTable_offers$ref;
 export type OfferTable_offers = {|
   +edges: ?$ReadOnlyArray<?{|
-    +offer_id: ?string,
+    +id: ?string,
     +position_type: ?string,
     +position_title: ?string,
     +location: ?{|
@@ -54,7 +54,7 @@ const node/*: ReaderFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "offer_id",
+          "name": "id",
           "args": null,
           "storageKey": null
         },
