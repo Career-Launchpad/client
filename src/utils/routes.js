@@ -3,6 +3,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import OffersPage from "../pages/Offers/OffersPage";
 import MajorsPage from "../pages/Majors/MajorsPage";
 import StudentsPage from "../pages/Students/StudentsPage";
+import CompaniesPage from "../pages/Students/CompaniesPage";
 
 export const LOGIN = {
   path: "/login",
@@ -39,6 +40,14 @@ export const STUDENTS = {
   icon: "group"
 };
 
+export const COMPANIES = {
+  name: "Companies",
+  path: "/companies",
+  component: CompaniesPage,
+  protected: true,
+  icon: "apartment"
+};
+
 export const DEFAULT = OFFERS;
 
-export const Routes = [LOGIN, EMAIL, OFFERS, MAJORS, STUDENTS];
+export const Routes = [LOGIN, EMAIL, OFFERS, MAJORS, STUDENTS, COMPANIES];
