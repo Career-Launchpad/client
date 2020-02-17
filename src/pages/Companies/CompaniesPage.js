@@ -23,7 +23,6 @@ const CompaniesPage = () => {
         query={query}
         cacheConfig={{ force: true }}
         render={({ props }) => {
-          console.log(props);
           setLoading(!props);
           if (!props) return <div />;
           return (

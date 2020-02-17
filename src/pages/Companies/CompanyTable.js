@@ -3,12 +3,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 
-const headers = [
-  { name: "Name", id: "name" },
-];
+const headers = [{ name: "Name", id: "name" }];
 
 const CompanyTable = ({ Companies }) => {
-  console.log(Companies);
   return (
     <DataTable headers={headers}>
       {Companies.map((Company, i) => {
@@ -23,13 +20,5 @@ const CompanyTable = ({ Companies }) => {
     </DataTable>
   );
 };
-
-// export default createFragmentContainer(CompanyTable, {
-//   Companies: graphql`
-//     fragment CompanyTable_Companies on company {
-//       name
-//     }
-//   `
-// });
 
 export default CompanyTable;
