@@ -16,8 +16,8 @@ const baseLookup = {
   local: "http://127.0.0.1:8080"
 };
 
-// const URL_BASE = baseLookup[process.env.NODE_ENV];
-const URL_BASE = baseLookup["local"]; // TODO comment out and uncomment line above
+const URL_BASE = baseLookup[process.env.NODE_ENV]; // Comment out for local testing
+// const URL_BASE = baseLookup["local"]; // Uncomment for local testing
 
 const graphqlEndpoint = `${URL_BASE}/graphql`;
 
