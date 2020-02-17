@@ -17,7 +17,7 @@ const baseLookup = {
 };
 
 // const URL_BASE = baseLookup[process.env.NODE_ENV];
-const URL_BASE = baseLookup['local']; // TODO comment out and uncomment line above
+const URL_BASE = baseLookup["local"]; // TODO comment out and uncomment line above
 
 const graphqlEndpoint = `${URL_BASE}/graphql`;
 

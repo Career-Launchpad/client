@@ -47,4 +47,3 @@ const query = graphql`
 `;
 
 export default Students;
-

@@ -12,16 +12,16 @@ const headers = [
   { name: "Academic Year", id: "academic_year" },
   { name: "Major", id: "major" },
   { name: "Offers Received", id: "offerCount" },
-  { name: "Offer Accepted", id: "offerAccepted" },
+  { name: "Offer Accepted", id: "offerAccepted" }
 ];
 
 const StudentTable = ({ students }) => {
   return (
     <DataTable headers={headers}>
       {students.edges.map((rawStudent, i) => {
-        let student = {...rawStudent}
-        const offers = student.offers.edges || []
-        student.offerCount = offers.length
+        let student = { ...rawStudent };
+        const offers = student.offers.edges || [];
+        student.offerCount = offers.length;
         student.offerAccepted = offers.some(o => o.accepted);
         return (
           <DataTableRow key={student.id || i} data={student}>
@@ -31,7 +31,9 @@ const StudentTable = ({ students }) => {
               <TableCell>{student.academic_year}</TableCell>
               <TableCell>{student.major}</TableCell>
               <TableCell>{student.offerCount}</TableCell>
-              <TableCell>{<Icon>{student.offerAccepted ? 'check' : 'clear'}</Icon>}</TableCell>
+              <TableCell>
+                {<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}
+              </TableCell>
             </TableRow>
           </DataTableRow>
         );
@@ -42,19 +44,19 @@ const StudentTable = ({ students }) => {
 
 export default createFragmentContainer(StudentTable, {
   students: graphql`
-  fragment StudentTable_students on studentConnection {
-    edges {
-      id
-      firstname
-      lastname
-      academic_year
-      major
-      offers {
-        edges {
-          accepted
+    fragment StudentTable_students on studentConnection {
+      edges {
+        id
+        firstname
+        lastname
+        academic_year
+        major
+        offers {
+          edges {
+            accepted
+          }
         }
       }
     }
-  }
   `
 });
