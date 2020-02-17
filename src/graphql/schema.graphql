@@ -107,7 +107,7 @@ type store {
   student(id: String): student
   offer(id: String): offer
   offers: offerConnection
-  students(gender: String): [student]
+  students(gender: String): studentConnection
   company_names: [String]
   companies: [company]
   company(id: String): company
@@ -126,6 +126,10 @@ type student {
   ethnicity: String
   last_authentication: String
   security_level: String
-  offers(student_id: String): [offer]
+  offers(student_id: String): offerConnection
+}
+
+type studentConnection {
+  edges: [student]
 }
 

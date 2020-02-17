@@ -1,4 +1,6 @@
-import React from "react";
+
+
+import React from 'react'
 import { createFragmentContainer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import TableCell from "@material-ui/core/TableCell";
