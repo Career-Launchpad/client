@@ -1,9 +1,6 @@
 import React from "react";
-import { createFragmentContainer } from "react-relay";
-import { graphql } from "babel-plugin-relay/macro";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import NumberFormat from "react-number-format";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 
 const headers = [
