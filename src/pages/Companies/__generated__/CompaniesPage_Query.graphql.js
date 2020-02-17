@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b38dd1466a6ea6542c12c3bc8deda7c3
+ * @relayHash afc60e5b5365c9d814e0b5ba973dada8
  */
 
 /* eslint-disable */
@@ -9,12 +9,12 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type CompanyTable_Companies$ref = any;
 export type CompaniesPage_QueryVariables = {||};
 export type CompaniesPage_QueryResponse = {|
   +store: ?{|
     +companies: ?$ReadOnlyArray<?{|
-      +$fragmentRefs: CompanyTable_Companies$ref
+      +id: ?string,
+      +name: ?string,
     |}>
   |}
 |};
@@ -29,15 +29,11 @@ export type CompaniesPage_Query = {|
 query CompaniesPage_Query {
   store {
     companies {
-      ...CompanyTable_Companies
+      id
+      name
     }
     id
   }
-}
-
-fragment CompanyTable_Companies on company {
-  id
-  name
 }
 */
 
@@ -48,6 +44,25 @@ var v0 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v1 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "companies",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "company",
+  "plural": true,
+  "selections": [
+    (v0/*: any*/),
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "name",
+      "args": null,
+      "storageKey": null
+    }
+  ]
 };
 return {
   "kind": "Request",
@@ -67,22 +82,7 @@ return {
         "concreteType": "store",
         "plural": false,
         "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "companies",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "company",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "FragmentSpread",
-                "name": "CompanyTable_Companies",
-                "args": null
-              }
-            ]
-          }
+          (v1/*: any*/)
         ]
       }
     ]
@@ -101,25 +101,7 @@ return {
         "concreteType": "store",
         "plural": false,
         "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "companies",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "company",
-            "plural": true,
-            "selections": [
-              (v0/*: any*/),
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "name",
-                "args": null,
-                "storageKey": null
-              }
-            ]
-          },
+          (v1/*: any*/),
           (v0/*: any*/)
         ]
       }
@@ -129,11 +111,11 @@ return {
     "operationKind": "query",
     "name": "CompaniesPage_Query",
     "id": null,
-    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_Companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_Companies on company {\n  id\n  name\n}\n",
+    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      id\n      name\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '6b5d4db258ecd802e9342f7eec4fa31f';
+(node/*: any*/).hash = 'f02dc7cacdf60f259383e4208622413a';
 module.exports = node;

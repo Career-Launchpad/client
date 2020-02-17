@@ -3,7 +3,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import OffersPage from "../pages/Offers/OffersPage";
 import MajorsPage from "../pages/Majors/MajorsPage";
 import StudentsPage from "../pages/Students/StudentsPage";
-import CompaniesPage from "../pages/Students/CompaniesPage";
+import CompaniesPage from "../pages/Companies/CompaniesPage";
 
 export const LOGIN = {
   path: "/login",

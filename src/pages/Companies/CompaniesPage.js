@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CompanysPage = () => {
+const CompaniesPage = () => {
   const [loading, setLoading] = useState(false);
   const styles = useStyles();
   return (
@@ -23,11 +23,12 @@ const CompanysPage = () => {
         query={query}
         cacheConfig={{ force: true }}
         render={({ props }) => {
+          console.log(props);
           setLoading(!props);
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <CompanyTable Companys={props.store.Companys} />
+              <CompanyTable Companies={props.store.companies} />
             </div>
           );
         }}
@@ -40,10 +41,11 @@ const query = graphql`
   query CompaniesPage_Query {
     store {
       companies {
-        ...CompanyTable_Companies
+        id
+        name
       }
     }
   }
 `;
 
-export default CompanysPage;
+export default CompaniesPage;
