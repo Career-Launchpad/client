@@ -23,12 +23,11 @@ const CompaniesPage = () => {
         query={query}
         cacheConfig={{ force: true }}
         render={({ props }) => {
-          console.log(props);
           setLoading(!props);
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <CompanyTable companies={props.store.companies} />
+              <CompanyTable companies={props.store} />
             </div>
           );
         }}
@@ -40,9 +39,7 @@ const CompaniesPage = () => {
 const query = graphql`
   query CompaniesPage_Query {
     store {
-      companies {
-        ...CompanyTable_companies
-      }
+      ...CompanyTable_companies
     }
   }
 `;

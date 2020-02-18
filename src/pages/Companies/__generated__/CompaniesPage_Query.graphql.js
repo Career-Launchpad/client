@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d1be8d4fe4fe36383123cafd107e4979
+ * @relayHash bb09880ef153e5e8461ff6d6a4bb503b
  */
 
 /* eslint-disable */
@@ -13,9 +13,7 @@ type CompanyTable_companies$ref = any;
 export type CompaniesPage_QueryVariables = {||};
 export type CompaniesPage_QueryResponse = {|
   +store: ?{|
-    +companies: ?$ReadOnlyArray<?{|
-      +$fragmentRefs: CompanyTable_companies$ref
-    |}>
+    +$fragmentRefs: CompanyTable_companies$ref
   |}
 |};
 export type CompaniesPage_Query = {|
@@ -28,16 +26,16 @@ export type CompaniesPage_Query = {|
 /*
 query CompaniesPage_Query {
   store {
-    companies {
-      ...CompanyTable_companies
-    }
+    ...CompanyTable_companies
     id
   }
 }
 
-fragment CompanyTable_companies on company {
-  id
-  name
+fragment CompanyTable_companies on store {
+  companies {
+    id
+    name
+  }
 }
 */
 
@@ -68,20 +66,9 @@ return {
         "plural": false,
         "selections": [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "companies",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "company",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "FragmentSpread",
-                "name": "CompanyTable_companies",
-                "args": null
-              }
-            ]
+            "kind": "FragmentSpread",
+            "name": "CompanyTable_companies",
+            "args": null
           }
         ]
       }
@@ -129,11 +116,11 @@ return {
     "operationKind": "query",
     "name": "CompaniesPage_Query",
     "id": null,
-    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_companies on company {\n  id\n  name\n}\n",
+    "text": "query CompaniesPage_Query {\n  store {\n    ...CompanyTable_companies\n    id\n  }\n}\n\nfragment CompanyTable_companies on store {\n  companies {\n    id\n    name\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f348111e2ee8b57b4634581cd8b503ea';
+(node/*: any*/).hash = 'a794b9251c21e73d457e9786d6b69cc1';
 module.exports = node;

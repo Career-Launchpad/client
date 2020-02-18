@@ -12,8 +12,10 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type CompanyTable_companies$ref: FragmentReference;
 declare export opaque type CompanyTable_companies$fragmentType: CompanyTable_companies$ref;
 export type CompanyTable_companies = {|
-  +id: ?string,
-  +name: ?string,
+  +companies: ?$ReadOnlyArray<?{|
+    +id: ?string,
+    +name: ?string,
+  |}>,
   +$refType: CompanyTable_companies$ref,
 |};
 export type CompanyTable_companies$data = CompanyTable_companies;
@@ -28,26 +30,37 @@ export type CompanyTable_companies$key = {
 const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
   "name": "CompanyTable_companies",
-  "type": "company",
+  "type": "store",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
     {
-      "kind": "ScalarField",
+      "kind": "LinkedField",
       "alias": null,
-      "name": "id",
+      "name": "companies",
+      "storageKey": null,
       "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "name",
-      "args": null,
-      "storageKey": null
+      "concreteType": "company",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "id",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "name",
+          "args": null,
+          "storageKey": null
+        }
+      ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '361d0944a8b684b2cd10caf7588376de';
+(node/*: any*/).hash = '5c5deead0873581b22877dc7dcca0ef7';
 module.exports = node;
