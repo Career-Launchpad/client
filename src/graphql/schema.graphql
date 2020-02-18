@@ -126,7 +126,7 @@ type student {
   ethnicity: String
   last_authentication: String
   security_level: String
-  offers(student_id: String): [offer]
+  offers(student_id: String): offerConnection
 }
 
 type studentConnection {

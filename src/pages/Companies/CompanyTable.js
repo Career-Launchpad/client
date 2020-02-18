@@ -1,14 +1,20 @@
 import React from "react";
+import { createFragmentContainer } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
+import NumberFormat from "react-number-format";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 
-const headers = [{ name: "Name", id: "name" }];
+const headers = [
+  { name: "Name", id: "name" },
+];
 
-const CompanyTable = ({ Companies }) => {
+const CompanyTable = ({ companies }) => {
+  console.log(companies);
   return (
     <DataTable headers={headers}>
-      {Companies.map((Company, i) => {
+      {companies.map((Company, i) => {
         return (
           <DataTableRow key={Company.id || i} data={Company}>
             <TableRow>
@@ -21,4 +27,11 @@ const CompanyTable = ({ Companies }) => {
   );
 };
 
-export default CompanyTable;
+export default createFragmentContainer(CompanyTable, {
+  companies: graphql`
+    fragment CompanyTable_companies on company {
+      id
+      name
+    }
+  `
+});
