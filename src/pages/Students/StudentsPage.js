@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from "../../utils/environment";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 
 import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
@@ -24,7 +24,7 @@ const Students = () => {
   const [studentId, setStudentId] = useState(null);
   const styles = useStyles();
 
-  const openDialog = (studentId) => {
+  const openDialog = studentId => {
     setOpen(true);
     setStudentId(studentId);
   };
@@ -34,7 +34,7 @@ const Students = () => {
 
   const handleDialogExited = () => {
     setStudentId(null);
-  }
+  };
 
   return (
     <Layout loading={loading}>
@@ -47,13 +47,25 @@ const Students = () => {
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <StudentTable students={props.store.students} onStudentClicked={openDialog}/>
+              <StudentTable
+                students={props.store.students}
+                onStudentClicked={openDialog}
+              />
             </div>
           );
         }}
       />
-      <ClosableDialog onClose={handleClose} open={open} title="Student Information" onExited={handleDialogExited}>
-      <Typography className={styles.dialogContent}>Student ID: {studentId} Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</Typography>
+      <ClosableDialog
+        onClose={handleClose}
+        open={open}
+        title="Student Information"
+        onExited={handleDialogExited}
+      >
+        <Typography className={styles.dialogContent}>
+          Student ID: {studentId} Cras mattis consectetur purus sit amet
+          fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+          quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </Typography>
       </ClosableDialog>
     </Layout>
   );

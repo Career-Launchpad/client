@@ -25,10 +25,12 @@ const StudentTable = ({ students, onStudentClicked }) => {
         student.offerAccepted = offers.some(o => o.accepted);
         return (
           <DataTableRow key={student.id || i} data={student}>
-            <TableRow onClick={(e) => {
-              onStudentClicked(student.id)
-              console.log(student)
-            }}>
+            <TableRow
+              onClick={e => {
+                onStudentClicked(student.id);
+                console.log(student);
+              }}
+            >
               <TableCell>{student.firstname}</TableCell>
               <TableCell>{student.lastname}</TableCell>
               <TableCell>{student.academic_year}</TableCell>
