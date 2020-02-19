@@ -15,7 +15,7 @@ const headers = [
   { name: "Offer Accepted", id: "offerAccepted" }
 ];
 
-const StudentTable = ({ students }) => {
+const StudentTable = ({ students, onStudentClicked }) => {
   return (
     <DataTable headers={headers}>
       {students.edges.map((rawStudent, i) => {
@@ -25,7 +25,10 @@ const StudentTable = ({ students }) => {
         student.offerAccepted = offers.some(o => o.accepted);
         return (
           <DataTableRow key={student.id || i} data={student}>
-            <TableRow>
+            <TableRow onClick={(e) => {
+              onStudentClicked(student.id)
+              console.log(student)
+            }}>
               <TableCell>{student.firstname}</TableCell>
               <TableCell>{student.lastname}</TableCell>
               <TableCell>{student.academic_year}</TableCell>
