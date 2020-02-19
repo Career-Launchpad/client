@@ -45,14 +45,6 @@ const DialogTitle = withStyles(styles)(props => {
 const ClosableDialog = ({ title, onClose, classes, children, ...other }) => {
   return (
     <Dialog onClose={onClose} classes={classes} {...other}>
-      {/* <MuiDialogTitle disableTypography>
-                <Typography variant="h6">{title}</Typography>
-                {onClose ? (
-                    <IconButton aria-label="close" onClick={onClose}>
-                    <CloseIcon />
-                    </IconButton>
-                ) : null}
-            </MuiDialogTitle> */}
       <DialogTitle onClose={onClose}>{title}</DialogTitle>
       {children}
     </Dialog>
