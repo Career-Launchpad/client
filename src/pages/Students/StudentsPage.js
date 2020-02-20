@@ -17,31 +17,30 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   },
   studentInfoModal: {
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'column'
+    padding: "1rem",
+    display: "flex",
+    flexDirection: "column"
   },
   modalUpper: {
-    display: 'flex',
-    flexDirection: 'row'
+    display: "flex",
+    flexDirection: "row"
   },
   upperLeftContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'start',
-    marginRight: '2rem'
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    marginRight: "2rem"
   },
   studentName: {
-    paddingLeft: '0rem'
+    paddingLeft: "0rem"
   },
   noPadding: {
-    padding: '0rem'
+    padding: "0rem"
   },
   avatarImage: {
-    width: '8rem',
-    height: '8rem',
+    width: "8rem",
+    height: "8rem"
   }
-
 }));
 
 const Students = () => {
@@ -52,11 +51,11 @@ const Students = () => {
 
   const openDialog = student => {
     setOpen(true);
-    document.getElementById('root').classList.add('blur-effect');
+    document.getElementById("root").classList.add("blur-effect");
     setStudent(student);
   };
   const handleClose = () => {
-    document.getElementById('root').classList.remove('blur-effect');
+    document.getElementById("root").classList.remove("blur-effect");
     setOpen(false);
   };
 
@@ -92,16 +91,25 @@ const Students = () => {
         <span className={styles.studentInfoModal}>
           <span className={styles.modalUpper}>
             <span className={styles.upperLeftContainer}>
-              <Typography variant='h5' className={styles.dialogContent, styles.studentName}>{student && `${student.firstname} ${student.lastname}`}</Typography>
-              <Typography className={styles.dialogContent, styles.noPadding}><strong>Major: </strong>{student && student.major}</Typography>
-              <Typography className={styles.dialogContent, styles.noPadding}><strong>Academic Year: </strong>{student && student.academic_year}</Typography>
+              <Typography
+                variant="h5"
+                className={(styles.dialogContent, styles.studentName)}
+              >
+                {student && `${student.firstname} ${student.lastname}`}
+              </Typography>
+              <Typography className={(styles.dialogContent, styles.noPadding)}>
+                <strong>Major: </strong>
+                {student && student.major}
+              </Typography>
+              <Typography className={(styles.dialogContent, styles.noPadding)}>
+                <strong>Academic Year: </strong>
+                {student && student.academic_year}
+              </Typography>
             </span>
-            <img className={styles.avatarImage} src={'/avatar.png'}/>
+            <img className={styles.avatarImage} src={"/avatar.png"} />
           </span>
-          <span className={styles.modalLower}>{
-            student && 
-            <div>Table goes here</div>
-          }
+          <span className={styles.modalLower}>
+            {student && <div>Table goes here</div>}
           </span>
         </span>
       </ClosableDialog>
