@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1
   },
+  themeButton: {
+    color: "#FFFFFF"
+  },
   toolbar: {
     display: "flex",
     justifyContent: "space-between"
@@ -34,7 +37,7 @@ const Toolbar = ({ loading }) => {
             </Typography>
             <div>
               <IconButton size="small" onClick={() => toggleTheme()}>
-                <Icon>
+                <Icon className={styles.themeButton}>
                   {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
                 </Icon>
               </IconButton>

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
 import StudentTable from "./StudentTable";
+import OfferTable from "../Offers/OfferTable";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -43,6 +44,48 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const Dialog = ({ open, student, onExited, onClose }) => {
+  const styles = useStyles();
+  console.log(student);
+  return (
+    <ClosableDialog
+      onClose={onClose}
+      open={open}
+      title="Student Information"
+      onExited={onExited}
+    >
+      <span className={styles.studentInfoModal}>
+        <span className={styles.modalUpper}>
+          <span className={styles.upperLeftContainer}>
+            <Typography
+              variant="h5"
+              className={(styles.dialogContent, styles.studentName)}
+            >
+              {student && `${student.firstname} ${student.lastname}`}
+            </Typography>
+            <Typography className={(styles.dialogContent, styles.noPadding)}>
+              <strong>Major: </strong>
+              {student && student.major}
+            </Typography>
+            <Typography className={(styles.dialogContent, styles.noPadding)}>
+              <strong>Academic Year: </strong>
+              {student && student.academic_year}
+            </Typography>
+          </span>
+          <img
+            alt="avatar placeholder"
+            className={styles.avatarImage}
+            src={"/avatar.png"}
+          />
+        </span>
+        <span className={styles.modalLower}>
+          {/* {student && <OfferTable offers={student.offers} />} */}
+        </span>
+      </span>
+    </ClosableDialog>
+  );
+};
+
 const Students = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -73,50 +116,23 @@ const Students = () => {
           setLoading(!props);
           if (!props) return <div />;
           return (
-            <div className={styles.content}>
-              <StudentTable
-                students={props.store.students}
-                onStudentClicked={openDialog}
+            <>
+              <div className={styles.content}>
+                <StudentTable
+                  students={props.store.students}
+                  onStudentClicked={openDialog}
+                />
+              </div>
+              <Dialog
+                student={student}
+                open={open}
+                onClose={handleClose}
+                onExited={handleDialogExited}
               />
-            </div>
+            </>
           );
         }}
       />
-      <ClosableDialog
-        onClose={handleClose}
-        open={open}
-        title="Student Information"
-        onExited={handleDialogExited}
-      >
-        <span className={styles.studentInfoModal}>
-          <span className={styles.modalUpper}>
-            <span className={styles.upperLeftContainer}>
-              <Typography
-                variant="h5"
-                className={(styles.dialogContent, styles.studentName)}
-              >
-                {student && `${student.firstname} ${student.lastname}`}
-              </Typography>
-              <Typography className={(styles.dialogContent, styles.noPadding)}>
-                <strong>Major: </strong>
-                {student && student.major}
-              </Typography>
-              <Typography className={(styles.dialogContent, styles.noPadding)}>
-                <strong>Academic Year: </strong>
-                {student && student.academic_year}
-              </Typography>
-            </span>
-            <img
-              alt="avatar placeholder"
-              className={styles.avatarImage}
-              src={"/avatar.png"}
-            />
-          </span>
-          <span className={styles.modalLower}>
-            {student && <div>Table goes here</div>}
-          </span>
-        </span>
-      </ClosableDialog>
     </Layout>
   );
 };

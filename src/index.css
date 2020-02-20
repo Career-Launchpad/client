@@ -39,7 +39,6 @@ code {
   color: #ffffff !important;
 }
 
-.MuiIconButton-root,
-.MuiButton-root {
+.MuiButton-label {
   color: #ffffff !important;
 }
