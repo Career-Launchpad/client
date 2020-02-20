@@ -24,7 +24,8 @@ const BenefitsSubForm = ({ styles, values, handleBlur, handleChange }) => {
         name="benefits_prefabbed"
       />
       <Typography variant="caption" className={styles.field}>
-        Describe any additional benefits offered at this position (eg. paid time off, parental leave, etc...)
+        Describe any additional benefits offered at this position (eg. paid time
+        off, parental leave, etc...)
       </Typography>
       <TextField
         multiline
