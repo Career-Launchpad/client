@@ -40,7 +40,7 @@ const StudentTable = ({ students, onStudentClicked }) => {
             <TableRow
               className={styles.clickable}
               onClick={e => {
-                onStudentClicked(student.id);
+                onStudentClicked(student);
                 console.log(student);
               }}
             >

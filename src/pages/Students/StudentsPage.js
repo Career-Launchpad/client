@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
 import StudentTable from "./StudentTable";
+import OfferTable from "../Offers/OfferTable";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -15,25 +16,51 @@ const useStyles = makeStyles(theme => ({
   },
   dialogContent: {
     padding: theme.spacing(2)
+  },
+  studentInfoModal: {
+    padding: '1rem',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  modalUpper: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  upperLeftContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'start',
+    marginRight: '2rem'
+  },
+  studentName: {
+    paddingLeft: '0rem'
+  },
+  noPadding: {
+    padding: '0rem'
+  },
+  avatarImage: {
+    width: '8rem',
+    height: '8rem',
   }
+
 }));
 
 const Students = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [studentId, setStudentId] = useState(null);
+  const [student, setStudent] = useState(null);
   const styles = useStyles();
 
-  const openDialog = studentId => {
+  const openDialog = student => {
     setOpen(true);
-    setStudentId(studentId);
+    setStudent(student);
   };
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleDialogExited = () => {
-    setStudentId(null);
+    setStudent(null);
   };
 
   return (
@@ -61,11 +88,21 @@ const Students = () => {
         title="Student Information"
         onExited={handleDialogExited}
       >
-        <Typography className={styles.dialogContent}>
-          Student ID: {studentId} Cras mattis consectetur purus sit amet
-          fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-          quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-        </Typography>
+        <span className={styles.studentInfoModal}>
+          <span className={styles.modalUpper}>
+            <span className={styles.upperLeftContainer}>
+              <Typography variant='h5' className={styles.dialogContent, styles.studentName}>{student && `${student.firstname} ${student.lastname}`}</Typography>
+              <Typography className={styles.dialogContent, styles.noPadding}><strong>Major: </strong>{student && student.major}</Typography>
+              <Typography className={styles.dialogContent, styles.noPadding}><strong>Academic Year: </strong>{student && student.academic_year}</Typography>
+            </span>
+            <img className={styles.avatarImage} src={'/avatar.png'}/>
+          </span>
+          <span className={styles.modalLower}>{
+            student && 
+            <div>Table goes here</div>
+          }
+          </span>
+        </span>
       </ClosableDialog>
     </Layout>
   );
