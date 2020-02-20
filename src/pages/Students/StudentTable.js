@@ -5,6 +5,17 @@ import Icon from "@material-ui/core/Icon";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  clickable: {
+    cursor: 'pointer',
+    "&:hover": {
+      background: '#ececec'
+    }
+  }
+});
+
 
 const headers = [
   { name: "First Name", id: "firstname" },
@@ -16,6 +27,7 @@ const headers = [
 ];
 
 const StudentTable = ({ students, onStudentClicked }) => {
+  const styles = useStyles();
   return (
     <DataTable headers={headers}>
       {students.edges.map((rawStudent, i) => {
@@ -26,6 +38,7 @@ const StudentTable = ({ students, onStudentClicked }) => {
         return (
           <DataTableRow key={student.id || i} data={student}>
             <TableRow
+              className={styles.clickable}
               onClick={e => {
                 onStudentClicked(student.id);
                 console.log(student);
