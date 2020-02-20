@@ -53,9 +53,11 @@ const Students = () => {
 
   const openDialog = student => {
     setOpen(true);
+    document.getElementById('root').classList.add('blur-effect');
     setStudent(student);
   };
   const handleClose = () => {
+    document.getElementById('root').classList.remove('blur-effect');
     setOpen(false);
   };
 
