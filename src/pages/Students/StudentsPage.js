@@ -106,7 +106,7 @@ const Students = () => {
                 {student && student.academic_year}
               </Typography>
             </span>
-            <img className={styles.avatarImage} src={"/avatar.png"} />
+            <img alt="avatar placeholder" className={styles.avatarImage} src={"/avatar.png"} />
           </span>
           <span className={styles.modalLower}>
             {student && <div>Table goes here</div>}
