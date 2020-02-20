@@ -10,12 +10,14 @@ const palette = {
   primary: {
     light: "#E6EEF8",
     main: "#0251B7",
-    dark: "#001025"
+    dark: "#001025",
+    hover: '#ECECEC'
   },
   secondary: {
     light: "#F1F8FB",
     main: "#72BBD8",
-    dark: "#17252B"
+    dark: "#17252B",
+    hover: '#6F6F6F'
   },
   error: {
     main: "#FF350C"

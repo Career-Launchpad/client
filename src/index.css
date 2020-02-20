@@ -33,3 +33,12 @@ code {
 .blur-effect {
   filter: blur(.25rem) brightness(90%)
 }
+
+.MuiAppBar-colorDefault {
+  background: #2b2bb4 !important;
+  color: #ffffff !important;
+}
+
+.MuiIconButton-root, .MuiButton-root {
+  color: #ffffff !important;
+}

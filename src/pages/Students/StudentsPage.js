@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
 import StudentTable from "./StudentTable";
-import OfferTable from "../Offers/OfferTable";
 
 const useStyles = makeStyles(theme => ({
   content: {

@@ -6,12 +6,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 import { makeStyles } from "@material-ui/core/styles";
+import { getCurrentTheme } from '../../utils/theme';
+
+const theme = getCurrentTheme();
+let themeType = theme.palette.type;
+let chosenTheme = themeType === 'light' ? 'primary' : 'secondary';
 
 const useStyles = makeStyles({
   clickable: {
     cursor: 'pointer',
     "&:hover": {
-      background: '#ececec'
+      background: theme.palette[chosenTheme].hover
     }
   }
 });
