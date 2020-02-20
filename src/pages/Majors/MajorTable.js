@@ -8,7 +8,6 @@ import { DataTable, DataTableRow } from "../../components/DataTable";
 const headers = [{ name: "Name", id: "name" }];
 
 const MajorTable = ({ majors: { majors } }) => {
-  console.log(majors);
   return (
     <DataTable headers={headers}>
       {majors.map((major, i) => {
