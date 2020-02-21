@@ -30,7 +30,7 @@ const Toolbar = ({ loading }) => {
   return (
     <ThemeConsumer>
       {({ theme, toggleTheme }) => (
-        <AppBar position="fixed" className={styles.appBar} color="default">
+        <AppBar position="fixed" className={styles.appBar} color="primary">
           <MuiToolbar className={styles.toolbar}>
             <Typography variant="h6" noWrap className={styles.home}>
               Prospect
@@ -41,7 +41,7 @@ const Toolbar = ({ loading }) => {
                   {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
                 </Icon>
               </IconButton>
-              <Button onClick={Auth.logout}>Logout</Button>
+              <Button onClick={Auth.logout} className={styles.themeButton}>Logout</Button>
             </div>
           </MuiToolbar>
           <LinearProgress
