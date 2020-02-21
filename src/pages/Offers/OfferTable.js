@@ -41,6 +41,7 @@ const OfferTable = ({ offers }) => {
   );
 };
 
+//This fragment is exported because it's consumed by both the OfferTable and the StudentTable (which uses it to display the offer count per student)
 export const OffersTableFragment = graphql`
 fragment OfferTable_offers on offerConnection {
   edges {

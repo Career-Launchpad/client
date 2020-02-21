@@ -31,6 +31,7 @@ const headers = [
   { name: "Offer Accepted", id: "offerAccepted" }
 ];
 
+//This is a private component that consumes the OfferTable_offers fragment to display the length
 const OffersCount = createFragmentContainer(({offers}) => <>{offers.edges.length}</>, {
   offers: OffersTableFragment
 });
