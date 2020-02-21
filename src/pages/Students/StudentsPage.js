@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
 
 const Dialog = ({ open, student, onExited, onClose }) => {
   const styles = useStyles();
-  console.log(student);
   return (
     <ClosableDialog
       classes={{paper: styles.dialog}}
