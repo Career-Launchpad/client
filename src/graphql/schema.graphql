@@ -26,6 +26,10 @@ type company {
   name: String
 }
 
+type companyConnection {
+  edges: [company]
+}
+
 input createOfferInput {
   student_id: String
   position_type: String
@@ -52,6 +56,12 @@ input createStudentInput {
   gender: String
   ethnicity: String
   last_authentication: String
+}
+
+input filter {
+  field: String
+  value: String
+  comp: String
 }
 
 type location {
@@ -106,12 +116,12 @@ type store {
   id: ID!
   student(id: String): student
   offer(id: String): offer
-  offers: offerConnection
-  students(gender: String): studentConnection
-  company_names: [String]
-  companies: [company]
+  offers(filters: [filter]): offerConnection
+  students(filters: [filter]): studentConnection
+  company_names(filters: [filter]): [String]
+  companies(filters: [filter]): companyConnection
   company(id: String): company
-  majors: [String]
+  majors(filters: [filter]): [String]
 }
 
 type student {
