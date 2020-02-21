@@ -5,6 +5,19 @@ import Icon from "@material-ui/core/Icon";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => {
+  const hoverStyle = theme.palette.type === "light" ? "primary" : "secondary";
+  return {
+    clickable: {
+      cursor: "pointer",
+      "&:hover": {
+        background: theme.palette[hoverStyle].hover
+      }
+    }
+  };
+});
 
 const headers = [
   { name: "First Name", id: "firstname" },
@@ -15,7 +28,8 @@ const headers = [
   { name: "Offer Accepted", id: "offerAccepted" }
 ];
 
-const StudentTable = ({ students }) => {
+const StudentTable = ({ students, onStudentClicked }) => {
+  const styles = useStyles();
   return (
     <DataTable headers={headers}>
       {students.edges.map((rawStudent, i) => {
@@ -25,7 +39,12 @@ const StudentTable = ({ students }) => {
         student.offerAccepted = offers.some(o => o.accepted);
         return (
           <DataTableRow key={student.id || i} data={student}>
-            <TableRow>
+            <TableRow
+              className={styles.clickable}
+              onClick={e => {
+                onStudentClicked(student);
+              }}
+            >
               <TableCell>{student.firstname}</TableCell>
               <TableCell>{student.lastname}</TableCell>
               <TableCell>{student.academic_year}</TableCell>
@@ -52,6 +71,7 @@ export default createFragmentContainer(StudentTable, {
         academic_year
         major
         offers {
+          ...OfferTable_offers
           edges {
             accepted
           }

@@ -29,3 +29,7 @@ code {
 .markdown p {
   margin-top: 0;
 }
+
+.blur-effect {
+  filter: blur(0.25rem) brightness(90%);
+}

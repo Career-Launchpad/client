@@ -38,7 +38,7 @@
     "update-schema-local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
     "relay": "npm run update-schema && npm run relay-compile",
     "relay-local": "npm run update-schema-local && npm run relay-compile",
-    "relay-compile": "relay-compiler --config relay.config.json"
+    "relay-compile": "relay-compiler --watch --config relay.config.json"
   },
   "eslintConfig": {
     "extends": "react-app"
