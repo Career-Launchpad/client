@@ -79,7 +79,7 @@ const Dialog = ({ open, student, onExited, onClose }) => {
           />
         </span>
         <span className={styles.modalLower}>
-          {/* {student && <OfferTable offers={student.offers} />} */}
+          {student && <OfferTable offers={student.offers} />}
         </span>
       </span>
     </ClosableDialog>

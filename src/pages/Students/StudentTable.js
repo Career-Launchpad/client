@@ -74,20 +74,7 @@ export default createFragmentContainer(StudentTable, {
         academic_year
         major
         offers {
-          edges {
-            id
-            position_type
-            position_title
-            location {
-              state
-            }
-            company {
-              name
-            }
-            academic_year
-            wage_type
-            wage_value
-          }
+          ...OfferTable_offers
         }
       }
     }
