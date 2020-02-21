@@ -12,7 +12,7 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
       className={className}
       margin="normal"
       freeSolo
-      filterOptions={o => o.filter(o => o.startsWith(field.value))}
+      filterOptions={o => o.filter(o => o.toLowerCase().startsWith(field.value.toLowerCase()))}
       disableClearable
       options={options}
       onChange={(e, v) => helpers.setValue(v)}
@@ -24,6 +24,7 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
           {...params}
           label={label}
           fullWidth
+          size="small"
           margin="none"
           variant="filled"
           color="secondary"

@@ -4,6 +4,8 @@ import OffersPage from "../pages/Offers/OffersPage";
 import MajorsPage from "../pages/Majors/MajorsPage";
 import StudentsPage from "../pages/Students/StudentsPage";
 import CompaniesPage from "../pages/Companies/CompaniesPage";
+import AddOfferPage from "../pages/AddOffer/AddOfferPage";
+import AddStudentPage from "../pages/AddStudent/AddStudentPage";
 
 export const LOGIN = {
   path: "/login",
@@ -48,6 +50,16 @@ export const COMPANIES = {
   icon: "apartment"
 };
 
+export const addStudent = {
+  path: "/add-student",
+  component: AddStudentPage
+};
+
+export const addOffer = {
+  path: "/add-offer",
+  component: AddOfferPage
+};
+
 export const DEFAULT = OFFERS;
 
-export const Routes = [LOGIN, EMAIL, OFFERS, MAJORS, STUDENTS, COMPANIES];
+export const Routes = [LOGIN, EMAIL, OFFERS, MAJORS, STUDENTS, COMPANIES, addStudent, addOffer];

@@ -8,6 +8,7 @@ const TextField = props => {
   const helperText = error ? meta.error : " ";
   return (
     <MuiTextField
+      size="small"
       name={field.name}
       value={field.value}
       margin="normal"
