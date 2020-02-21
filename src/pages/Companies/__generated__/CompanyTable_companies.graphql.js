@@ -12,7 +12,7 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type CompanyTable_companies$ref: FragmentReference;
 declare export opaque type CompanyTable_companies$fragmentType: CompanyTable_companies$ref;
 export type CompanyTable_companies = {|
-  +companies: ?$ReadOnlyArray<?{|
+  +edges: ?$ReadOnlyArray<?{|
     +id: ?string,
     +name: ?string,
   |}>,
@@ -30,14 +30,14 @@ export type CompanyTable_companies$key = {
 const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
   "name": "CompanyTable_companies",
-  "type": "store",
+  "type": "companyConnection",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "companies",
+      "name": "edges",
       "storageKey": null,
       "args": null,
       "concreteType": "company",
@@ -62,5 +62,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '5c5deead0873581b22877dc7dcca0ef7';
+(node/*: any*/).hash = 'b0d98ee7be4b0009b8b160eea212037a';
 module.exports = node;
