@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     height: "8rem"
   },
   dialog: {
-    maxWidth: "unset",
+    maxWidth: "unset"
   }
 }));
 
@@ -53,7 +53,7 @@ const Dialog = ({ open, student, onExited, onClose }) => {
   const styles = useStyles();
   return (
     <ClosableDialog
-      classes={{paper: styles.dialog}}
+      classes={{ paper: styles.dialog }}
       onClose={onClose}
       open={open}
       title="Student Information"

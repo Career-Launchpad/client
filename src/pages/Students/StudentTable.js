@@ -50,7 +50,9 @@ const StudentTable = ({ students, onStudentClicked }) => {
               <TableCell>{student.academic_year}</TableCell>
               <TableCell>{student.major}</TableCell>
               <TableCell>{student.offerCount}</TableCell>
-              <TableCell>{<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}</TableCell>
+              <TableCell>
+                {<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}
+              </TableCell>
             </TableRow>
           </DataTableRow>
         );
