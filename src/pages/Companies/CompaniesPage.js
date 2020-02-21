@@ -27,7 +27,7 @@ const CompaniesPage = () => {
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <CompanyTable companies={props.store} />
+              <CompanyTable companies={props.store.companies} />
             </div>
           );
         }}
@@ -39,7 +39,9 @@ const CompaniesPage = () => {
 const query = graphql`
   query CompaniesPage_Query {
     store {
-      ...CompanyTable_companies
+      companies {
+        ...CompanyTable_companies
+      }
     }
   }
 `;

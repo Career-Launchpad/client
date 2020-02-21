@@ -7,14 +7,14 @@ import { DataTable, DataTableRow } from "../../components/DataTable";
 
 const headers = [{ name: "Name", id: "name" }];
 
-const CompanyTable = ({ companies }) => {
+const MajorTable = ({ majors: { majors } }) => {
   return (
     <DataTable headers={headers}>
-      {companies.edges.map((Company, i) => {
+      {majors.map((major, i) => {
         return (
-          <DataTableRow key={Company.id || i} data={Company}>
+          <DataTableRow key={i}>
             <TableRow>
-              <TableCell>{Company.name}</TableCell>
+              <TableCell>{major}</TableCell>
             </TableRow>
           </DataTableRow>
         );
@@ -23,13 +23,10 @@ const CompanyTable = ({ companies }) => {
   );
 };
 
-export default createFragmentContainer(CompanyTable, {
-  companies: graphql`
-    fragment CompanyTable_companies on companyConnection {
-      edges {
-        id
-        name
-      }
+export default createFragmentContainer(MajorTable, {
+  majors: graphql`
+    fragment MajorTable_majors on store {
+      majors
     }
   `
 });
