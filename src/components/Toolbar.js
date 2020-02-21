@@ -41,7 +41,9 @@ const Toolbar = ({ loading }) => {
                   {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
                 </Icon>
               </IconButton>
-              <Button onClick={Auth.logout} className={styles.themeButton}>Logout</Button>
+              <Button onClick={Auth.logout} className={styles.themeButton}>
+                Logout
+              </Button>
             </div>
           </MuiToolbar>
           <LinearProgress
