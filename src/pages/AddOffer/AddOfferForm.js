@@ -63,10 +63,17 @@ const commit = (input, callback) => {
 const AddOfferForm = ({ onSubmit }) => {
   const { user } = useContext(AuthContext);
   const handleSubmit = (values, { setSubmitting }) => {
+    const selectedBenefits = values.benefits_prefabbed;
+
     const newOffer = {
       ...values,
       extended: String(values.extended),
-      deadline: String(values.deadline)
+      deadline: String(values.deadline),
+      benefits_prefabbed: undefined,
+      benefits_description:
+        selectedBenefits.length > 0
+          ? `${selectedBenefits.join(". ")}. ${values.benefits_description}`
+          : values.benefits_description
     };
     commit(newOffer, (res, err) => {
       setSubmitting(false);
@@ -91,6 +98,7 @@ const AddOfferForm = ({ onSubmit }) => {
         wage_type: "",
         wage_value: "",
         bonuses: [],
+        benefits_prefabbed: [],
         benefits_description: "",
         extended: new Date().getTime(),
         deadline: new Date().getTime(),
