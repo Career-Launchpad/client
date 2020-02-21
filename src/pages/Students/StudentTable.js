@@ -6,20 +6,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 import { makeStyles } from "@material-ui/core/styles";
-import { getCurrentTheme } from "../../utils/theme";
-import { OffersTableFragment } from "../Offers/OfferTable";
 
-const theme = getCurrentTheme();
-let themeType = theme.palette.type;
-let chosenTheme = themeType === "light" ? "primary" : "secondary";
-
-const useStyles = makeStyles({
-  clickable: {
-    cursor: "pointer",
-    "&:hover": {
-      background: theme.palette[chosenTheme].hover
+const useStyles = makeStyles(theme => {
+  const hoverStyle = theme.palette.type === "light" ? "primary" : "secondary";
+  return {
+    clickable: {
+      cursor: "pointer",
+      "&:hover": {
+        background: theme.palette[hoverStyle].hover
+      }
     }
-  }
+  };
 });
 
 const headers = [
@@ -30,11 +27,6 @@ const headers = [
   { name: "Offers Received", id: "offerCount" },
   { name: "Offer Accepted", id: "offerAccepted" }
 ];
-
-//This is a private component that consumes the OfferTable_offers fragment to display the length
-const OffersCount = createFragmentContainer(({offers}) => <>{offers.edges.length}</>, {
-  offers: OffersTableFragment
-});
 
 const StudentTable = ({ students, onStudentClicked }) => {
   const styles = useStyles();
@@ -51,17 +43,14 @@ const StudentTable = ({ students, onStudentClicked }) => {
               className={styles.clickable}
               onClick={e => {
                 onStudentClicked(student);
-                console.log(student);
               }}
             >
               <TableCell>{student.firstname}</TableCell>
               <TableCell>{student.lastname}</TableCell>
               <TableCell>{student.academic_year}</TableCell>
               <TableCell>{student.major}</TableCell>
-              <TableCell><OffersCount offers={student.offers}/></TableCell>
-              <TableCell>
-                {<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}
-              </TableCell>
+              <TableCell>{student.offerCount}</TableCell>
+              <TableCell>{<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}</TableCell>
             </TableRow>
           </DataTableRow>
         );
@@ -81,6 +70,9 @@ export default createFragmentContainer(StudentTable, {
         major
         offers {
           ...OfferTable_offers
+          edges {
+            accepted
+          }
         }
       }
     }

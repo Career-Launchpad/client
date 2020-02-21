@@ -26,12 +26,7 @@ const OfferTable = ({ offers }) => {
               <TableCell>{offer.position_type}</TableCell>
               <TableCell>{offer.wage_type}</TableCell>
               <TableCell>
-                <NumberFormat
-                  value={offer.wage_value}
-                  displayType="text"
-                  thousandSeparator
-                  prefix="$"
-                />
+                <NumberFormat value={offer.wage_value} displayType="text" thousandSeparator prefix="$" />
               </TableCell>
             </TableRow>
           </DataTableRow>
@@ -41,26 +36,23 @@ const OfferTable = ({ offers }) => {
   );
 };
 
-//This fragment is exported because it's consumed by both the OfferTable and the StudentTable (which uses it to display the offer count per student)
-export const OffersTableFragment = graphql`
-fragment OfferTable_offers on offerConnection {
-  edges {
-    id
-    position_type
-    position_title
-    location {
-      state
-    }
-    company {
-      name
-    }
-    academic_year
-    wage_type
-    wage_value
-  }
-}
-`;
-
 export default createFragmentContainer(OfferTable, {
-  offers: OffersTableFragment
+  offers: graphql`
+    fragment OfferTable_offers on offerConnection {
+      edges {
+        id
+        position_type
+        position_title
+        location {
+          state
+        }
+        company {
+          name
+        }
+        academic_year
+        wage_type
+        wage_value
+      }
+    }
+  `
 });

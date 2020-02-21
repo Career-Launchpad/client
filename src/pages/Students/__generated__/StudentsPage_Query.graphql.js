@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 59527dadb08d74114d02f6d541f47a25
+ * @relayHash 7a1bc4238b042f753ffedee77aa2a21b
  */
 
 /* eslint-disable */
@@ -61,6 +61,9 @@ fragment StudentTable_students on studentConnection {
     major
     offers {
       ...OfferTable_offers
+      edges {
+        accepted
+      }
     }
   }
 }
@@ -257,6 +260,13 @@ return {
                             "name": "wage_value",
                             "args": null,
                             "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "accepted",
+                            "args": null,
+                            "storageKey": null
                           }
                         ]
                       }
@@ -275,7 +285,7 @@ return {
     "operationKind": "query",
     "name": "StudentsPage_Query",
     "id": null,
-    "text": "query StudentsPage_Query {\n  store {\n    students {\n      ...StudentTable_students\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n\nfragment StudentTable_students on studentConnection {\n  edges {\n    id\n    firstname\n    lastname\n    academic_year\n    major\n    offers {\n      ...OfferTable_offers\n    }\n  }\n}\n",
+    "text": "query StudentsPage_Query {\n  store {\n    students {\n      ...StudentTable_students\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n\nfragment StudentTable_students on studentConnection {\n  edges {\n    id\n    firstname\n    lastname\n    academic_year\n    major\n    offers {\n      ...OfferTable_offers\n      edges {\n        accepted\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

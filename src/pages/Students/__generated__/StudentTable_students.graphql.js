@@ -20,7 +20,10 @@ export type StudentTable_students = {|
     +academic_year: ?string,
     +major: ?string,
     +offers: ?{|
-      +$fragmentRefs: OfferTable_offers$ref
+      +edges: ?$ReadOnlyArray<?{|
+        +accepted: ?boolean
+      |}>,
+      +$fragmentRefs: OfferTable_offers$ref,
     |},
   |}>,
   +$refType: StudentTable_students$ref,
@@ -95,6 +98,24 @@ const node/*: ReaderFragment*/ = {
           "plural": false,
           "selections": [
             {
+              "kind": "LinkedField",
+              "alias": null,
+              "name": "edges",
+              "storageKey": null,
+              "args": null,
+              "concreteType": "offer",
+              "plural": true,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "accepted",
+                  "args": null,
+                  "storageKey": null
+                }
+              ]
+            },
+            {
               "kind": "FragmentSpread",
               "name": "OfferTable_offers",
               "args": null
@@ -106,5 +127,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ec6d968908ea4fd9512d69c6bf61b9ad';
+(node/*: any*/).hash = '805e8dcab46b71b85ba43620d140fb86';
 module.exports = node;
