@@ -24,13 +24,15 @@ const useStyles = makeStyles(theme => ({
   },
   modalUpper: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    marginBottom: "10px"
   },
   upperLeftContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
-    marginRight: "2rem"
+    marginRight: "2rem",
+    flexGrow: "1"
   },
   studentName: {
     paddingLeft: "0rem"
@@ -41,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   avatarImage: {
     width: "8rem",
     height: "8rem"
+  },
+  dialog: {
+    maxWidth: "unset",
   }
 }));
 
@@ -49,14 +54,15 @@ const Dialog = ({ open, student, onExited, onClose }) => {
   console.log(student);
   return (
     <ClosableDialog
+      classes={{paper: styles.dialog}}
       onClose={onClose}
       open={open}
       title="Student Information"
       onExited={onExited}
     >
-      <span className={styles.studentInfoModal}>
-        <span className={styles.modalUpper}>
-          <span className={styles.upperLeftContainer}>
+      <div className={styles.studentInfoModal}>
+        <div className={styles.modalUpper}>
+          <div className={styles.upperLeftContainer}>
             <Typography
               variant="h5"
               className={(styles.dialogContent, styles.studentName)}
@@ -71,17 +77,17 @@ const Dialog = ({ open, student, onExited, onClose }) => {
               <strong>Academic Year: </strong>
               {student && student.academic_year}
             </Typography>
-          </span>
+          </div>
           <img
             alt="avatar placeholder"
             className={styles.avatarImage}
             src={"/avatar.png"}
           />
-        </span>
-        <span className={styles.modalLower}>
+        </div>
+        <div className={styles.modalLower}>
           {student && <OfferTable offers={student.offers} />}
-        </span>
-      </span>
+        </div>
+      </div>
     </ClosableDialog>
   );
 };
