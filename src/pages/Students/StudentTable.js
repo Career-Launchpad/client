@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 import { makeStyles } from "@material-ui/core/styles";
 import { getCurrentTheme } from "../../utils/theme";
+import { OffersTableFragment } from "../Offers/OfferTable";
 
 const theme = getCurrentTheme();
 let themeType = theme.palette.type;
@@ -30,6 +31,10 @@ const headers = [
   { name: "Offer Accepted", id: "offerAccepted" }
 ];
 
+const OffersCount = createFragmentContainer(({offers}) => <>{offers.edges.length}</>, {
+  offers: OffersTableFragment
+});
+
 const StudentTable = ({ students, onStudentClicked }) => {
   const styles = useStyles();
   return (
@@ -52,7 +57,7 @@ const StudentTable = ({ students, onStudentClicked }) => {
               <TableCell>{student.lastname}</TableCell>
               <TableCell>{student.academic_year}</TableCell>
               <TableCell>{student.major}</TableCell>
-              <TableCell>{student.offerCount}</TableCell>
+              <TableCell><OffersCount offers={student.offers}/></TableCell>
               <TableCell>
                 {<Icon>{student.offerAccepted ? "check" : "clear"}</Icon>}
               </TableCell>

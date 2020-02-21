@@ -41,23 +41,25 @@ const OfferTable = ({ offers }) => {
   );
 };
 
-export default createFragmentContainer(OfferTable, {
-  offers: graphql`
-    fragment OfferTable_offers on offerConnection {
-      edges {
-        id
-        position_type
-        position_title
-        location {
-          state
-        }
-        company {
-          name
-        }
-        academic_year
-        wage_type
-        wage_value
-      }
+export const OffersTableFragment = graphql`
+fragment OfferTable_offers on offerConnection {
+  edges {
+    id
+    position_type
+    position_title
+    location {
+      state
     }
-  `
+    company {
+      name
+    }
+    academic_year
+    wage_type
+    wage_value
+  }
+}
+`;
+
+export default createFragmentContainer(OfferTable, {
+  offers: OffersTableFragment
 });
