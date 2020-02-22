@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
 const EmailFlowPage = () => {
   const styles = useStyles();
   const history = useHistory();
-  const activeStep = history?.location?.state?.index || 4;
+  const activeStep = history?.location?.state?.index || 0;
 
   const handleIndexChange = index => {
     history.push("/email", { index });

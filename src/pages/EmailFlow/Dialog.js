@@ -26,12 +26,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dialog = ({ children, onSubmit, cancelText, submitText, prompt }) => {
+const Dialog = ({ onSubmit, cancelText, submitText, prompt }) => {
   const styles = useStyles();
   return (
     <div className={styles.form}>
       <ReactMarkdown className="markdown" source={prompt} linkTarget="_blank" />
-      {children}
       <div className={styles.buttonContainer}>
         {cancelText && (
           <Button

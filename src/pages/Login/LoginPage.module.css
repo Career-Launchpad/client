@@ -1,3 +1,14 @@
+.paper {
+  width: fit-content;
+  max-width: 38rem;
+  padding: 2rem;
+  margin: auto;
+  margin-top: 15vmin;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .form {
   display: flex;
   flex-direction: column;

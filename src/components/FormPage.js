@@ -79,10 +79,7 @@ const FormPage = ({ onClose, children, transition, loading }) => {
           style={{ visibility: loading ? "visible" : "hidden" }}
         />
       </AppBar>
-      <DialogContent className={styles.dialogContent}>
-        {/* <Paper className={styles.paper}>{children}</Paper> */}
-        {children}
-      </DialogContent>
+      <DialogContent className={styles.dialogContent}>{children}</DialogContent>
     </Dialog>
   );
 };
