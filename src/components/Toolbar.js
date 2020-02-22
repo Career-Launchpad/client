@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1
   },
+  themeButton: {
+    color: "#FFFFFF"
+  },
   toolbar: {
     display: "flex",
     justifyContent: "space-between"
@@ -27,18 +30,20 @@ const Toolbar = ({ loading }) => {
   return (
     <ThemeConsumer>
       {({ theme, toggleTheme }) => (
-        <AppBar position="fixed" className={styles.appBar} color="default">
+        <AppBar position="fixed" className={styles.appBar} color="primary">
           <MuiToolbar className={styles.toolbar}>
             <Typography variant="h6" noWrap className={styles.home}>
               Prospect
             </Typography>
             <div>
               <IconButton size="small" onClick={() => toggleTheme()}>
-                <Icon>
+                <Icon className={styles.themeButton}>
                   {theme.palette.type === "dark" ? "nights_stay" : "wb_sunny"}
                 </Icon>
               </IconButton>
-              <Button onClick={Auth.logout}>Logout</Button>
+              <Button onClick={Auth.logout} className={styles.themeButton}>
+                Logout
+              </Button>
             </div>
           </MuiToolbar>
           <LinearProgress

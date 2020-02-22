@@ -8,6 +8,7 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type OfferTable_offers$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type StudentTable_students$ref: FragmentReference;
 declare export opaque type StudentTable_students$fragmentType: StudentTable_students$ref;
@@ -21,7 +22,8 @@ export type StudentTable_students = {|
     +offers: ?{|
       +edges: ?$ReadOnlyArray<?{|
         +accepted: ?boolean
-      |}>
+      |}>,
+      +$fragmentRefs: OfferTable_offers$ref,
     |},
   |}>,
   +$refType: StudentTable_students$ref,
@@ -112,6 +114,11 @@ const node/*: ReaderFragment*/ = {
                   "storageKey": null
                 }
               ]
+            },
+            {
+              "kind": "FragmentSpread",
+              "name": "OfferTable_offers",
+              "args": null
             }
           ]
         }
@@ -120,5 +127,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'dc22cb43d097bb3fef6797335b17e0f9';
+(node/*: any*/).hash = '805e8dcab46b71b85ba43620d140fb86';
 module.exports = node;
