@@ -61,7 +61,12 @@ const FormPage = ({ onClose, children, transition, loading }) => {
       <AppBar className={styles.appBar}>
         <Toolbar>
           {onClose && (
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
           )}
@@ -69,7 +74,10 @@ const FormPage = ({ onClose, children, transition, loading }) => {
             Prospect
           </Typography>
         </Toolbar>
-        <LinearProgress color="secondary" style={{ visibility: loading ? "visible" : "hidden" }} />
+        <LinearProgress
+          color="secondary"
+          style={{ visibility: loading ? "visible" : "hidden" }}
+        />
       </AppBar>
       <DialogContent className={styles.dialogContent}>
         {/* <Paper className={styles.paper}>{children}</Paper> */}

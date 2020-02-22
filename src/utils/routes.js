@@ -62,4 +62,13 @@ export const addOffer = {
 
 export const DEFAULT = OFFERS;
 
-export const Routes = [LOGIN, EMAIL, OFFERS, MAJORS, STUDENTS, COMPANIES, addStudent, addOffer];
+export const Routes = [
+  LOGIN,
+  EMAIL,
+  OFFERS,
+  MAJORS,
+  STUDENTS,
+  COMPANIES,
+  addStudent,
+  addOffer
+];

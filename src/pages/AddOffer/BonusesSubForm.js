@@ -44,7 +44,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const bonusTypes = ["Signing Bonus (Cash)", "Equity (RSU)", "Equity (Options)", "Relocation", "Other"];
+const bonusTypes = [
+  "Signing Bonus (Cash)",
+  "Equity (RSU)",
+  "Equity (Options)",
+  "Relocation",
+  "Other"
+];
 
 const BonusesSubForm = ({ styles, values }) => {
   styles = { ...styles, ...useStyles() };
@@ -98,7 +104,9 @@ const BonusesSubForm = ({ styles, values }) => {
               color="secondary"
               className={styles.addButton}
               startIcon={<AddIcon />}
-              onClick={() => arrayHelpers.push({ type: "", value: "", description: "" })}
+              onClick={() =>
+                arrayHelpers.push({ type: "", value: "", description: "" })
+              }
             >
               add bonus
             </Button>

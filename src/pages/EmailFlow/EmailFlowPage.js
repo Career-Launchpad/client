@@ -37,18 +37,29 @@ const useStyles = makeStyles(() => ({
 
 const EmailFlowPage = () => {
   const styles = useStyles();
-  const [activeStep, setActiveStep] = React.useState(3);
+  const [activeStep, setActiveStep] = React.useState(4);
   const [navigate, setNavigate] = React.useState(false);
 
   const steps = [
     {
       label: "What is this?",
-      content: <Dialog onSubmit={() => setActiveStep(1)} prompt={INTRO_MD} submitText="Begin" />
+      content: (
+        <Dialog
+          onSubmit={() => setActiveStep(1)}
+          prompt={INTRO_MD}
+          submitText="Begin"
+        />
+      )
     },
     {
       label: "Have you received any offers?",
       content: (
-        <Dialog onSubmit={yes => setActiveStep(yes ? 2 : 4)} prompt={HAS_OFFERS_MD} submitText="Yes" cancelText="No" />
+        <Dialog
+          onSubmit={yes => setActiveStep(yes ? 2 : 4)}
+          prompt={HAS_OFFERS_MD}
+          submitText="Yes"
+          cancelText="No"
+        />
       )
     },
     {
@@ -57,7 +68,7 @@ const EmailFlowPage = () => {
         <AddOfferForm
           onSubmit={offer => {
             console.log(offer);
-            setActiveStep(2);
+            setActiveStep(3);
           }}
         />
       )

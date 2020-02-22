@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash af8ae5a067fc280b5e4a620eb7fe4f91
+ * @relayHash 5a08a8cbb7323c6a5aee3546c9276707
  */
 
 /* eslint-disable */
@@ -26,12 +26,7 @@ export type AddStudentForm_MutationVariables = {|
 |};
 export type AddStudentForm_MutationResponse = {|
   +student: ?{|
-    +id: ?string,
-    +firstname: ?string,
-    +lastname: ?string,
-    +major: ?string,
-    +college_name: ?string,
-    +gender: ?string,
+    +id: ?string
   |}
 |};
 export type AddStudentForm_Mutation = {|
@@ -47,11 +42,6 @@ mutation AddStudentForm_Mutation(
 ) {
   student(student: $input) {
     id
-    firstname
-    lastname
-    major
-    college_name
-    gender
   }
 }
 */
@@ -87,41 +77,6 @@ v1 = [
         "name": "id",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "firstname",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "lastname",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "major",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "college_name",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "gender",
-        "args": null,
-        "storageKey": null
       }
     ]
   }
@@ -146,11 +101,11 @@ return {
     "operationKind": "mutation",
     "name": "AddStudentForm_Mutation",
     "id": null,
-    "text": "mutation AddStudentForm_Mutation(\n  $input: createStudentInput!\n) {\n  student(student: $input) {\n    id\n    firstname\n    lastname\n    major\n    college_name\n    gender\n  }\n}\n",
+    "text": "mutation AddStudentForm_Mutation(\n  $input: createStudentInput!\n) {\n  student(student: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '250f1e352f37a896583fc7da4891c302';
+(node/*: any*/).hash = '4983015809ef15332f6a68f53255b79b';
 module.exports = node;

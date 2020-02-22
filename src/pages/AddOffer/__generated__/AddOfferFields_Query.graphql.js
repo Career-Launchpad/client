@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7cc3ea8cdb357e9fbc01f4b49be7fe30
+ * @relayHash 716653b09a156d55a97dd6a3f403d604
  */
 
 /* eslint-disable */
@@ -9,21 +9,21 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AddOfferStepper_QueryVariables = {||};
-export type AddOfferStepper_QueryResponse = {|
+export type AddOfferFields_QueryVariables = {||};
+export type AddOfferFields_QueryResponse = {|
   +store: ?{|
     +company_names: ?$ReadOnlyArray<?string>
   |}
 |};
-export type AddOfferStepper_Query = {|
-  variables: AddOfferStepper_QueryVariables,
-  response: AddOfferStepper_QueryResponse,
+export type AddOfferFields_Query = {|
+  variables: AddOfferFields_QueryVariables,
+  response: AddOfferFields_QueryResponse,
 |};
 */
 
 
 /*
-query AddOfferStepper_Query {
+query AddOfferFields_Query {
   store {
     company_names
     id
@@ -43,7 +43,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "AddOfferStepper_Query",
+    "name": "AddOfferFields_Query",
     "type": "query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -64,7 +64,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AddOfferStepper_Query",
+    "name": "AddOfferFields_Query",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -90,13 +90,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "AddOfferStepper_Query",
+    "name": "AddOfferFields_Query",
     "id": null,
-    "text": "query AddOfferStepper_Query {\n  store {\n    company_names\n    id\n  }\n}\n",
+    "text": "query AddOfferFields_Query {\n  store {\n    company_names\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '49090c9520f812bf1a4615fb958cf7da';
+(node/*: any*/).hash = '605a7715e49ab752c2eb5ad9b1f5be72';
 module.exports = node;
