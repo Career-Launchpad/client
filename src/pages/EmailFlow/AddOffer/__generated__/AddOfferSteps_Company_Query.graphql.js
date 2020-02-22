@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 716653b09a156d55a97dd6a3f403d604
+ * @relayHash d3090f829e443b446e7629ab6c920765
  */
 
 /* eslint-disable */
@@ -9,21 +9,21 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type AddOfferFields_QueryVariables = {||};
-export type AddOfferFields_QueryResponse = {|
+export type AddOfferSteps_Company_QueryVariables = {||};
+export type AddOfferSteps_Company_QueryResponse = {|
   +store: ?{|
     +company_names: ?$ReadOnlyArray<?string>
   |}
 |};
-export type AddOfferFields_Query = {|
-  variables: AddOfferFields_QueryVariables,
-  response: AddOfferFields_QueryResponse,
+export type AddOfferSteps_Company_Query = {|
+  variables: AddOfferSteps_Company_QueryVariables,
+  response: AddOfferSteps_Company_QueryResponse,
 |};
 */
 
 
 /*
-query AddOfferFields_Query {
+query AddOfferSteps_Company_Query {
   store {
     company_names
     id
@@ -43,7 +43,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "AddOfferFields_Query",
+    "name": "AddOfferSteps_Company_Query",
     "type": "query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -64,7 +64,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "AddOfferFields_Query",
+    "name": "AddOfferSteps_Company_Query",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -90,13 +90,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "AddOfferFields_Query",
+    "name": "AddOfferSteps_Company_Query",
     "id": null,
-    "text": "query AddOfferFields_Query {\n  store {\n    company_names\n    id\n  }\n}\n",
+    "text": "query AddOfferSteps_Company_Query {\n  store {\n    company_names\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '605a7715e49ab752c2eb5ad9b1f5be72';
+(node/*: any*/).hash = 'bd64dd76d4303477cf6276861c3cb23e';
 module.exports = node;

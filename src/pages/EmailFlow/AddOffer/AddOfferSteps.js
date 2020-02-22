@@ -7,12 +7,12 @@ import cx from "classnames";
 import * as yup from "yup";
 
 import BonusesSubForm from "./BonusesSubForm";
-import TextField from "../../components/formik/TextField";
-import MoneyField from "../../components/formik/MoneyField";
-import DatePicker from "../../components/formik/DatePicker";
-import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
-import CheckboxArrayField from "../../components/formik/CheckboxArrayField";
-import environment from "../../utils/environment";
+import TextField from "../../../components/formik/TextField";
+import MoneyField from "../../../components/formik/MoneyField";
+import DatePicker from "../../../components/formik/DatePicker";
+import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
+import CheckboxArrayField from "../../../components/formik/CheckboxArrayField";
+import environment from "../../../utils/environment";
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const PositionFields = {
+export const PositionStep = {
   label: "Position",
   initialValues: { position_title: "", position_type: "" },
   validationSchema: yup.object().shape({
@@ -67,7 +67,7 @@ export const PositionFields = {
   }
 };
 
-export const CompanyFields = {
+export const CompanyStep = {
   label: "Company",
   initialValues: {
     company_name: "",
@@ -125,14 +125,14 @@ export const CompanyFields = {
 };
 
 const query = graphql`
-  query AddOfferFields_Query {
+  query AddOfferSteps_Company_Query {
     store {
       company_names
     }
   }
 `;
 
-export const CompensationFields = {
+export const CompensationStep = {
   label: "Compensation",
   initialValues: { wage_type: "", wage_value: "", bonuses: [] },
   validationSchema: yup.object().shape({
@@ -178,7 +178,7 @@ export const CompensationFields = {
   }
 };
 
-export const BenefitsFields = {
+export const BenefitsStep = {
   label: "Benefits",
   initialValues: { benefits_prefabbed: [], benefits_description: "" },
   validationSchema: yup.object().shape({}),
@@ -211,7 +211,7 @@ export const BenefitsFields = {
   }
 };
 
-export const AcceptanceFields = {
+export const AcceptanceStep = {
   label: "Acceptance",
   initialValues: { extended: new Date().getTime(), accepted: "" },
   validationSchema: yup.object().shape({

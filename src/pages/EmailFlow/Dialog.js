@@ -42,14 +42,16 @@ const Dialog = ({ children, onSubmit, cancelText, submitText, prompt }) => {
             {cancelText}
           </Button>
         )}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => onSubmit(true)}
-          className={styles.button}
-        >
-          {submitText}
-        </Button>
+        {submitText && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onSubmit(true)}
+            className={styles.button}
+          >
+            {submitText}
+          </Button>
+        )}
       </div>
     </div>
   );

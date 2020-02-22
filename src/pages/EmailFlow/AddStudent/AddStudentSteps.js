@@ -4,8 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import * as yup from "yup";
 
-import TextField from "../../components/formik/TextField";
-import AutocompleteTextField from "../../components/formik/AutocompleteTextField";
+import TextField from "../../../components/formik/TextField";
+import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import majors from "./majors";
 
 const useStyles = makeStyles(theme => ({
@@ -27,15 +27,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const PersonalFields = {
+export const PersonalStep = {
   label: "Name",
   initialValues: { firstname: "", lastname: "" },
   validationSchema: yup.object().shape({
     firstname: yup.string().required("Required"),
     lastname: yup.string().required("Required")
   }),
-  Fields: () => {
+  Fields: props => {
     const styles = useStyles();
+
     return (
       <>
         <TextField
@@ -53,7 +54,7 @@ export const PersonalFields = {
   }
 };
 
-export const AcademicFields = {
+export const AcademicStep = {
   label: "Academic",
   initialValues: { major: "", academic_year: "" },
   validationSchema: yup.object().shape({
@@ -96,7 +97,7 @@ export const AcademicFields = {
   }
 };
 
-export const DemographicFields = {
+export const DemographicStep = {
   label: "Demographics",
   initialValues: { gender: "", ethnicity: "" },
   Fields: () => {

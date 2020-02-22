@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -7,21 +7,25 @@ import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import StepContent from "@material-ui/core/StepContent";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   content: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start"
   }
-}));
+});
 
-const StepperForm = ({ onSubmit, steps }) => {
+const StepperForm = ({ onSubmit, steps, initialValues: externalValues }) => {
   const styles = useStyles();
-  const [allValues, setAllValues] = useState({});
+  const [allValues, setAllValues] = useState(externalValues);
   const [activeStep, setActiveStep] = useState(0);
 
+  useEffect(() => {
+    setAllValues(a => ({ ...a, ...externalValues }));
+  }, [externalValues]);
+
   const handleSubmit = (values, bag, index) => {
-    const newAllValues = { ...allValues, values };
+    const newAllValues = { ...allValues, ...values };
     if (index !== steps.length - 1) {
       setAllValues(newAllValues);
       setActiveStep(index + 1);
@@ -41,6 +45,7 @@ const StepperForm = ({ onSubmit, steps }) => {
             </StepButton>
             <StepContent>
               <Formik
+                enableReinitialize
                 initialValues={{ ...initialValues, ...allValues }}
                 validationSchema={validationSchema}
                 onSubmit={(values, bag) => handleSubmit(values, bag, index)}

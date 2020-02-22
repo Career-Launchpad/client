@@ -3,15 +3,15 @@ import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 
 import {
-  PositionFields,
-  CompanyFields,
-  CompensationFields,
-  BenefitsFields,
-  AcceptanceFields
-} from "./AddOfferFields";
-import StepperForm from "../../components/formik/StepperForm";
-import { AuthContext } from "../../utils/auth";
-import environment from "../../utils/environment";
+  PositionStep,
+  CompanyStep,
+  CompensationStep,
+  BenefitsStep,
+  AcceptanceStep
+} from "./AddOfferSteps";
+import StepperForm from "../../../components/formik/StepperForm";
+import { AuthContext } from "../../../utils/auth";
+import environment from "../../../utils/environment";
 
 const commit = (input, callback) => {
   commitMutation(environment, {
@@ -29,11 +29,11 @@ const commit = (input, callback) => {
 };
 
 const steps = [
-  PositionFields,
-  CompanyFields,
-  CompensationFields,
-  BenefitsFields,
-  AcceptanceFields
+  PositionStep,
+  CompanyStep,
+  CompensationStep,
+  BenefitsStep,
+  AcceptanceStep
 ];
 
 const AddOfferForm = ({ onSubmit }) => {
