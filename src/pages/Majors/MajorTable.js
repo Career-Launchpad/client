@@ -8,27 +8,28 @@ import NumberFormat from "react-number-format";
 
 const headers = [
   { name: "Name", id: "name" },
-  { name: "Number of Students", id: "nStudents"},
-  { name: "Avg. Offer Compensation", id: "avgCompensation"},
+  { name: "Number of Students", id: "nStudents" },
+  { name: "Avg. Offer Compensation", id: "avgCompensation" }
 ];
 
 const getAvgWageForMajor = (offers, students, major) => {
-  let n_students = students.edges.filter((student) => student.major === major).length
-  
+  let n_students = students.edges.filter(student => student.major === major)
+    .length;
+
   let total_wage = offers.edges.reduce((total, offer) => {
-    let student = students.edges.filter((s) => s.id === offer.student_id)[0]
+    let student = students.edges.filter(s => s.id === offer.student_id)[0];
     if (student.major === major) {
-      total += offer.wage_value
-      return total
+      total += offer.wage_value;
+      return total;
     } else {
-      return total
+      return total;
     }
-  }, 0)
+  }, 0);
 
-  return total_wage / n_students
-}
+  return total_wage / n_students;
+};
 
-const MajorTable = ({data: {majors, students, offers}}) => {
+const MajorTable = ({ data: { majors, students, offers } }) => {
   return (
     <DataTable headers={headers}>
       {majors.map((major, i) => {
@@ -36,7 +37,12 @@ const MajorTable = ({data: {majors, students, offers}}) => {
           <DataTableRow key={i}>
             <TableRow>
               <TableCell>{major}</TableCell>
-              <TableCell>{students.edges.filter((student) => student.major === major).length}</TableCell>
+              <TableCell>
+                {
+                  students.edges.filter(student => student.major === major)
+                    .length
+                }
+              </TableCell>
               <TableCell>
                 <NumberFormat
                   value={getAvgWageForMajor(offers, students, major)}
