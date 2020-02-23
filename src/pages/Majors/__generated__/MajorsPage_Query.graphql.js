@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a464142fec41e500ed198ba8c7ab182c
+ * @relayHash 048d3bb9ca8682b661675df28fa0c55b
  */
 
 /* eslint-disable */
@@ -37,6 +37,14 @@ fragment MajorTable_data on store {
     edges {
       id
       major
+    }
+  }
+  offers {
+    edges {
+      id
+      student_id
+      wage_value
+      wage_type
     }
   }
 }
@@ -128,6 +136,50 @@ return {
               }
             ]
           },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "offers",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "offerConnection",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "edges",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "offer",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "student_id",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "wage_value",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "wage_type",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              }
+            ]
+          },
           (v0/*: any*/)
         ]
       }
@@ -137,7 +189,7 @@ return {
     "operationKind": "query",
     "name": "MajorsPage_Query",
     "id": null,
-    "text": "query MajorsPage_Query {\n  store {\n    ...MajorTable_data\n    id\n  }\n}\n\nfragment MajorTable_data on store {\n  majors\n  students {\n    edges {\n      id\n      major\n    }\n  }\n}\n",
+    "text": "query MajorsPage_Query {\n  store {\n    ...MajorTable_data\n    id\n  }\n}\n\nfragment MajorTable_data on store {\n  majors\n  students {\n    edges {\n      id\n      major\n    }\n  }\n  offers {\n    edges {\n      id\n      student_id\n      wage_value\n      wage_type\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
