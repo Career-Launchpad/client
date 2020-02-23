@@ -27,7 +27,7 @@ const MajorsPage = () => {
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <MajorTable majors={props.store} />
+              <MajorTable data={props.store} />
             </div>
           );
         }}
@@ -39,7 +39,7 @@ const MajorsPage = () => {
 const query = graphql`
   query MajorsPage_Query {
     store {
-      ...MajorTable_majors
+      ...MajorTable_data
     }
   }
 `;

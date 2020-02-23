@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 12c804d9bb8f7188097baae777738541
+ * @relayHash a464142fec41e500ed198ba8c7ab182c
  */
 
 /* eslint-disable */
@@ -9,11 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type MajorTable_majors$ref = any;
+type MajorTable_data$ref = any;
 export type MajorsPage_QueryVariables = {||};
 export type MajorsPage_QueryResponse = {|
   +store: ?{|
-    +$fragmentRefs: MajorTable_majors$ref
+    +$fragmentRefs: MajorTable_data$ref
   |}
 |};
 export type MajorsPage_Query = {|
@@ -26,17 +26,31 @@ export type MajorsPage_Query = {|
 /*
 query MajorsPage_Query {
   store {
-    ...MajorTable_majors
+    ...MajorTable_data
     id
   }
 }
 
-fragment MajorTable_majors on store {
+fragment MajorTable_data on store {
   majors
+  students {
+    edges {
+      id
+      major
+    }
+  }
 }
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -56,7 +70,7 @@ const node/*: ConcreteRequest*/ = {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "MajorTable_majors",
+            "name": "MajorTable_data",
             "args": null
           }
         ]
@@ -85,12 +99,36 @@ const node/*: ConcreteRequest*/ = {
             "storageKey": null
           },
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "id",
+            "name": "students",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
-          }
+            "concreteType": "studentConnection",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "edges",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "student",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "major",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              }
+            ]
+          },
+          (v0/*: any*/)
         ]
       }
     ]
@@ -99,10 +137,11 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "MajorsPage_Query",
     "id": null,
-    "text": "query MajorsPage_Query {\n  store {\n    ...MajorTable_majors\n    id\n  }\n}\n\nfragment MajorTable_majors on store {\n  majors\n}\n",
+    "text": "query MajorsPage_Query {\n  store {\n    ...MajorTable_data\n    id\n  }\n}\n\nfragment MajorTable_data on store {\n  majors\n  students {\n    edges {\n      id\n      major\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '8b423aae85c0f9fdcaa91c7e603a33ee';
+(node/*: any*/).hash = 'c9b56c8b17ef365655f62c38bfd53619';
 module.exports = node;

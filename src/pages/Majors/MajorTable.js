@@ -5,9 +5,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 
-const headers = [{ name: "Name", id: "name" }];
+const headers = [
+  { name: "Name", id: "name" },
+  { name: "Number of Students", id: "nStudents"}
+];
 
-const MajorTable = ({ majors: { majors } }) => {
+const MajorTable = ({data: {majors, students}}) => {
   return (
     <DataTable headers={headers}>
       {majors.map((major, i) => {
@@ -15,6 +18,7 @@ const MajorTable = ({ majors: { majors } }) => {
           <DataTableRow key={i}>
             <TableRow>
               <TableCell>{major}</TableCell>
+              <TableCell>{students.edges.filter((student) => student.major === major).length}</TableCell>
             </TableRow>
           </DataTableRow>
         );
@@ -24,9 +28,15 @@ const MajorTable = ({ majors: { majors } }) => {
 };
 
 export default createFragmentContainer(MajorTable, {
-  majors: graphql`
-    fragment MajorTable_majors on store {
+  data: graphql`
+    fragment MajorTable_data on store {
       majors
+      students {
+        edges {
+          id
+          major
+        }
+      }
     }
   `
 });
