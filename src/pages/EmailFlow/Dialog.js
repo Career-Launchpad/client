@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    margin: "0 -10px"
+    marginTop: 10
   },
   field: {
     margin: "10px"
@@ -19,10 +19,10 @@ const useStyles = makeStyles(theme => ({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-end"
+    justifyContent: "flex-start"
   },
   button: {
-    margin: "20px 0 0 20px"
+    margin: "20px 20px 0 0"
   }
 }));
 
@@ -41,14 +41,16 @@ const Dialog = ({ onSubmit, cancelText, submitText, prompt }) => {
             {cancelText}
           </Button>
         )}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => onSubmit(true)}
-          className={styles.button}
-        >
-          {submitText}
-        </Button>
+        {submitText && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onSubmit(true)}
+            className={styles.button}
+          >
+            {submitText}
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -1,107 +1,111 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { makeStyles, Typography } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 
 import FormPage from "../../components/FormPage";
-import AddStudentForm from "../AddStudent/AddStudentForm";
-import AddOfferForm from "../AddOffer/AddOfferForm";
+import AddStudentForm from "./AddStudent/AddStudentForm";
+import AddOfferForm from "./AddOffer/AddOfferForm";
 import Dialog from "./Dialog";
 
-const introPrompt = `
-Your school has requested that you input information regarding your job hunt. Please click "BEGIN" to continue.
+const INTRO_MD = `
+Career Services is looking to help students to get great jobs and internships. 
 
-Your information will be used in accordance with our [Privacy Policy](https://meetprospect.now.sh/privacy).
+This survey will ask you for some information about your job hunt. 
+
+It should take **about than 5 minutes to complete**.
+
+By continuing you agree to our [privacy policy](https://meetprospect.now.sh/privacy).
 `;
 
-const IntroDialog = ({ onSubmit }) => (
-  <Dialog onSubmit={onSubmit} prompt={introPrompt} submitText="Begin" />
-);
+const HAS_OFFERS_MD = `
+If not, that's okay! We're here to help you get connected with Career Services to get the job you want.
+`;
 
-const HasOfferDialog = ({ onSubmit }) => (
-  <Dialog
-    onSubmit={onSubmit}
-    prompt="Have you received an offer as part of your job search so far?"
-    submitText="Yes"
-    cancelText="No"
-  />
-);
-
-const HasMoreDialog = ({ onSubmit }) => (
-  <Dialog
-    onSubmit={onSubmit}
-    prompt="Have you received any other offers?"
-    submitText="Yes"
-    cancelText="No"
-  />
-);
-
-const ThankYouDialog = ({ onSubmit }) => (
-  <Dialog
-    onSubmit={onSubmit}
-    prompt="Thank you! Your time will help your school to better serve their students"
-    submitText="Finish"
-  />
-);
-
-const Pages = [
-  { name: "IntroDialog", component: IntroDialog },
-  { name: "AddStudentForm", component: AddStudentForm },
-  { name: "HasOfferDialog", component: HasOfferDialog },
-  { name: "HasMoreDialog", component: HasMoreDialog },
-  { name: "AddOfferForm", component: AddOfferForm },
-  { name: "ThankYouDialog", component: ThankYouDialog }
-];
+const useStyles = makeStyles(() => ({
+  paper: {
+    width: "100%",
+    maxWidth: "42rem",
+    padding: "2rem",
+    margin: "auto",
+    marginTop: "15vmin",
+    marginBottom: "10vh",
+    display: "flex",
+    flexDirection: "column"
+  }
+}));
 
 const EmailFlowPage = () => {
-  const [result, setResult] = React.useState({
-    student: { college_id: "byu_cpms" }
-  });
-  const [current, setCurrent] = React.useState("IntroDialog");
-  const [navigate, setNavigate] = React.useState(false);
+  const styles = useStyles();
+  const history = useHistory();
+  const activeStep = history?.location?.state?.index || 0;
 
-  const handleClose = () => {
-    setNavigate(true);
+  const handleIndexChange = index => {
+    history.push("/email", { index });
   };
 
-  const handleFormSubmit = (id, data, forward = true) => {
-    switch (id) {
-      case "IntroDialog":
-        forward ? setCurrent("AddStudentForm") : handleClose();
-        break;
-      case "AddStudentForm":
-        setResult({
-          ...result,
-          student: { ...result.student, ...data.student }
-        });
-        setCurrent(forward ? "HasOfferDialog" : "IntroDialog");
-        break;
-      case "HasOfferDialog":
-        setCurrent(data ? "AddOfferForm" : "ThankYouDialog");
-        break;
-      case "AddOfferForm":
-        setResult({ ...result, offer: { ...result.offer, ...data.offer } });
-        setCurrent(forward ? "HasMoreDialog" : "HasOfferDialog");
-        break;
-      case "HasMoreDialog":
-        setCurrent(data ? "AddOfferForm" : "ThankYouDialog");
-        break;
-      case "ThankYouDialog":
-        handleClose();
-        break;
-      default:
-        console.log(`Unrecognized ${id}`);
+  const steps = [
+    {
+      label: "What is this?",
+      content: (
+        <Dialog
+          onSubmit={() => handleIndexChange(1)}
+          prompt={INTRO_MD}
+          submitText="Begin"
+        />
+      )
+    },
+    {
+      label: "Have you received any offers?",
+      content: (
+        <Dialog
+          onSubmit={yes => handleIndexChange(yes ? 2 : 4)}
+          prompt={HAS_OFFERS_MD}
+          submitText="Yes"
+          cancelText="No"
+        />
+      )
+    },
+    {
+      label: "Tell us about your offer!",
+      content: <AddOfferForm onSubmit={() => handleIndexChange(3)} />
+    },
+    {
+      label: "Any other offers?",
+      content: (
+        <Dialog
+          onSubmit={yes => handleIndexChange(yes ? 2 : 4)}
+          prompt="By entering all of the offers that you have received, even the ones that you have not accepted, you help future students to make better decisions."
+          submitText="Yes"
+          cancelText="No"
+        />
+      )
+    },
+    {
+      label: "Tell us about yourself!",
+      content: <AddStudentForm onSubmit={() => handleIndexChange(5)} />
+    },
+    {
+      label: "Finished!",
+      content: (
+        <Dialog prompt="Thank you! Your time will help your school to better serve you!" />
+      )
     }
-  };
+  ];
 
   return (
     <>
-      {navigate && <Redirect to="/" />}
-      <FormPage onClose={handleClose}>
-        {Pages.filter(page => page.name === current).map(page => (
-          <page.component
-            key={page.name}
-            onSubmit={data => handleFormSubmit(page.name, data)}
-          />
-        ))}
+      <FormPage>
+        <Paper className={styles.paper}>
+          {steps
+            .filter((_, i) => i === activeStep)
+            .map(({ label, content }) => (
+              <div key={label}>
+                {<Typography variant="h5">{label}</Typography>}
+                {content}
+              </div>
+            ))}
+        </Paper>
       </FormPage>
     </>
   );

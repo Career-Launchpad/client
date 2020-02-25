@@ -9,8 +9,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import * as cx from "classnames";
 
-import MoneyField from "../../components/formik/MoneyField";
-import TextField from "../../components/formik/TextField";
+import MoneyField from "../../../components/formik/MoneyField";
+import TextField from "../../../components/formik/TextField";
 
 const useStyles = makeStyles(theme => ({
   bonus: {
@@ -57,7 +57,7 @@ const BonusesSubForm = ({ styles, values }) => {
   return (
     <>
       {values.bonuses.length !== 0 && (
-        <Typography variant="h6" className={styles.subtitle}>
+        <Typography variant="body1" className={styles.subtitle}>
           Bonuses
         </Typography>
       )}

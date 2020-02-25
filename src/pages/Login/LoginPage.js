@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 import { Formik } from "formik";
 import * as yup from "yup";
 
@@ -57,7 +58,7 @@ const Login = () => {
           {auth.state === AUTH_STATE.AUTHENTICATED && (
             <Redirect to={redirectTo} />
           )}
-          <div>
+          <Paper className={styles.paper}>
             <Formik
               initialValues={{
                 emailAddress: "",
@@ -118,7 +119,7 @@ const Login = () => {
                 </form>
               )}
             </Formik>
-          </div>
+          </Paper>
         </FormPage>
       )}
     </AuthConsumer>
