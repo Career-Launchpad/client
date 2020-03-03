@@ -1,68 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { createFragmentContainer } from "react-relay";
 import Chart from "chart.js";
-import classes from "./LineGraph.module.css";
-let myLineChart;
+import graphql from "babel-plugin-relay/macro";
+import LineGraph from "../LineGraph";
 
 //--Chart Style Options--//
-Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
+Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 Chart.defaults.global.legend.display = false;
 //--Chart Style Options--//
 
-export default class OffersLineGraph extends Component {
-    chartRef = React.createRef();
-
-    componentDidMount() {
-        this.buildChart();
-    }
-
-    componentDidUpdate() {
-        this.buildChart();
-    }
-
-    buildChart = () => {
-        const myChartRef = this.chartRef.current.getContext("2d");
-        const { data, average, labels } = this.props;
-        console.log(data);
-        console.log(average);
-
-        if (typeof myLineChart !== "undefined") myLineChart.destroy();
-
-        myLineChart = new Chart(myChartRef, {
-            type: "line",
-            data: {
-                //Bring in data
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Sales",
-                        data: data,
-                        fill: false,
-                        borderColor: "#6610f2"
-                    },
-                    {
-                        label: "National Average",
-                        data: average,
-                        fill: false,
-                        borderColor: "#E0E0E0"
-                    }
-                ]
-            },
-            options: {
-                //Customize chart options
-            }
-        });
-
-    }
-
-    render() {
-
-        return (
-            <div className={classes.graphContainer}>
-                <canvas
-                    id="myChart"
-                    ref={this.chartRef}
-                />
-            </div>
-        )
-    }
+const OffersLineGraph = ({ offers }) => {
+    console.log(offers.edges);
+    const data = offers.edges.map(o => o.wage_value);
+    const labels = offers.edges.map(o => o.company.name);
+    console.log(labels);
+    return (
+        <LineGraph
+            data={data}
+            labels={labels}
+        />
+    )
 }
+
+export default createFragmentContainer(OffersLineGraph, {
+    offers: graphql`
+        fragment OfferTable_offers on offerConnection {
+            edges {
+                wage_value
+                company_name
+            }
+        }
+    `
+  });

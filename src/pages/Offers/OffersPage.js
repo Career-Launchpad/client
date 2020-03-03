@@ -26,14 +26,13 @@ const OffersPage = () => {
         render={({ props }) => {
           setLoading(!props);
           if (!props) return <div />;
-          console.log(props.store.offers[0]);
-          var data = props.store.offers.map(o => o.salary);
-          var labels = props.store.offers.map(o => o.firstName);
+          // console.log(props.store.offers.edges[0]);
+          // var data = props.store.offers.edges.map(o => o.salary);
+          // var labels = props.store.offers.edges.map(o => o.firstName);
           return (
             <div className={styles.content}>
               <OffersLineGraph
-                data={data}
-                labels={labels}
+                offers={props.store.offers}
               />
               <OfferTable offers={props.store.offers} />
             </div>
