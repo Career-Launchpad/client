@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 import { Formik } from "formik";
 import * as yup from "yup";
 
@@ -33,6 +34,10 @@ const Login = () => {
     setIsLogin(!isLogin);
   };
 
+  const resendVerificationLink = async () => {
+    await Auth.sendVerificationEmail();
+  };
+
   const handleSubmit = async values => {
     setError("");
     setLoading(true);
@@ -53,7 +58,7 @@ const Login = () => {
           {auth.state === AUTH_STATE.AUTHENTICATED && (
             <Redirect to={redirectTo} />
           )}
-          <div>
+          <Paper className={styles.paper}>
             <Formik
               initialValues={{
                 emailAddress: "",
@@ -77,6 +82,24 @@ const Login = () => {
                     >
                       {error}
                     </Typography>
+                    {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
+                      <>
+                        <Typography variant="body1" className={styles.error}>
+                          {isLogin
+                            ? "Looks like you haven't verified your email yet"
+                            : "Account created. Please verify your email address via the link sent to your inbox"}
+                          <button
+                            type="button"
+                            className={styles.buttonLink}
+                            onClick={resendVerificationLink}
+                          >
+                            <Typography color="primary">
+                              {"Resend Verification Link"}
+                            </Typography>
+                          </button>
+                        </Typography>
+                      </>
+                    )}
                     <Typography variant="body1" className={styles.loginPrompt}>
                       If you {isLogin ? "don't yet" : "already"} have an account{" "}
                       <button
@@ -96,7 +119,7 @@ const Login = () => {
                 </form>
               )}
             </Formik>
-          </div>
+          </Paper>
         </FormPage>
       )}
     </AuthConsumer>

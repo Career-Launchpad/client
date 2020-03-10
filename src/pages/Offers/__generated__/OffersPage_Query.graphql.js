@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f393b6a1a31f22ef2ef95a50fc0d10cd
+ * @relayHash 63f78c28cdaa71feafd469707f728e16
  */
 
 /* eslint-disable */
@@ -37,13 +37,15 @@ query OffersPage_Query {
 
 fragment OfferTable_offers on offerConnection {
   edges {
-    offer_id
+    id
     position_type
     position_title
     location {
       state
     }
-    company_name
+    company {
+      name
+    }
     academic_year
     wage_type
     wage_value
@@ -51,7 +53,15 @@ fragment OfferTable_offers on offerConnection {
 }
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -121,13 +131,7 @@ const node/*: ConcreteRequest*/ = {
                 "concreteType": "offer",
                 "plural": true,
                 "selections": [
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "offer_id",
-                    "args": null,
-                    "storageKey": null
-                  },
+                  (v0/*: any*/),
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -161,11 +165,22 @@ const node/*: ConcreteRequest*/ = {
                     ]
                   },
                   {
-                    "kind": "ScalarField",
+                    "kind": "LinkedField",
                     "alias": null,
-                    "name": "company_name",
+                    "name": "company",
+                    "storageKey": null,
                     "args": null,
-                    "storageKey": null
+                    "concreteType": "company",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "name",
+                        "args": null,
+                        "storageKey": null
+                      }
+                    ]
                   },
                   {
                     "kind": "ScalarField",
@@ -192,13 +207,7 @@ const node/*: ConcreteRequest*/ = {
               }
             ]
           },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
+          (v0/*: any*/)
         ]
       }
     ]
@@ -207,10 +216,11 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "OffersPage_Query",
     "id": null,
-    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    offer_id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company_name\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
+    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };
+})();
 // prettier-ignore
 (node/*: any*/).hash = '7e3df4547801652a7bb09432d233237d';
 module.exports = node;

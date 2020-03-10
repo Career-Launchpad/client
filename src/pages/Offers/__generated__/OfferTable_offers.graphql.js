@@ -13,13 +13,15 @@ declare export opaque type OfferTable_offers$ref: FragmentReference;
 declare export opaque type OfferTable_offers$fragmentType: OfferTable_offers$ref;
 export type OfferTable_offers = {|
   +edges: ?$ReadOnlyArray<?{|
-    +offer_id: ?string,
+    +id: ?string,
     +position_type: ?string,
     +position_title: ?string,
     +location: ?{|
       +state: ?string
     |},
-    +company_name: ?string,
+    +company: ?{|
+      +name: ?string
+    |},
     +academic_year: ?string,
     +wage_type: ?string,
     +wage_value: ?number,
@@ -54,7 +56,7 @@ const node/*: ReaderFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "offer_id",
+          "name": "id",
           "args": null,
           "storageKey": null
         },
@@ -91,11 +93,22 @@ const node/*: ReaderFragment*/ = {
           ]
         },
         {
-          "kind": "ScalarField",
+          "kind": "LinkedField",
           "alias": null,
-          "name": "company_name",
+          "name": "company",
+          "storageKey": null,
           "args": null,
-          "storageKey": null
+          "concreteType": "company",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "name",
+              "args": null,
+              "storageKey": null
+            }
+          ]
         },
         {
           "kind": "ScalarField",
@@ -123,5 +136,5 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'ced5c8cbe9c512d74e72827a155ec643';
+(node/*: any*/).hash = '0ed422b719f57439df0575800fa0f83d';
 module.exports = node;

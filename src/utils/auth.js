@@ -4,6 +4,7 @@ import * as firebase from "firebase/app";
 
 const AUTH_STATE = {
   PENDING: "PENDING",
+  NEEDS_VERIFICATION: "NEEDS_VERIFICATION",
   AUTHENTICATED: "AUTHENTICATED",
   NOT_AUTHENTICATED: "NOT_AUTHENTICATED"
 };
@@ -35,8 +36,8 @@ class AuthService {
     return await this.firebase
       .auth()
       .createUserWithEmailAndPassword(user.emailAddress, user.password)
-      .then(() => {
-        return { user };
+      .then(async () => {
+        await this.sendVerificationEmail();
       })
       .catch(error => {
         return { error };
@@ -50,9 +51,6 @@ class AuthService {
     return await this.firebase
       .auth()
       .signInWithEmailAndPassword(user.emailAddress, user.password)
-      .then(() => {
-        return { user };
-      })
       .catch(error => {
         return { error };
       });
@@ -75,6 +73,11 @@ class AuthService {
   logout = async () => {
     this.user = null;
     await this.firebase.auth().signOut();
+  };
+
+  sendVerificationEmail = async () => {
+    let user = await this.firebase.auth().currentUser;
+    user.sendEmailVerification();
   };
 
   getCurrentUser = async () => {
@@ -101,13 +104,21 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const [value, setValue] = useState({ state: AUTH_STATE.PENDING });
+  const safeSetValue = newValue => {
+    if (newValue.state !== value.state) {
+      setValue(newValue);
+    }
+  };
+
   useEffect(() => {
     Auth.firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setValue({ user, state: AUTH_STATE.AUTHENTICATED });
-        return;
+      let state = AUTH_STATE.NOT_AUTHENTICATED;
+      if (user && user.emailVerified) {
+        state = AUTH_STATE.AUTHENTICATED;
+      } else if (user && !user.emailVerified) {
+        state = AUTH_STATE.NEEDS_VERIFICATION;
       }
-      setValue({ user: undefined, state: AUTH_STATE.NOT_AUTHENTICATED });
+      safeSetValue({ user, state });
     });
   });
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -115,4 +126,4 @@ const AuthProvider = ({ children }) => {
 
 const AuthConsumer = AuthContext.Consumer;
 
-export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer };
+export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer, AuthContext };

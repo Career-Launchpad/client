@@ -5,7 +5,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Paper from "@material-ui/core/Paper";
 import Slide from "@material-ui/core/Slide";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -80,9 +79,7 @@ const FormPage = ({ onClose, children, transition, loading }) => {
           style={{ visibility: loading ? "visible" : "hidden" }}
         />
       </AppBar>
-      <DialogContent className={styles.dialogContent}>
-        <Paper className={styles.paper}>{children}</Paper>
-      </DialogContent>
+      <DialogContent className={styles.dialogContent}>{children}</DialogContent>
     </Dialog>
   );
 };

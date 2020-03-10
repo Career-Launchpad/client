@@ -21,6 +21,15 @@ input bonusInput {
   description: String
 }
 
+type company {
+  id: String
+  name: String
+}
+
+type companyConnection {
+  edges: [company]
+}
+
 input createOfferInput {
   student_id: String
   position_type: String
@@ -37,15 +46,22 @@ input createOfferInput {
 }
 
 input createStudentInput {
+  id: String
   email: String
   firstname: String
   lastname: String
-  college_id: String
+  college_name: String
   academic_year: String
   major: String
   gender: String
   ethnicity: String
   last_authentication: String
+}
+
+input filter {
+  field: String
+  value: String
+  comp: String
 }
 
 type location {
@@ -61,16 +77,14 @@ input locationInput {
 }
 
 type mutation {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(student: createStudentInput): student
   offer(offer: createOfferInput): offer
 }
 
 type offer {
-  offer_id: String
+  id: String
   position_type: String
   position_title: String
   accepted: Boolean
@@ -78,7 +92,7 @@ type offer {
   extended: String
   deadline: String
   academic_year: String
-  company_name: String
+  company: company
   flag: Boolean
   student_id: String
   location: location
@@ -92,22 +106,22 @@ type offerConnection {
 }
 
 type query {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   store: store
 }
 
 type store {
-  """
-  The ID of an object
-  """
+  """The ID of an object"""
   id: ID!
   student(id: String): student
   offer(id: String): offer
-  offers: offerConnection
-  students(gender: String): [student]
+  offers(filters: [filter]): offerConnection
+  students(filters: [filter]): studentConnection
+  company_names(filters: [filter]): [String]
+  companies(filters: [filter]): companyConnection
+  company(id: String): company
+  majors(filters: [filter]): [String]
 }
 
 type student {
@@ -119,8 +133,13 @@ type student {
   academic_year: String
   major: String
   gender: String
+  ethnicity: String
   last_authentication: String
   security_level: String
-  ethnicity: String
-  offers(student_id: String): [offer]
+  offers(student_id: String): offerConnection
 }
+
+type studentConnection {
+  edges: [student]
+}
+

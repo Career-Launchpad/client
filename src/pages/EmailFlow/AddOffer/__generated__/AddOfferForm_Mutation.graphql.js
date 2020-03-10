@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dd51b28351008a654fdb6015278f20de
+ * @relayHash 50c4daefefb55d30375562aaccd54d9a
  */
 
 /* eslint-disable */
@@ -41,16 +41,7 @@ export type AddOfferForm_MutationVariables = {|
 |};
 export type AddOfferForm_MutationResponse = {|
   +offer: ?{|
-    +offer_id: ?string,
-    +position_type: ?string,
-    +position_title: ?string,
-    +wage_value: ?number,
-    +wage_type: ?string,
-    +location: ?{|
-      +city: ?string,
-      +state: ?string,
-      +country: ?string,
-    |},
+    +id: ?string
   |}
 |};
 export type AddOfferForm_Mutation = {|
@@ -65,16 +56,7 @@ mutation AddOfferForm_Mutation(
   $input: createOfferInput!
 ) {
   offer(offer: $input) {
-    offer_id
-    position_type
-    position_title
-    wage_value
-    wage_type
-    location {
-      city
-      state
-      country
-    }
+    id
   }
 }
 */
@@ -107,69 +89,9 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "offer_id",
+        "name": "id",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "position_type",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "position_title",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "wage_value",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "wage_type",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "location",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "location",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "city",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "state",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "country",
-            "args": null,
-            "storageKey": null
-          }
-        ]
       }
     ]
   }
@@ -194,11 +116,11 @@ return {
     "operationKind": "mutation",
     "name": "AddOfferForm_Mutation",
     "id": null,
-    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    offer_id\n    position_type\n    position_title\n    wage_value\n    wage_type\n    location {\n      city\n      state\n      country\n    }\n  }\n}\n",
+    "text": "mutation AddOfferForm_Mutation(\n  $input: createOfferInput!\n) {\n  offer(offer: $input) {\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8ce3c260772be4549dab28230f66dd13';
+(node/*: any*/).hash = '1ad59062e124a4e7a48cdedcf1870f25';
 module.exports = node;

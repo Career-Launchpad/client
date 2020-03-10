@@ -32,8 +32,11 @@ const AutocompleteTextField = ({
     <Autocomplete
       className={className}
       margin="normal"
-      freeSolo={freeSolo}
-      filterOptions={o => o.filter(o => o.startsWith(internalValue))}
+
+      freeSolo
+      filterOptions={o =>
+        o.filter(o => o.toLowerCase().startsWith(internalValue.toLowerCase()))
+      }
       disableClearable
       options={options}
       onChange={(e, v) => helpers.setValue(v)}
@@ -45,6 +48,7 @@ const AutocompleteTextField = ({
           {...params}
           label={label}
           fullWidth
+          size="small"
           margin="none"
           variant="filled"
           color="secondary"
