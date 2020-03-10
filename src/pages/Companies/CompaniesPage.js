@@ -4,7 +4,7 @@ import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from "../../utils/environment";
 import ClosableDialog from "../../components/ClosableDialog";
-
+import Typography from "@material-ui/core/Typography";
 import Layout from "../../components/Layout";
 import CompanyTable from "./CompanyTable";
 
@@ -15,17 +15,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Dialog = ({ open, company, onExited, onClose }) => {
-  console.log(company)
   const styles = useStyles();
   return (
     <ClosableDialog
       classes={{ paper: styles.dialog }}
       onClose={onClose}
       open={open}
-      title="Company Information"
+      title= {company ? company.name : 'Company Information'}
       onExited={onExited}
     >
-      hello world
+      <Typography
+        variant="h5"
+      >
+        {company && `${company.name}`}
+      </Typography>
     </ClosableDialog>
   );
 };
