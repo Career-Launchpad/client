@@ -51,7 +51,7 @@ export const PositionStep = {
           name="position_title"
           className={cx(styles.smallField, styles.field)}
         />
-        <Combobox 
+        <Combobox
           label="Position Type"
           name="position_type"
           className={cx(styles.smallField, styles.field)}
