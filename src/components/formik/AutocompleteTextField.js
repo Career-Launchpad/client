@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useField } from "formik";
-import { TextField as MuiTextField } from "@material-ui/core";
+import React from "react";
+import { Field, useField } from "formik";
+import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const AutocompleteTextField = ({
@@ -11,55 +11,37 @@ const AutocompleteTextField = ({
   freeSolo
 }) => {
   const [field, meta, helpers] = useField(name);
-  const [internalValue, setInternalValue] = useState(field.value);
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
-  const handleChange = e => {
-    setInternalValue(e.target.value);
-  };
-  const handleBlur = e => {
-    if (options.includes(internalValue) || internalValue === "" || freeSolo) {
-      helpers.setValue(internalValue);
-    } else {
-      setInternalValue("");
-    }
-    helpers.setTouched(true);
-    field.onBlur(e);
-    console.log(internalValue);
-  };
+
   console.log({ error });
   return (
     <Autocomplete
-      className={className}
-      margin="normal"
-
-      freeSolo
-      filterOptions={o =>
-        o.filter(o => o.toLowerCase().startsWith(internalValue.toLowerCase()))
-      }
+      freeSolo={freeSolo}
       disableClearable
+      id={name}
+      className={className}
+      name={name}
       options={options}
-      onChange={(e, v) => helpers.setValue(v)}
-      onBlur={field.onBlur}
-      name={field.name}
-      value={internalValue}
+      getOptionLabel={option => option}
+      defaultValue={field.value}
+      onChange={(e, value) => {
+        console.log(value)
+        helpers.setValue(value)
+    }}
       renderInput={params => (
-        <MuiTextField
-          {...params}
-          label={label}
+        <Field 
+          component={TextField} 
+          {...params} 
+          name={name} 
+          label={label} 
+          variant="filled" 
           fullWidth
-          size="small"
-          margin="none"
-          variant="filled"
-          color="secondary"
-          name={field.name}
-          value={internalValue}
-          helperText={helperText}
           error={error}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-      )}
+          helperText={helperText}
+          onBlur={field.onBlur}
+          />
+    )}
     />
   );
 };
