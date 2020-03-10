@@ -10,6 +10,7 @@ import BonusesSubForm from "./BonusesSubForm";
 import TextField from "../../../components/formik/TextField";
 import MoneyField from "../../../components/formik/MoneyField";
 import DatePicker from "../../../components/formik/DatePicker";
+import Combobox from "../../../components/formik/Combobox";
 import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import CheckboxArrayField from "../../../components/formik/CheckboxArrayField";
 import environment from "../../../utils/environment";
@@ -50,18 +51,12 @@ export const PositionStep = {
           name="position_title"
           className={cx(styles.smallField, styles.field)}
         />
-        <TextField
-          select
+        <Combobox 
           label="Position Type"
           name="position_type"
           className={cx(styles.smallField, styles.field)}
-        >
-          {positionTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={positionTypes}
+        />
       </>
     );
   }
@@ -96,6 +91,7 @@ export const CompanyStep = {
             let loading = !props;
             return (
               <AutocompleteTextField
+                freeSolo
                 label="Company"
                 name="company_name"
                 className={cx(styles.smallField, styles.field)}

@@ -7,8 +7,7 @@ const AutocompleteTextField = ({
   className,
   name,
   label,
-  options,
-  freeSolo
+  options
 }) => {
   const [field, meta, helpers] = useField(name);
   const error = !!meta.touched && !!meta.error;
@@ -17,7 +16,6 @@ const AutocompleteTextField = ({
   console.log({ error });
   return (
     <Autocomplete
-      freeSolo={freeSolo}
       disableClearable
       id={name}
       className={className}
