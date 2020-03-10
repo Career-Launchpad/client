@@ -13,17 +13,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CompanyTable = ({ companies , onCompanyClicked}) => {
+const CompanyTable = ({ companies, onCompanyClicked }) => {
   const styles = useStyles();
   return (
     <DataTable headers={headers}>
-      {companies.edges.map((Company, i) => {
+      {companies.edges.map((company, i) => {
         return (
-          <DataTableRow key={Company.id || i} data={Company}>
-            <TableRow className={styles.row} onClick={e => {
-              onCompanyClicked(Company);
-            }}>
-              <TableCell>{Company.name}</TableCell>
+          <DataTableRow key={company.id || i} data={company}>
+            <TableRow
+              className={styles.row}
+              onClick={e => { onCompanyClicked(company) }}>
+              <TableCell>{company.name}</TableCell>
             </TableRow>
           </DataTableRow>
         );

@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Dialog = ({ open, company, onExited, onClose }) => {
+  console.log(company)
   const styles = useStyles();
   return (
     <ClosableDialog
@@ -33,7 +34,7 @@ const Dialog = ({ open, company, onExited, onClose }) => {
 const CompaniesPage = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [company, setCompany] = useState(false);
+  const [company, setCompany] = useState(null);
   const styles = useStyles();
 
   const openDialog = company => {
