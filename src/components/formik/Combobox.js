@@ -3,12 +3,11 @@ import { Field, useField } from "formik";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const AutocompleteTextField = ({ className, name, label, options }) => {
+const Combobox = ({ className, name, label, options }) => {
   const [field, meta, helpers] = useField(name);
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
 
-  console.log({ error });
   return (
     <Autocomplete
       disableClearable
@@ -21,7 +20,6 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
       getOptionLabel={option => option}
       defaultValue={field.value}
       onChange={(e, value) => {
-        console.log(value);
         helpers.setValue(value);
       }}
       renderInput={params => (
@@ -41,4 +39,4 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
   );
 };
 
-export default AutocompleteTextField;
+export default Combobox;
