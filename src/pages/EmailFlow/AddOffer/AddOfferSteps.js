@@ -1,7 +1,6 @@
 import React from "react";
 import { QueryRenderer } from "react-relay";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
 import graphql from "babel-plugin-relay/macro";
 import cx from "classnames";
 import * as yup from "yup";
@@ -151,18 +150,12 @@ export const CompensationStep = {
 
     return (
       <>
-        <TextField
-          select
+        <Combobox
           label="Wage Type"
           name="wage_type"
           className={cx(styles.smallField, styles.field)}
-        >
-          {compensationTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={compensationTypes}
+        />
         <MoneyField
           label="Wage Value"
           name="wage_value"
@@ -228,18 +221,12 @@ export const AcceptanceStep = {
           name="extended"
           className={cx(styles.smallField, styles.field)}
         />
-        <TextField
-          select
+        <Combobox
           label="Accepted"
           name="accepted"
           className={cx(styles.smallField, styles.field)}
-        >
-          {acceptedOptions.map(entry => (
-            <MenuItem key={entry} value={entry}>
-              {entry}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={acceptedOptions}
+        />
       </>
     );
   }
