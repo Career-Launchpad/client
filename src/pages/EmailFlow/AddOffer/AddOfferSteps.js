@@ -1,7 +1,6 @@
 import React from "react";
 import { QueryRenderer } from "react-relay";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
 import graphql from "babel-plugin-relay/macro";
 import cx from "classnames";
 import * as yup from "yup";
@@ -10,6 +9,7 @@ import BonusesSubForm from "./BonusesSubForm";
 import TextField from "../../../components/formik/TextField";
 import MoneyField from "../../../components/formik/MoneyField";
 import DatePicker from "../../../components/formik/DatePicker";
+import Combobox from "../../../components/formik/Combobox";
 import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import CheckboxArrayField from "../../../components/formik/CheckboxArrayField";
 import environment from "../../../utils/environment";
@@ -50,18 +50,12 @@ export const PositionStep = {
           name="position_title"
           className={cx(styles.smallField, styles.field)}
         />
-        <TextField
-          select
+        <Combobox
           label="Position Type"
           name="position_type"
           className={cx(styles.smallField, styles.field)}
-        >
-          {positionTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={positionTypes}
+        />
       </>
     );
   }
@@ -96,6 +90,7 @@ export const CompanyStep = {
             let loading = !props;
             return (
               <AutocompleteTextField
+                freeSolo
                 label="Company"
                 name="company_name"
                 className={cx(styles.smallField, styles.field)}
@@ -155,18 +150,12 @@ export const CompensationStep = {
 
     return (
       <>
-        <TextField
-          select
+        <Combobox
           label="Wage Type"
           name="wage_type"
           className={cx(styles.smallField, styles.field)}
-        >
-          {compensationTypes.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={compensationTypes}
+        />
         <MoneyField
           label="Wage Value"
           name="wage_value"
@@ -232,18 +221,12 @@ export const AcceptanceStep = {
           name="extended"
           className={cx(styles.smallField, styles.field)}
         />
-        <TextField
-          select
+        <Combobox
           label="Accepted"
           name="accepted"
           className={cx(styles.smallField, styles.field)}
-        >
-          {acceptedOptions.map(entry => (
-            <MenuItem key={entry} value={entry}>
-              {entry}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={acceptedOptions}
+        />
       </>
     );
   }
