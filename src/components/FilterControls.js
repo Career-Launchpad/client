@@ -9,19 +9,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteIcon from "@material-ui/icons/Delete";
 import cx from "classnames";
 
-const FilterControl = ({ filter, onDelete, className }) => {
-  return (
-    <div className={className}>
-      <span>{filter.field}</span>
-      <span>{filter.comp}</span>
-      <span>{filter.value}</span>
-      <IconButton onClick={onDelete}>
-        <DeleteIcon />
-      </IconButton>
-    </div>
-  );
-};
-
 const useStyles = makeStyles(theme => {
   console.log(theme);
   return {
@@ -39,6 +26,19 @@ const useStyles = makeStyles(theme => {
     }
   };
 });
+
+const FilterEntry = ({ filter, onDelete, className }) => {
+  return (
+    <div className={className}>
+      <span>{filter.field}</span>
+      <span>{filter.comp}</span>
+      <span>{filter.value}</span>
+      <IconButton onClick={onDelete}>
+        <DeleteIcon />
+      </IconButton>
+    </div>
+  );
+};
 
 const FilterControls = ({ onChange, fieldNames }) => {
   const classes = useStyles();
@@ -92,7 +92,6 @@ const FilterControls = ({ onChange, fieldNames }) => {
             ? cx(classes.control, classes.right, classes.filterOn)
             : cx(classes.control, classes.right)
         }
-        variant="contained"
         onClick={handleClick}
       >
         {filtersOn ? "Filters On" : "Filter"}
@@ -111,7 +110,7 @@ const FilterControls = ({ onChange, fieldNames }) => {
         }}
       >
         {filters.map((f, i) => (
-          <FilterControl
+          <FilterEntry
             className={classes.margins}
             key={i}
             filter={f}
