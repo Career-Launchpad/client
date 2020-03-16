@@ -23,14 +23,17 @@ const OffersPage = () => {
       <QueryRenderer
         environment={environment}
         query={query}
-        variables={{filters: filters}}
+        variables={{ filters: filters }}
         cacheConfig={{ force: true }}
         render={({ props }) => {
           setLoading(!props);
           if (!props) return <div />;
           return (
             <div className={styles.content}>
-              <FilterControls onChange={setFilters} onClear={() => setFilters(null)}></FilterControls>
+              <FilterControls
+                onChange={setFilters}
+                onClear={() => setFilters(null)}
+              ></FilterControls>
               <OfferTable offers={props.store.offers} />
             </div>
           );
