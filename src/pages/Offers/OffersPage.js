@@ -31,6 +31,7 @@ const OffersPage = () => {
           return (
             <div className={styles.content}>
               <FilterControls
+                filters={filters || []}
                 onChange={setFilters}
                 onClear={() => setFilters(null)}
               ></FilterControls>

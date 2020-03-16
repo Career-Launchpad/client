@@ -27,47 +27,32 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const FilterEntry = ({ filter, onDelete, className }) => {
-  return (
-    <div className={className}>
-      <span>{filter.field}</span>
-      <span>{filter.comp}</span>
-      <span>{filter.value}</span>
-      <IconButton onClick={onDelete}>
-        <DeleteIcon />
-      </IconButton>
-    </div>
-  );
-};
+const FilterControls = ({ onChange, fieldNames, filters }) => {
 
-const FilterControls = ({ onChange, fieldNames }) => {
+  if (!Array.isArray(filters)) {
+    console.error("FilterControls expects filters to be an array");
+  }
+
   const classes = useStyles();
-
-  const [filters, setFilters] = useState([]);
-  //{ field: "wage_type", value: "Hourly", comp: "=" }
 
   const [field, setField] = useState("");
   const [value, setValue] = useState("");
   const [comp, setComp] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const update = () => {
-    onChange(filters);
-  };
-
   const remove = filter => {
-    setFilters(filters.filter(i => i !== filter));
+    onChange(filters.filter(i => i !== filter));
   };
 
   const add = () => {
-    setFilters([...filters, { field: field, comp: comp, value: value }]);
+    onChange([...filters, { field: field, comp: comp, value: value }]);
     setField("");
     setValue("");
     setComp("");
   };
 
   const clear = () => {
-    setFilters([]);
+    onChange([]);
   };
 
   const handleClick = event => {
@@ -110,12 +95,14 @@ const FilterControls = ({ onChange, fieldNames }) => {
         }}
       >
         {filters.map((f, i) => (
-          <FilterEntry
-            className={classes.margins}
-            key={i}
-            filter={f}
-            onDelete={() => remove(f)}
-          />
+          <div key={i} className={classes.margins}>
+            <span>{f.field}</span>
+            <span>{f.comp}</span>
+            <span>{f.value}</span>
+            <IconButton onClick={() => remove(f)}>
+              <DeleteIcon />
+            </IconButton>
+          </div>
         ))}
         <div>
           <TextField
