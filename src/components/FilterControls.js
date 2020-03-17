@@ -62,6 +62,7 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
 
   const clear = () => {
     onChange([]);
+    handleClose();
   };
 
   const handleClick = event => {
@@ -75,8 +76,6 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
   const open = Boolean(anchorEl);
 
   const filtersOn = filters && filters.length > 0;
-
-  console.log(filters);
 
   return (
     <>

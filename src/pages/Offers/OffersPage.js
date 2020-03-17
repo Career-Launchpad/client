@@ -22,26 +22,26 @@ const OffersPage = () => {
   const styles = useStyles();
   return (
     <Layout loading={loading}>
-      <QueryRenderer
-        environment={environment}
-        query={query}
-        variables={{ filters: filters }}
-        cacheConfig={{ force: true }}
-        render={({ props }) => {
-          setLoading(!props);
-          if (!props) return <div />;
-          return (
-            <div className={styles.content}>
-              <FilterControls
-                filters={filters || []}
-                onChange={setFilters}
-                onClear={() => setFilters(null)}
-              ></FilterControls>
-              <OfferTable offers={props.store.offers} />
-            </div>
-          );
-        }}
-      />
+      <div className={styles.content}>
+        <FilterControls
+          filters={filters}
+          onChange={setFilters}
+          onClear={() => setFilters(null)}
+        ></FilterControls>
+        <QueryRenderer
+          environment={environment}
+          query={query}
+          variables={{ filters: filters.length ? filters : null }}
+          cacheConfig={{ force: true }}
+          render={({ props }) => {
+            setLoading(!props);
+            if (!props) return <div />;
+            return (
+                <OfferTable offers={props.store.offers} />
+                );
+              }}
+        />
+      </div>
     </Layout>
   );
 };
