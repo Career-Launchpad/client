@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => {
     margins: {
       margin: "10px"
     },
+    marginsVertical: {
+      margin: "10px 0 10px 0"
+    },
     control: {
       marginBottom: "10px"
     },
@@ -23,12 +26,26 @@ const useStyles = makeStyles(theme => {
     },
     right: {
       float: "right"
+    },
+    row: {
+      width: "100%",
+      display: "flex",
+      '& svg': {
+        margin: theme.spacing(1.5),
+      },
+      '& hr': {
+        margin: theme.spacing(0, 0.5),
+      },
+      alignItems: "center",
+    },
+    filterEntryColumn: {
+      flex: 1,
+      textAlign: "center"
     }
   };
 });
 
 const FilterControls = ({ onChange, fieldNames, filters }) => {
-
   if (!Array.isArray(filters)) {
     console.error("FilterControls expects filters to be an array");
   }
@@ -95,16 +112,21 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
         }}
       >
         {filters.map((f, i) => (
-          <div key={i} className={classes.margins}>
-            <span>{f.field}</span>
-            <span>{f.comp}</span>
-            <span>{f.value}</span>
-            <IconButton onClick={() => remove(f)}>
-              <DeleteIcon />
-            </IconButton>
+          <div
+            key={i}
+            className={classes.row}
+          >
+            <span className={classes.filterEntryColumn}>{f.field}</span>
+            <span className={classes.filterEntryColumn}>{f.comp}</span>
+            <span className={classes.filterEntryColumn}>{f.value}</span>
+            <div className={classes.deleteButton}>
+              <Button onClick={() => remove(f)}>
+                Delete
+              </Button>
+            </div>
           </div>
         ))}
-        <div>
+        <div className={classes.row}>
           <TextField
             className={classes.margins}
             variant="filled"
@@ -115,7 +137,7 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
             onChange={e => setField(e.target.value)}
           ></TextField>
           <TextField
-            className={classes.margins}
+            className={classes.marginsVertical}
             variant="filled"
             label="Comparator"
             name="Comparator"
@@ -135,19 +157,19 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
           <Button onClick={add} disabled={!value || !comp || !field}>
             Add Filter
           </Button>
-          {filtersOn && (
-            <>
-              <Divider></Divider>
-              <Button
-                className={cx(classes.right, classes.margins)}
-                onClick={clear}
-                endIcon={<CloseIcon />}
-              >
-                Clear Filters
-              </Button>
-            </>
-          )}
         </div>
+        {filtersOn && (
+          <>
+            <Divider></Divider>
+            <Button
+              className={cx(classes.right, classes.margins)}
+              onClick={clear}
+              endIcon={<CloseIcon />}
+            >
+              Clear Filters
+            </Button>
+          </>
+        )}
       </Popover>
     </>
   );
