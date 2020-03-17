@@ -28,13 +28,7 @@ const useStyles = makeStyles(theme => {
     row: {
       width: "100%",
       display: "flex",
-      '& svg': {
-        margin: theme.spacing(1.5),
-      },
-      '& hr': {
-        margin: theme.spacing(0, 0.5),
-      },
-      alignItems: "center",
+      alignItems: "center"
     },
     filterEntryColumn: {
       flex: 1,
@@ -110,17 +104,12 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
         }}
       >
         {filters.map((f, i) => (
-          <div
-            key={i}
-            className={classes.row}
-          >
+          <div key={i} className={classes.row}>
             <span className={classes.filterEntryColumn}>{f.field}</span>
             <span className={classes.filterEntryColumn}>{f.comp}</span>
             <span className={classes.filterEntryColumn}>{f.value}</span>
             <div className={classes.deleteButton}>
-              <Button onClick={() => remove(f)}>
-                Delete
-              </Button>
+              <Button onClick={() => remove(f)}>Delete</Button>
             </div>
           </div>
         ))}

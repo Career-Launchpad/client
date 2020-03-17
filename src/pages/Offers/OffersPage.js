@@ -16,7 +16,9 @@ const useStyles = makeStyles(theme => ({
 
 const OffersPage = () => {
   const [loading, setLoading] = useState(false);
-  const [filters, setFilters] = useState(null);
+  const [filters, setFilters] = useState([
+    { field: "wage_type", value: "Hourly", comp: "=" }
+  ]);
   const styles = useStyles();
   return (
     <Layout loading={loading}>
