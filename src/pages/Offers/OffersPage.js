@@ -36,10 +36,8 @@ const OffersPage = () => {
           render={({ props }) => {
             setLoading(!props);
             if (!props) return <div />;
-            return (
-                <OfferTable offers={props.store.offers} />
-                );
-              }}
+            return <OfferTable offers={props.store.offers} />;
+          }}
         />
       </div>
     </Layout>
