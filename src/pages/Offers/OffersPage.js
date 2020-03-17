@@ -6,7 +6,7 @@ import environment from "../../utils/environment";
 
 import FilterControls from "../../components/FilterControls";
 import Layout from "../../components/Layout";
-import OfferTable from "./OfferTable";
+import OfferTable, { columns } from "./OfferTable";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -24,6 +24,7 @@ const OffersPage = () => {
     <Layout loading={loading}>
       <div className={styles.content}>
         <FilterControls
+          columnInfo={columns.filter(f => !f.id.includes(".")) /* This removes nested fields, which we can't filter by yet */}
           filters={filters}
           onChange={setFilters}
           onClear={() => setFilters(null)}

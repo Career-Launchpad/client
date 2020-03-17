@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
 import CloseIcon from "@material-ui/icons/Close";
 import cx from "classnames";
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const FilterControls = ({ onChange, fieldNames, filters }) => {
+const FilterControls = ({ onChange, columnInfo, filters }) => {
   if (!Array.isArray(filters)) {
     console.error("FilterControls expects filters to be an array");
   }
@@ -54,7 +55,7 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
   };
 
   const add = () => {
-    onChange([...filters, { field: field, comp: comp, value: value }]);
+    onChange([...filters, { field: field.id, comp: comp, value: value }]);
     setField("");
     setValue("");
     setComp("");
@@ -72,6 +73,11 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const columnLabels = {};
+  for (let col of columnInfo) {
+    columnLabels[col.id] = col.name;
+  }
 
   const open = Boolean(anchorEl);
 
@@ -104,7 +110,7 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
       >
         {filters.map((f, i) => (
           <div key={i} className={classes.row}>
-            <span className={classes.filterEntryColumn}>{f.field}</span>
+            <span className={classes.filterEntryColumn}>{columnLabels[f.field]}</span>
             <span className={classes.filterEntryColumn}>{f.comp}</span>
             <span className={classes.filterEntryColumn}>{f.value}</span>
             <div className={classes.deleteButton}>
@@ -114,6 +120,7 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
         ))}
         <div className={classes.row}>
           <TextField
+            select
             className={classes.margins}
             variant="filled"
             label="Field"
@@ -121,7 +128,13 @@ const FilterControls = ({ onChange, fieldNames, filters }) => {
             value={field}
             size="small"
             onChange={e => setField(e.target.value)}
-          ></TextField>
+          >
+            {columnInfo.map(col => (
+              <MenuItem key={col.id} value={col}>
+                {col.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             className={classes.marginsVertical}
             variant="filled"
