@@ -41,6 +41,29 @@ const useStyles = makeStyles(theme => {
   };
 });
 
+const operators = [
+  {
+    name: "Equals",
+    value: "="
+  },
+  {
+    name: "Less than",
+    value: "<"
+  },
+  {
+    name: "Greater than",
+    value: ">"
+  },
+  {
+    name: "Less than or equal to",
+    value: "<="
+  },
+  {
+    name: "Greater than or equal to",
+    value: ">="
+  }
+];
+
 const FilterControls = ({ onChange, columnInfo, filters }) => {
   if (!Array.isArray(filters)) {
     console.error("FilterControls expects filters to be an array");
@@ -113,8 +136,12 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
       >
         {filters.map((f, i) => (
           <div key={i} className={classes.row}>
-            <span className={classes.filterEntryColumn}>{columnLabels[f.field]}</span>
-            <span className={classes.filterEntryColumn}>{f.comp}</span>
+            <span className={classes.filterEntryColumn}>
+              {columnLabels[f.field]}
+            </span>
+            <span className={classes.filterEntryColumn}>
+              {operators.find(o => o.value === f.comp).name}
+            </span>
             <span className={classes.filterEntryColumn}>{f.value}</span>
             <div className={classes.deleteButton}>
               <Button onClick={() => remove(f)}>Delete</Button>
@@ -139,14 +166,21 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             ))}
           </TextField>
           <TextField
-            className={classes.marginsVertical}
+            select
+            className={cx(classes.marginsVertical, classes.selectField)}
             variant="filled"
             label="Comparator"
             name="Comparator"
             value={comp}
             size="small"
             onChange={e => setComp(e.target.value)}
-          ></TextField>
+          >
+            {operators.map(op => (
+              <MenuItem key={op.value} value={op.value}>
+                {op.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             className={classes.margins}
             variant="filled"
