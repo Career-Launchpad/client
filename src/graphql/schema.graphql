@@ -24,6 +24,7 @@ input bonusInput {
 type company {
   id: String
   name: String
+  offers(company_id: String): offerConnection
 }
 
 type companyConnection {

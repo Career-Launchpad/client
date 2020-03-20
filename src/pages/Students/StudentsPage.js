@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../../utils/environment";
+import { useEnvironment } from "../../utils/environment";
 import Typography from "@material-ui/core/Typography";
 
 import ClosableDialog from "../../components/ClosableDialog";
@@ -95,6 +95,7 @@ const Students = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [student, setStudent] = useState(null);
+  const environment = useEnvironment();
   const styles = useStyles();
 
   const openDialog = student => {

@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import { Environment, RecordSource, Store } from "relay-runtime";
 import {
   RelayNetworkLayer,
@@ -5,8 +6,10 @@ import {
   loggerMiddleware,
   errorMiddleware,
   perfMiddleware,
-  cacheMiddleware
+  cacheMiddleware,
+  authMiddleware
 } from "react-relay-network-modern";
+import { useAuth } from "./auth";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
@@ -21,35 +24,50 @@ const URL_BASE = baseLookup[process.env.NODE_ENV]; // Comment out for local test
 
 const graphqlEndpoint = `${URL_BASE}/graphql`;
 
-const network = new RelayNetworkLayer(
-  [
-    cacheMiddleware({ size: 100, ttl: 900000 }),
-    urlMiddleware({
-      url: req => Promise.resolve(`${graphqlEndpoint}`)
-    }),
-    __DEV__ ? loggerMiddleware() : null,
-    __DEV__ ? errorMiddleware() : null,
-    __DEV__ ? perfMiddleware() : null,
+const newEnvironment = token => {
+  const network = new RelayNetworkLayer(
+    [
+      cacheMiddleware({ size: 100, ttl: 900000 }),
+      urlMiddleware({
+        url: req => Promise.resolve(`${graphqlEndpoint}`)
+      }),
+      authMiddleware({
+        token,
+        allowEmptyToken: false
+      }),
+      __DEV__ ? loggerMiddleware() : null,
+      __DEV__ ? errorMiddleware() : null,
+      __DEV__ ? perfMiddleware() : null,
 
-    // example of the custom inline middleware
-    next => async req => {
-      req.fetchOpts.mode = "cors"; // allow cors requests
-      req.fetchOpts.credentials = "same-origin"; // allow to send cookies (sending credentials to same domains)
-      const res = await next(req);
-      return res;
-    }
-  ],
-  {}
-);
+      // example of the custom inline middleware
+      next => async req => {
+        req.fetchOpts.mode = "cors"; // allow cors requests
+        req.fetchOpts.credentials = "same-origin"; // allow to send cookies (sending credentials to same domains)
+        const res = await next(req);
+        return res;
+      }
+    ],
+    {}
+  );
 
-const source = new RecordSource();
-const store = new Store(source);
-const handlerProvider = null;
+  const source = new RecordSource();
+  const store = new Store(source);
+  const handlerProvider = null;
+  return new Environment({ handlerProvider, network, store });
+};
 
-const environment = new Environment({
-  handlerProvider,
-  network,
-  store
-});
+const EnvironmentContext = React.createContext();
 
-export { environment as default, URL_BASE };
+const useEnvironment = () => useContext(EnvironmentContext);
+
+const EnvironmentProvider = ({ children }) => {
+  const { user } = useAuth();
+  const token = user ? user.getIdToken() : "";
+  return (
+    <EnvironmentContext.Provider value={newEnvironment(token)}>
+      {children}
+    </EnvironmentContext.Provider>
+  );
+};
+
+export { EnvironmentProvider, useEnvironment };

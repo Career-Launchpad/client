@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "firebase/auth";
 import * as firebase from "firebase/app";
+import { useContext } from "react";
 
 const AUTH_STATE = {
   PENDING: "PENDING",
@@ -96,11 +97,18 @@ class AuthService {
       : {};
     return this.user;
   };
+
+  getToken = async () => {
+    const auth = await this.firebase.auth();
+    return auth.currentUser ? auth.currentUser.getIdToken() : "";
+  };
 }
 
 const Auth = new AuthService();
 
 const AuthContext = React.createContext();
+
+const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [value, setValue] = useState({ state: AUTH_STATE.PENDING });
@@ -124,6 +132,4 @@ const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-const AuthConsumer = AuthContext.Consumer;
-
-export { Auth as default, AUTH_STATE, AuthProvider, AuthConsumer, AuthContext };
+export { Auth as default, AUTH_STATE, AuthProvider, useAuth };
