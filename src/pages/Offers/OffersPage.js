@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../../utils/environment";
+import { useEnvironment } from "../../utils/environment";
 
 import FilterControls from "../../components/FilterControls";
 import Layout from "../../components/Layout";
@@ -19,6 +19,7 @@ const OffersPage = () => {
   const [filters, setFilters] = useState([
     { field: "wage_type", value: "Hourly", comp: "=" }
   ]);
+  const environment = useEnvironment();
   const styles = useStyles();
   return (
     <Layout loading={loading}>

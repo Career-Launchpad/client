@@ -13,7 +13,7 @@ Career Services is looking to help students to get great jobs and internships.
 
 This survey will ask you for some information about your job hunt. 
 
-It should take **about than 5 minutes to complete**.
+It should take **about 5 minutes to complete**.
 
 By continuing you agree to our [privacy policy](https://meetprospect.now.sh/privacy).
 `;

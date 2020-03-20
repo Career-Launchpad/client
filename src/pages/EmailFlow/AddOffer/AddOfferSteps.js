@@ -12,7 +12,7 @@ import DatePicker from "../../../components/formik/DatePicker";
 import Combobox from "../../../components/formik/Combobox";
 import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import CheckboxArrayField from "../../../components/formik/CheckboxArrayField";
-import environment from "../../../utils/environment";
+import { useEnvironment } from "../../../utils/environment";
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -81,6 +81,7 @@ export const CompanyStep = {
   }),
   Fields: () => {
     const styles = useStyles();
+    const environment = useEnvironment();
     return (
       <>
         <QueryRenderer
