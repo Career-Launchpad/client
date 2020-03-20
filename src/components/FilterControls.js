@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => {
     filterEntryColumn: {
       flex: 1,
       textAlign: "center"
+    },
+    selectField: {
+      minWidth: "220px"
     }
   };
 });
@@ -121,7 +124,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
         <div className={classes.row}>
           <TextField
             select
-            className={classes.margins}
+            className={cx(classes.margins, classes.selectField)}
             variant="filled"
             label="Field"
             name="Field"
