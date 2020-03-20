@@ -42,7 +42,9 @@ const Login = () => {
   const handleSubmit = async values => {
     setError("");
     setLoading(true);
-    const { error } = isLogin ? await Auth.login(values) : await Auth.signup(values);
+    const { error } = isLogin
+      ? await Auth.login(values)
+      : await Auth.signup(values);
     setLoading(false);
     if (error) {
       setError(error.message);
@@ -64,11 +66,17 @@ const Login = () => {
         >
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className={styles.form}>
-              <Typography variant="h4">{isLogin ? "Login" : "Sign Up"}</Typography>{" "}
+              <Typography variant="h4">
+                {isLogin ? "Login" : "Sign Up"}
+              </Typography>{" "}
               <TextField label="Email Address" name="emailAddress" />
               <TextField label="Password" name="password" type="password" />
               <div className={styles.buttonContainer}>
-                <Typography variant="body1" color="error" className={styles.error}>
+                <Typography
+                  variant="body1"
+                  color="error"
+                  className={styles.error}
+                >
                   {error}
                 </Typography>
                 {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
@@ -77,16 +85,28 @@ const Login = () => {
                       {isLogin
                         ? "Looks like you haven't verified your email yet"
                         : "Account created. Please verify your email address via the link sent to your inbox"}
-                      <button type="button" className={styles.buttonLink} onClick={resendVerificationLink}>
-                        <Typography color="primary">{"Resend Verification Link"}</Typography>
+                      <button
+                        type="button"
+                        className={styles.buttonLink}
+                        onClick={resendVerificationLink}
+                      >
+                        <Typography color="primary">
+                          {"Resend Verification Link"}
+                        </Typography>
                       </button>
                     </Typography>
                   </>
                 )}
                 <Typography variant="body1" className={styles.loginPrompt}>
                   If you {isLogin ? "don't yet" : "already"} have an account{" "}
-                  <button type="button" className={styles.buttonLink} onClick={toggleIsLogin}>
-                    <Typography color="primary">{isLogin ? "sign up" : "login"}</Typography>
+                  <button
+                    type="button"
+                    className={styles.buttonLink}
+                    onClick={toggleIsLogin}
+                  >
+                    <Typography color="primary">
+                      {isLogin ? "sign up" : "login"}
+                    </Typography>
                   </button>
                 </Typography>
                 <Button variant="contained" type="submit" color="primary">

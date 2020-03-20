@@ -63,7 +63,11 @@ const useEnvironment = () => useContext(EnvironmentContext);
 const EnvironmentProvider = ({ children }) => {
   const { user } = useAuth();
   const token = user ? user.getIdToken() : "";
-  return <EnvironmentContext.Provider value={newEnvironment(token)}>{children}</EnvironmentContext.Provider>;
+  return (
+    <EnvironmentContext.Provider value={newEnvironment(token)}>
+      {children}
+    </EnvironmentContext.Provider>
+  );
 };
 
 export { EnvironmentProvider, useEnvironment };

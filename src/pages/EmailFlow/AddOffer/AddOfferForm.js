@@ -2,7 +2,13 @@ import React from "react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 
-import { PositionStep, CompanyStep, CompensationStep, BenefitsStep, AcceptanceStep } from "./AddOfferSteps";
+import {
+  PositionStep,
+  CompanyStep,
+  CompensationStep,
+  BenefitsStep,
+  AcceptanceStep
+} from "./AddOfferSteps";
 import StepperForm from "../../../components/formik/StepperForm";
 import { useAuth } from "../../../utils/auth";
 import { useEnvironment } from "../../../utils/environment";
@@ -22,7 +28,13 @@ const commit = (input, environment, callback) => {
   });
 };
 
-const steps = [PositionStep, CompanyStep, CompensationStep, BenefitsStep, AcceptanceStep];
+const steps = [
+  PositionStep,
+  CompanyStep,
+  CompensationStep,
+  BenefitsStep,
+  AcceptanceStep
+];
 
 const AddOfferForm = ({ onSubmit }) => {
   const environment = useEnvironment();

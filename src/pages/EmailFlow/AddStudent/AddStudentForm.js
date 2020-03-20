@@ -48,7 +48,11 @@ const AddStudentForm = ({ onSubmit }) => {
       query={query}
       variables={{ student_id: user.uid }}
       render={({ props }) => (
-        <StepperForm onSubmit={handleSubmit} steps={steps} initialValues={props?.store?.student} />
+        <StepperForm
+          onSubmit={handleSubmit}
+          steps={steps}
+          initialValues={props?.store?.student}
+        />
       )}
     />
   );

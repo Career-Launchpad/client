@@ -62,7 +62,10 @@ const Dialog = ({ open, student, onExited, onClose }) => {
       <div className={styles.studentInfoModal}>
         <div className={styles.modalUpper}>
           <div className={styles.upperLeftContainer}>
-            <Typography variant="h5" className={(styles.dialogContent, styles.studentName)}>
+            <Typography
+              variant="h5"
+              className={(styles.dialogContent, styles.studentName)}
+            >
               {student && `${student.firstname} ${student.lastname}`}
             </Typography>
             <Typography className={(styles.dialogContent, styles.noPadding)}>
@@ -74,9 +77,15 @@ const Dialog = ({ open, student, onExited, onClose }) => {
               {student && student.academic_year}
             </Typography>
           </div>
-          <img alt="avatar placeholder" className={styles.avatarImage} src={"/avatar.png"} />
+          <img
+            alt="avatar placeholder"
+            className={styles.avatarImage}
+            src={"/avatar.png"}
+          />
         </div>
-        <div className={styles.modalLower}>{student && <OfferTable offers={student.offers} />}</div>
+        <div className={styles.modalLower}>
+          {student && <OfferTable offers={student.offers} />}
+        </div>
       </div>
     </ClosableDialog>
   );
@@ -115,9 +124,17 @@ const Students = () => {
           return (
             <>
               <div className={styles.content}>
-                <StudentTable students={props.store.students} onStudentClicked={openDialog} />
+                <StudentTable
+                  students={props.store.students}
+                  onStudentClicked={openDialog}
+                />
               </div>
-              <Dialog student={student} open={open} onClose={handleClose} onExited={handleDialogExited} />
+              <Dialog
+                student={student}
+                open={open}
+                onClose={handleClose}
+                onExited={handleDialogExited}
+              />
             </>
           );
         }}

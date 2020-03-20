@@ -17,7 +17,9 @@ const PrivateRoute = ({ children, ...rest }) => {
           ) : state === AUTH_STATE.PENDING ? (
             <Splash />
           ) : (
-            <Redirect to={{ pathname: LOGIN.path, state: { from: location } }} />
+            <Redirect
+              to={{ pathname: LOGIN.path, state: { from: location } }}
+            />
           )}
         </>
       )}
