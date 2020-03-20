@@ -9,35 +9,34 @@ import CloseIcon from "@material-ui/icons/Close";
 import cx from "classnames";
 
 const useStyles = makeStyles(theme => ({
-    margins: {
-      margin: 10
-    },
-    marginsVertical: {
-      margin: "10px 0 10px 0"
-    },
-    control: {
-      marginBottom: "10px"
-    },
-    filterOn: {
-      color: theme.palette.primary.main
-    },
-    right: {
-      float: "right"
-    },
-    row: {
-      width: "100%",
-      display: "flex",
-      alignItems: "center"
-    },
-    filterEntryColumn: {
-      flex: 1,
-      textAlign: "center"
-    },
-    selectField: {
-      minWidth: 220
-    }
-  })
-);
+  margins: {
+    margin: 10
+  },
+  marginsVertical: {
+    margin: "10px 0 10px 0"
+  },
+  control: {
+    marginBottom: "10px"
+  },
+  filterOn: {
+    color: theme.palette.primary.main
+  },
+  right: {
+    float: "right"
+  },
+  row: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center"
+  },
+  filterEntryColumn: {
+    flex: 1,
+    textAlign: "center"
+  },
+  selectField: {
+    minWidth: 220
+  }
+}));
 
 const operators = [
   {
@@ -72,7 +71,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   const [field, setField] = useState("");
   const [value, setValue] = useState("");
   const [comp, setComp] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState();
 
   const remove = filter => {
     onChange(filters.filter(i => i !== filter));
@@ -110,11 +109,9 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   return (
     <>
       <Button
-        className={
-          filtersOn
-            ? cx(classes.control, classes.right, classes.filterOn)
-            : cx(classes.control, classes.right)
-        }
+        className={cx(classes.control, classes.right, {
+          [classes.filterOn]: filtersOn
+        })}
         onClick={handleClick}
       >
         {filtersOn ? "Filters On" : "Filter"}

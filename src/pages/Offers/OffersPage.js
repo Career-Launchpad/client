@@ -16,9 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 const OffersPage = () => {
   const [loading, setLoading] = useState(false);
-  const [filters, setFilters] = useState([
-    { field: "wage_type", value: "Hourly", comp: "=" }
-  ]);
+  const [filters, setFilters] = useState([]);
   const environment = useEnvironment();
   const styles = useStyles();
   return (
