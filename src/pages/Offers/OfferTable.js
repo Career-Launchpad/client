@@ -26,12 +26,7 @@ const OfferTable = ({ offers }) => {
               <TableCell>{offer.position_type}</TableCell>
               <TableCell>{offer.wage_type}</TableCell>
               <TableCell>
-                <NumberFormat
-                  value={offer.wage_value}
-                  displayType="text"
-                  thousandSeparator
-                  prefix="$"
-                />
+                <NumberFormat value={offer.wage_value} displayType="text" thousandSeparator prefix="$" />
               </TableCell>
             </TableRow>
           </DataTableRow>

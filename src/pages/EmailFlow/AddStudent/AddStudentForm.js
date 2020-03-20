@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { commitMutation } from "react-relay";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 
 import { PersonalStep, AcademicStep, DemographicStep } from "./AddStudentSteps";
 import StepperForm from "../../../components/formik/StepperForm";
-import { AuthContext } from "../../../utils/auth";
-import environment from "../../../utils/environment";
+import { useAuth } from "../../../utils/auth";
+import { useEnvironment } from "../../../utils/environment";
 
-const commit = (input, callback) => {
+const commit = (input, environment, callback) => {
   commitMutation(environment, {
     mutation: graphql`
       mutation AddStudentForm_Mutation($input: createStudentInput!) {
@@ -26,14 +26,15 @@ const commit = (input, callback) => {
 const steps = [PersonalStep, AcademicStep, DemographicStep];
 
 const AddStudentForm = ({ onSubmit }) => {
-  const { user } = useContext(AuthContext);
+  const environment = useEnvironment();
+  const { user } = useAuth();
 
   const handleSubmit = (values, { setSubmitting }) => {
     const newStudent = {
       ...values,
       id: user.uid
     };
-    commit(newStudent, (res, err) => {
+    commit(newStudent, environment, (res, err) => {
       setSubmitting(false);
       if (err) {
         return;
@@ -47,11 +48,7 @@ const AddStudentForm = ({ onSubmit }) => {
       query={query}
       variables={{ student_id: user.uid }}
       render={({ props }) => (
-        <StepperForm
-          onSubmit={handleSubmit}
-          steps={steps}
-          initialValues={props?.store?.student}
-        />
+        <StepperForm onSubmit={handleSubmit} steps={steps} initialValues={props?.store?.student} />
       )}
     />
   );

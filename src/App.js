@@ -10,31 +10,34 @@ import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./utils/auth";
 import { ThemeProvider } from "./utils/theme";
 import "./index.css";
+import { EnvironmentProvider } from "./utils/environment";
 
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <ThemeProvider>
-            <CssBaseline />
-            <Switch>
-              {Routes.map(route => {
-                const RouteElem = route.protected ? PrivateRoute : Route;
-                const RouteComponent = route.component;
-                return (
-                  <RouteElem key={route.path} path={route.path}>
-                    {<RouteComponent />}
-                  </RouteElem>
-                );
-              })}
-              <PrivateRoute>
-                <Redirect to={DEFAULT.path} />
-              </PrivateRoute>
-            </Switch>
-          </ThemeProvider>
-        </MuiPickersUtilsProvider>
-      </BrowserRouter>
+      <EnvironmentProvider>
+        <BrowserRouter>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <ThemeProvider>
+              <CssBaseline />
+              <Switch>
+                {Routes.map(route => {
+                  const RouteElem = route.protected ? PrivateRoute : Route;
+                  const RouteComponent = route.component;
+                  return (
+                    <RouteElem key={route.path} path={route.path}>
+                      {<RouteComponent />}
+                    </RouteElem>
+                  );
+                })}
+                <PrivateRoute>
+                  <Redirect to={DEFAULT.path} />
+                </PrivateRoute>
+              </Switch>
+            </ThemeProvider>
+          </MuiPickersUtilsProvider>
+        </BrowserRouter>
+      </EnvironmentProvider>
     </AuthProvider>
   );
 };

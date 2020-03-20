@@ -12,7 +12,7 @@ import DatePicker from "../../../components/formik/DatePicker";
 import Combobox from "../../../components/formik/Combobox";
 import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import CheckboxArrayField from "../../../components/formik/CheckboxArrayField";
-import environment from "../../../utils/environment";
+import { useEnvironment } from "../../../utils/environment";
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -37,12 +37,7 @@ export const PositionStep = {
   }),
   Fields: () => {
     const styles = useStyles();
-    const positionTypes = [
-      "Full time",
-      "Part time",
-      "Internship",
-      "Contractor"
-    ];
+    const positionTypes = ["Full time", "Part time", "Internship", "Contractor"];
     return (
       <>
         <TextField
@@ -81,6 +76,7 @@ export const CompanyStep = {
   }),
   Fields: () => {
     const styles = useStyles();
+    const environment = useEnvironment();
     return (
       <>
         <QueryRenderer
@@ -99,21 +95,9 @@ export const CompanyStep = {
             );
           }}
         />
-        <TextField
-          label="City"
-          name="location.city"
-          className={cx(styles.smallField, styles.field)}
-        />
-        <TextField
-          label="State"
-          name="location.state"
-          className={cx(styles.smallField, styles.field)}
-        />
-        <TextField
-          label="Country"
-          name="location.country"
-          className={cx(styles.smallField, styles.field)}
-        />
+        <TextField label="City" name="location.city" className={cx(styles.smallField, styles.field)} />
+        <TextField label="State" name="location.state" className={cx(styles.smallField, styles.field)} />
+        <TextField label="Country" name="location.country" className={cx(styles.smallField, styles.field)} />
       </>
     );
   }
@@ -150,6 +134,7 @@ export const CompensationStep = {
 
     return (
       <>
+<<<<<<< HEAD
         <Combobox
           label="Wage Type"
           name="wage_type"
@@ -161,6 +146,16 @@ export const CompensationStep = {
           name="wage_value"
           className={cx(styles.smallField, styles.field)}
         />
+=======
+        <TextField select label="Wage Type" name="wage_type" className={cx(styles.smallField, styles.field)}>
+          {compensationTypes.map(type => (
+            <MenuItem key={type} value={type}>
+              {type}
+            </MenuItem>
+          ))}
+        </TextField>
+        <MoneyField label="Wage Value" name="wage_value" className={cx(styles.smallField, styles.field)} />
+>>>>>>> Add auth
         <BonusesSubForm styles={styles} values={values} />
       </>
     );
@@ -173,20 +168,11 @@ export const BenefitsStep = {
   validationSchema: yup.object().shape({}),
   Fields: () => {
     const styles = useStyles();
-    const prefabbedBenefitOptions = [
-      "401k matching",
-      "Free food",
-      "Medical insurance",
-      "Dental insurance"
-    ];
+    const prefabbedBenefitOptions = ["401k matching", "Free food", "Medical insurance", "Dental insurance"];
 
     return (
       <>
-        <CheckboxArrayField
-          styles={styles}
-          options={prefabbedBenefitOptions}
-          name="benefits_prefabbed"
-        />
+        <CheckboxArrayField styles={styles} options={prefabbedBenefitOptions} name="benefits_prefabbed" />
         <TextField
           multiline
           fullWidth
@@ -216,6 +202,7 @@ export const AcceptanceStep = {
 
     return (
       <>
+<<<<<<< HEAD
         <DatePicker
           label="Date Extended"
           name="extended"
@@ -227,6 +214,16 @@ export const AcceptanceStep = {
           className={cx(styles.smallField, styles.field)}
           options={acceptedOptions}
         />
+=======
+        <DatePicker label="Date Extended" name="extended" className={cx(styles.smallField, styles.field)} />
+        <TextField select label="Accepted" name="accepted" className={cx(styles.smallField, styles.field)}>
+          {acceptedOptions.map(entry => (
+            <MenuItem key={entry} value={entry}>
+              {entry}
+            </MenuItem>
+          ))}
+        </TextField>
+>>>>>>> Add auth
       </>
     );
   }

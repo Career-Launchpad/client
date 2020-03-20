@@ -1,19 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 
-import {
-  PositionStep,
-  CompanyStep,
-  CompensationStep,
-  BenefitsStep,
-  AcceptanceStep
-} from "./AddOfferSteps";
+import { PositionStep, CompanyStep, CompensationStep, BenefitsStep, AcceptanceStep } from "./AddOfferSteps";
 import StepperForm from "../../../components/formik/StepperForm";
-import { AuthContext } from "../../../utils/auth";
-import environment from "../../../utils/environment";
+import { useAuth } from "../../../utils/auth";
+import { useEnvironment } from "../../../utils/environment";
 
-const commit = (input, callback) => {
+const commit = (input, environment, callback) => {
   commitMutation(environment, {
     mutation: graphql`
       mutation AddOfferForm_Mutation($input: createOfferInput!) {
@@ -28,16 +22,11 @@ const commit = (input, callback) => {
   });
 };
 
-const steps = [
-  PositionStep,
-  CompanyStep,
-  CompensationStep,
-  BenefitsStep,
-  AcceptanceStep
-];
+const steps = [PositionStep, CompanyStep, CompensationStep, BenefitsStep, AcceptanceStep];
 
 const AddOfferForm = ({ onSubmit }) => {
-  const { user } = useContext(AuthContext);
+  const environment = useEnvironment();
+  const { user } = useAuth();
 
   const handleSubmit = (values, { setSubmitting }) => {
     const selectedBenefits = values.benefits_prefabbed;
@@ -52,7 +41,7 @@ const AddOfferForm = ({ onSubmit }) => {
           ? `${selectedBenefits.join(". ")}. ${values.benefits_description}`
           : values.benefits_description
     };
-    commit(newOffer, (res, err) => {
+    commit(newOffer, environment, (res, err) => {
       setSubmitting(false);
       if (err) {
         return;

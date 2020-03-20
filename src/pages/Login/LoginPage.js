@@ -8,7 +8,7 @@ import * as yup from "yup";
 
 import FormPage from "../../components/FormPage";
 import TextField from "../../components/formik/TextField";
-import Auth, { AUTH_STATE, AuthConsumer } from "../../utils/auth";
+import Auth, { AUTH_STATE, useAuth } from "../../utils/auth";
 import { DEFAULT } from "../../utils/routes";
 import styles from "./LoginPage.module.css";
 
@@ -22,6 +22,7 @@ const loginSchema = yup.object().shape({
 
 const Login = () => {
   const { location } = useHistory();
+  const { auth } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -41,9 +42,7 @@ const Login = () => {
   const handleSubmit = async values => {
     setError("");
     setLoading(true);
-    const { error } = isLogin
-      ? await Auth.login(values)
-      : await Auth.signup(values);
+    const { error } = isLogin ? await Auth.login(values) : await Auth.signup(values);
     setLoading(false);
     if (error) {
       setError(error.message);
@@ -52,77 +51,53 @@ const Login = () => {
   };
 
   return (
-    <AuthConsumer>
-      {auth => (
-        <FormPage loading={loading}>
-          {auth.state === AUTH_STATE.AUTHENTICATED && (
-            <Redirect to={redirectTo} />
-          )}
-          <Paper className={styles.paper}>
-            <Formik
-              initialValues={{
-                emailAddress: "",
-                password: ""
-              }}
-              validationSchema={loginSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} className={styles.form}>
-                  <Typography variant="h4">
-                    {isLogin ? "Login" : "Sign Up"}
-                  </Typography>{" "}
-                  <TextField label="Email Address" name="emailAddress" />
-                  <TextField label="Password" name="password" type="password" />
-                  <div className={styles.buttonContainer}>
-                    <Typography
-                      variant="body1"
-                      color="error"
-                      className={styles.error}
-                    >
-                      {error}
-                    </Typography>
-                    {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
-                      <>
-                        <Typography variant="body1" className={styles.error}>
-                          {isLogin
-                            ? "Looks like you haven't verified your email yet"
-                            : "Account created. Please verify your email address via the link sent to your inbox"}
-                          <button
-                            type="button"
-                            className={styles.buttonLink}
-                            onClick={resendVerificationLink}
-                          >
-                            <Typography color="primary">
-                              {"Resend Verification Link"}
-                            </Typography>
-                          </button>
-                        </Typography>
-                      </>
-                    )}
-                    <Typography variant="body1" className={styles.loginPrompt}>
-                      If you {isLogin ? "don't yet" : "already"} have an account{" "}
-                      <button
-                        type="button"
-                        className={styles.buttonLink}
-                        onClick={toggleIsLogin}
-                      >
-                        <Typography color="primary">
-                          {isLogin ? "sign up" : "login"}
-                        </Typography>
+    <FormPage loading={loading}>
+      {auth.state === AUTH_STATE.AUTHENTICATED && <Redirect to={redirectTo} />}
+      <Paper className={styles.paper}>
+        <Formik
+          initialValues={{
+            emailAddress: "",
+            password: ""
+          }}
+          validationSchema={loginSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ handleSubmit }) => (
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <Typography variant="h4">{isLogin ? "Login" : "Sign Up"}</Typography>{" "}
+              <TextField label="Email Address" name="emailAddress" />
+              <TextField label="Password" name="password" type="password" />
+              <div className={styles.buttonContainer}>
+                <Typography variant="body1" color="error" className={styles.error}>
+                  {error}
+                </Typography>
+                {auth.state === AUTH_STATE.NEEDS_VERIFICATION && (
+                  <>
+                    <Typography variant="body1" className={styles.error}>
+                      {isLogin
+                        ? "Looks like you haven't verified your email yet"
+                        : "Account created. Please verify your email address via the link sent to your inbox"}
+                      <button type="button" className={styles.buttonLink} onClick={resendVerificationLink}>
+                        <Typography color="primary">{"Resend Verification Link"}</Typography>
                       </button>
                     </Typography>
-                    <Button variant="contained" type="submit" color="primary">
-                      {isLogin ? "Login" : "Sign Up"}
-                    </Button>
-                  </div>
-                </form>
-              )}
-            </Formik>
-          </Paper>
-        </FormPage>
-      )}
-    </AuthConsumer>
+                  </>
+                )}
+                <Typography variant="body1" className={styles.loginPrompt}>
+                  If you {isLogin ? "don't yet" : "already"} have an account{" "}
+                  <button type="button" className={styles.buttonLink} onClick={toggleIsLogin}>
+                    <Typography color="primary">{isLogin ? "sign up" : "login"}</Typography>
+                  </button>
+                </Typography>
+                <Button variant="contained" type="submit" color="primary">
+                  {isLogin ? "Login" : "Sign Up"}
+                </Button>
+              </div>
+            </form>
+          )}
+        </Formik>
+      </Paper>
+    </FormPage>
   );
 };
 
