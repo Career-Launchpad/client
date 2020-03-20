@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 63f78c28cdaa71feafd469707f728e16
+ * @relayHash 8f477e75ebe6af195a6031b99ca66531
  */
 
 /* eslint-disable */
@@ -10,7 +10,14 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type OfferTable_offers$ref = any;
-export type OffersPage_QueryVariables = {||};
+export type filter = {|
+  field?: ?string,
+  value?: ?string,
+  comp?: ?string,
+|};
+export type OffersPage_QueryVariables = {|
+  filters?: ?$ReadOnlyArray<?filter>
+|};
 export type OffersPage_QueryResponse = {|
   +store: ?{|
     +offers: ?{|
@@ -26,9 +33,11 @@ export type OffersPage_Query = {|
 
 
 /*
-query OffersPage_Query {
+query OffersPage_Query(
+  $filters: [filter]
+) {
   store {
-    offers {
+    offers(filters: $filters) {
       ...OfferTable_offers
     }
     id
@@ -54,7 +63,22 @@ fragment OfferTable_offers on offerConnection {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "filters",
+    "type": "[filter]",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "filters",
+    "variableName": "filters"
+  }
+],
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
@@ -68,7 +92,7 @@ return {
     "name": "OffersPage_Query",
     "type": "query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
@@ -84,7 +108,7 @@ return {
             "alias": null,
             "name": "offers",
             "storageKey": null,
-            "args": null,
+            "args": (v1/*: any*/),
             "concreteType": "offerConnection",
             "plural": false,
             "selections": [
@@ -102,7 +126,7 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "OffersPage_Query",
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
@@ -118,7 +142,7 @@ return {
             "alias": null,
             "name": "offers",
             "storageKey": null,
-            "args": null,
+            "args": (v1/*: any*/),
             "concreteType": "offerConnection",
             "plural": false,
             "selections": [
@@ -131,7 +155,7 @@ return {
                 "concreteType": "offer",
                 "plural": true,
                 "selections": [
-                  (v0/*: any*/),
+                  (v2/*: any*/),
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -207,7 +231,7 @@ return {
               }
             ]
           },
-          (v0/*: any*/)
+          (v2/*: any*/)
         ]
       }
     ]
@@ -216,11 +240,11 @@ return {
     "operationKind": "query",
     "name": "OffersPage_Query",
     "id": null,
-    "text": "query OffersPage_Query {\n  store {\n    offers {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
+    "text": "query OffersPage_Query(\n  $filters: [filter]\n) {\n  store {\n    offers(filters: $filters) {\n      ...OfferTable_offers\n    }\n    id\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '7e3df4547801652a7bb09432d233237d';
+(node/*: any*/).hash = '2367c638bcd86b3cf837c9e53f2df561';
 module.exports = node;
