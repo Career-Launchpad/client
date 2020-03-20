@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { createFragmentContainer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import ChartHelper from "../ChartHelper";
+import ChartHelper from "../../components/ChartHelper";
 
 const OffersPerCompanyBarGraph = ({ offers }) => {
     let data = {};
@@ -11,13 +11,13 @@ const OffersPerCompanyBarGraph = ({ offers }) => {
         else { data[companyOffers[i]] = 1; }
     }
     return (
-        <ChartHelper
-            data={Object.values(data)}
-            labels={Object.keys(data)}
-            title={"Student Offers Per Company"}
-            pointLabel={"Number of Student Offers"}
-            type={"bar"}
-        />
+            <ChartHelper
+                data={Object.values(data)}
+                labels={Object.keys(data)}
+                title={"Student Offers Per Company"}
+                pointLabel={"Number of Student Offers"}
+                type={"bar"}
+            />
     )
 }
 

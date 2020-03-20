@@ -27,12 +27,10 @@ const CompaniesPage = () => {
           setLoading(!props);
           if (!props) return <div />;
           return (
-            <div className={styles.content}>
-              {/* <OffersPerCompanyBarGraph
-                offers={props.store.offers}
-              /> */} 
-              {/* NEED TO GET OFFERS PER COMPANY HERE */}
-              <CompanyTable companies={props.store.companies} />
+            <div>
+              <div className={styles.content}>
+                <CompanyTable companies={props.store.companies} />
+              </div>
             </div>
           );
         }}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { createFragmentContainer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import ChartHelper from "../ChartHelper";
+import ChartHelper from "../../components/ChartHelper";
 
 //--Chart Style Options--//
 // Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";

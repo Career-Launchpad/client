@@ -32,15 +32,15 @@ const OffersPage = () => {
           // var data = props.store.offers.edges.map(o => o.salary);
           // var labels = props.store.offers.edges.map(o => o.firstName);
           return (
-            <div className={styles.content}>
-              <OfferSalariesLineGraph
-                offers={props.store.offers}
-              />
-              <OffersPerCompanyBarGraph
-                offers={props.store.offers}
-              />
-
-              <OfferTable offers={props.store.offers} />
+            <div>
+              <div className={styles.content}>
+                <OfferTable offers={props.store.offers} />
+              </div>
+              <div className={styles.content}>
+                <OffersPerCompanyBarGraph
+                  offers={props.store.offers}
+                />
+              </div>
             </div>
           );
         }}

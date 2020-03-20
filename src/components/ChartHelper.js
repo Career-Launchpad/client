@@ -61,7 +61,7 @@ export default class ChartHelper extends Component {
     render() {
 
         return (
-            <div className={classes.graphContainer} style={{ padding: 40 }}>
+            <div className={classes.graphContainer}>
                 <canvas
                     id="myChart"
                     ref={this.chartRef}
