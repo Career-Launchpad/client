@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from "../../utils/environment";
+// import OffersPerCompanyBarGraph from "./OffersPerCompanyBarGraph";
 
 import Layout from "../../components/Layout";
 import CompanyTable from "./CompanyTable";
@@ -27,6 +28,10 @@ const CompaniesPage = () => {
           if (!props) return <div />;
           return (
             <div className={styles.content}>
+              {/* <OffersPerCompanyBarGraph
+                offers={props.store.offers}
+              /> */} 
+              {/* NEED TO GET OFFERS PER COMPANY HERE */}
               <CompanyTable companies={props.store.companies} />
             </div>
           );

@@ -8,7 +8,7 @@ Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
 Chart.defaults.global.legend.display = false;
 //--Chart Style Options--//
 
-export default class LineGraph extends Component {
+export default class ChartHelper extends Component {
     chartRef = React.createRef();
 
     componentDidMount() {
@@ -21,34 +21,38 @@ export default class LineGraph extends Component {
 
     buildChart = () => {
         const myChartRef = this.chartRef.current.getContext("2d");
-        const { data, average, labels } = this.props;
+        const { data, labels, title, type, pointLabel } = this.props;
         console.log(data);
-        console.log(average);
 
         if (typeof myLineChart !== "undefined") myLineChart.destroy();
 
         myLineChart = new Chart(myChartRef, {
-            type: "line",
+            type: type,
             data: {
                 //Bring in data
                 labels: labels,
                 datasets: [
                     {
-                        label: "Sales",
+                        label: pointLabel,
                         data: data,
                         fill: false,
                         borderColor: "#6610f2"
                     },
-                    {
-                        label: "National Average",
-                        data: average,
-                        fill: false,
-                        borderColor: "#E0E0E0"
-                    }
                 ]
             },
             options: {
-                //Customize chart options
+                title: {
+                    display: true,
+                    text: title
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            precision: 0,
+                        }
+                    }]
+                }
             }
         });
 
@@ -57,7 +61,7 @@ export default class LineGraph extends Component {
     render() {
 
         return (
-            <div className={classes.graphContainer}>
+            <div className={classes.graphContainer} style={{ padding: 40 }}>
                 <canvas
                     id="myChart"
                     ref={this.chartRef}
