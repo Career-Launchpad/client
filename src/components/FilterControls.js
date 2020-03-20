@@ -8,11 +8,9 @@ import Divider from "@material-ui/core/Divider";
 import CloseIcon from "@material-ui/icons/Close";
 import cx from "classnames";
 
-const useStyles = makeStyles(theme => {
-  console.log(theme);
-  return {
+const useStyles = makeStyles(theme => ({
     margins: {
-      margin: "10px"
+      margin: 10
     },
     marginsVertical: {
       margin: "10px 0 10px 0"
@@ -36,10 +34,10 @@ const useStyles = makeStyles(theme => {
       textAlign: "center"
     },
     selectField: {
-      minWidth: "220px"
+      minWidth: 220
     }
-  };
-});
+  })
+);
 
 const operators = [
   {
