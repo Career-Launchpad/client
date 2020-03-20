@@ -24,7 +24,6 @@
     "react-relay-network-modern": "^4.3.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-    "react-with-firebase-auth": "^1.3.0",
     "rxjs": "^6.5.4",
     "uuid": "^3.3.3",
     "yup": "^0.27.0"
@@ -35,7 +34,7 @@
     "test": "react-scripts test",
     "lint": "prettier --check \"**/*.+(js|jsx|json|css|md)\"",
     "lint:fix": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "update-schema": "get-graphql-schema https://0379pmxh99.execute-api.us-east-1.amazonaws.com/dev/graphql > src/graphql/schema.graphql",
+    "update-schema": "get-graphql-schema https://p8as5qg8r5.execute-api.us-east-1.amazonaws.com/schema/graphql > src/graphql/schema.graphql",
     "update-schema-local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
     "relay": "npm run update-schema && npm run relay-compile",
     "relay-local": "npm run update-schema-local && npm run relay-compile",

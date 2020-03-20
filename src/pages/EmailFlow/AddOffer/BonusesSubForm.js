@@ -4,11 +4,11 @@ import { FieldArray } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import * as cx from "classnames";
 
+import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
 import MoneyField from "../../../components/formik/MoneyField";
 import TextField from "../../../components/formik/TextField";
 
@@ -68,18 +68,12 @@ const BonusesSubForm = ({ styles, values }) => {
             {values.bonuses.map((bonus, index) => (
               <div className={styles.bonus} key={index}>
                 <div></div>
-                <TextField
-                  select
+                <AutocompleteTextField
                   label="Bonus Type"
                   name={`bonuses[${index}].type`}
                   className={cx(styles.bonusField, styles.field)}
-                >
-                  {bonusTypes.map(type => (
-                    <MenuItem key={type} value={type}>
-                      {type}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                  options={bonusTypes}
+                />
                 <div className={cx(styles.field, styles.bonusValueWrapper)}>
                   <MoneyField
                     label="Value"

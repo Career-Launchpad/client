@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../../utils/environment";
+import { useEnvironment } from "../../utils/environment";
 
 import Layout from "../../components/Layout";
 import OfferTable from "./OfferTable";
@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const OffersPage = () => {
   const [loading, setLoading] = useState(false);
+  const environment = useEnvironment();
   const styles = useStyles();
   return (
     <Layout loading={loading}>

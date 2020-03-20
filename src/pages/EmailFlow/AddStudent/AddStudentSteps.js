@@ -1,11 +1,11 @@
 import React from "react";
 import cx from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
 import * as yup from "yup";
 
 import TextField from "../../../components/formik/TextField";
 import AutocompleteTextField from "../../../components/formik/AutocompleteTextField";
+import Combobox from "../../../components/formik/Combobox";
 import majors from "./majors";
 
 const useStyles = makeStyles(theme => ({
@@ -80,18 +80,12 @@ export const AcademicStep = {
           className={cx(styles.smallField, styles.field)}
           options={majors}
         />
-        <TextField
-          select
-          name="academic_year"
+        <Combobox
           label="Academic Year"
+          name="academic_year"
           className={cx(styles.smallField, styles.field)}
-        >
-          {academic_years.map(year => (
-            <MenuItem key={year} value={year}>
-              {year}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={academic_years}
+        />
       </>
     );
   }
@@ -115,30 +109,18 @@ export const DemographicStep = {
     ];
     return (
       <>
-        <TextField
-          select
-          name="gender"
+        <Combobox
           label="Gender (optional)"
+          name="gender"
           className={cx(styles.smallField, styles.field)}
-        >
-          {genders.map(g => (
-            <MenuItem key={g} value={g}>
-              {g}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          select
-          name="ethnicity"
+          options={genders}
+        />
+        <Combobox
           label="Ethnicity (optional)"
+          name="ethnicity"
           className={cx(styles.smallField, styles.field)}
-        >
-          {ethnicities.map(e => (
-            <MenuItem key={e} value={e}>
-              {e}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={ethnicities}
+        />
       </>
     );
   }

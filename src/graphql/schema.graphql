@@ -1,0 +1,146 @@
+schema {
+  query: query
+  mutation: mutation
+}
+
+type bonus {
+  value: Float
+  type: String
+  repeat_interval: String
+  repeat_count: Int
+  one_time: Boolean
+  description: String
+}
+
+input bonusInput {
+  value: Float
+  type: String
+  repeat_interval: String
+  repeat_count: Int
+  one_time: Boolean
+  description: String
+}
+
+type company {
+  id: String
+  name: String
+  offers(company_id: String): offerConnection
+}
+
+type companyConnection {
+  edges: [company]
+}
+
+input createOfferInput {
+  student_id: String
+  position_type: String
+  position_title: String
+  benefits_description: String
+  accepted: Boolean
+  extended: String
+  deadline: String
+  company_name: String
+  location: locationInput
+  wage_value: Float
+  wage_type: String
+  bonuses: [bonusInput]
+}
+
+input createStudentInput {
+  id: String
+  email: String
+  firstname: String
+  lastname: String
+  college_name: String
+  academic_year: String
+  major: String
+  gender: String
+  ethnicity: String
+  last_authentication: String
+}
+
+input filter {
+  field: String
+  value: String
+  comp: String
+}
+
+type location {
+  city: String
+  state: String
+  country: String
+}
+
+input locationInput {
+  city: String
+  state: String
+  country: String
+}
+
+type mutation {
+  """The ID of an object"""
+  id: ID!
+  student(student: createStudentInput): student
+  offer(offer: createOfferInput): offer
+}
+
+type offer {
+  id: String
+  position_type: String
+  position_title: String
+  accepted: Boolean
+  benefits_description: String
+  extended: String
+  deadline: String
+  academic_year: String
+  company: company
+  flag: Boolean
+  student_id: String
+  location: location
+  wage_value: Float
+  wage_type: String
+  bonuses: [bonus]
+}
+
+type offerConnection {
+  edges: [offer]
+}
+
+type query {
+  """The ID of an object"""
+  id: ID!
+  store: store
+}
+
+type store {
+  """The ID of an object"""
+  id: ID!
+  student(id: String): student
+  offer(id: String): offer
+  offers(filters: [filter]): offerConnection
+  students(filters: [filter]): studentConnection
+  company_names(filters: [filter]): [String]
+  companies(filters: [filter]): companyConnection
+  company(id: String): company
+  majors(filters: [filter]): [String]
+}
+
+type student {
+  id: String
+  email: String
+  firstname: String
+  lastname: String
+  college_name: String
+  academic_year: String
+  major: String
+  gender: String
+  ethnicity: String
+  last_authentication: String
+  security_level: String
+  offers(student_id: String): offerConnection
+}
+
+type studentConnection {
+  edges: [student]
+}
+
