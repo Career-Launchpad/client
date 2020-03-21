@@ -21,7 +21,7 @@ const OfferSalariesLineGraph = ({ offers }) => {
 
 export default createFragmentContainer(OfferSalariesLineGraph, {
   offers: graphql`
-    fragment OfferTable_offers on offerConnection {
+    fragment OfferSalariesLineGraph_offers on offerConnection {
       edges {
         wage_value
         company_name
