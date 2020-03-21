@@ -30,7 +30,7 @@ export default createFragmentContainer(OffersPerCompanyBarGraph, {
       edges {
         wage_value
         company {
-            name
+          name
         }
       }
     }
