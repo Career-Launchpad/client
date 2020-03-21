@@ -27,10 +27,8 @@ const CompaniesPage = () => {
           setLoading(!props);
           if (!props) return <div />;
           return (
-            <div>
-              <div className={styles.content}>
-                <CompanyTable companies={props.store.companies} />
-              </div>
+            <div className={styles.content}>
+              <CompanyTable companies={props.store.companies} />
             </div>
           );
         }}

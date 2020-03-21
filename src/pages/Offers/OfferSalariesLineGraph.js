@@ -3,11 +3,6 @@ import { createFragmentContainer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import ChartHelper from "../../components/ChartHelper";
 
-//--Chart Style Options--//
-// Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
-// Chart.defaults.global.legend.display = false;
-//--Chart Style Options--//
-
 const OfferSalariesLineGraph = ({ offers }) => {
     console.log(offers.edges);
     const data = offers.edges.map(o => o.wage_value);
