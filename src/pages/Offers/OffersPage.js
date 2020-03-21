@@ -6,7 +6,6 @@ import { useEnvironment } from "../../utils/environment";
 
 import FilterControls from "../../components/FilterControls";
 import Layout from "../../components/Layout";
-import OffersPerCompanyBarGraph from "./OffersPerCompanyBarGraph";
 import OfferTable, { columns } from "./OfferTable";
 
 const useStyles = makeStyles(theme => ({
@@ -44,9 +43,6 @@ const OffersPage = () => {
             return (
               <div>
                 <OfferTable offers={props.store.offers} />
-                <div className={styles.content}>
-                  <OffersPerCompanyBarGraph offers={props.store.offers} />
-                </div>
               </div>
             );
           }}
