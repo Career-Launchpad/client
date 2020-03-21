@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ChartHelper from "../../components/ChartHelper";
 
 const getAvgWageForMajor = (offers, students, major) => {
@@ -29,7 +29,7 @@ const getAvgWageForMajor = (offers, students, major) => {
     return n_offers;
   }
 
-export const OffersPerMajorBarGraph = ( majors, students, offers) => {
+const OffersPerMajorBarGraph = ({majors, students, offers}) => {
     let avgWages = [];
     let numStudents = [];
     let numOffers = [];

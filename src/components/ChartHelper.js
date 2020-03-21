@@ -1,72 +1,61 @@
-import React, { Component } from 'react'
+import React, { useEffect } from "react";
 import Chart from "chart.js";
 import classes from "./LineGraph.module.css";
 let myLineChart;
 
 //--Chart Style Options--//
-Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
+Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 Chart.defaults.global.legend.display = false;
 //--Chart Style Options--//
 
-export default class ChartHelper extends Component {
-    chartRef = React.createRef();
+const ChartHelper = ({ data, labels, title, type, pointLabel }) => {
+  useEffect(() => {
+    buildChart();
+  });
 
-    componentDidMount() {
-        this.buildChart();
-    }
+  const chartRef = React.createRef();
+  const buildChart = () => {
+    const myChartRef = chartRef.current.getContext("2d");
 
-    componentDidUpdate() {
-        this.buildChart();
-    }
+    if (typeof myLineChart !== "undefined") myLineChart.destroy();
 
-    buildChart = () => {
-        const myChartRef = this.chartRef.current.getContext("2d");
-        const { data, labels, title, type, pointLabel } = this.props;
-        console.log(data);
-
-        if (typeof myLineChart !== "undefined") myLineChart.destroy();
-
-        myLineChart = new Chart(myChartRef, {
-            type: type,
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: pointLabel,
-                        data: data,
-                        fill: true,
-                        backgroundColor: "#0251B7",
-                        borderColor: "#6610f2"
-                    },
-                ]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: title
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            precision: 0,
-                        }
-                    }]
-                }
+    myLineChart = new Chart(myChartRef, {
+      type: type,
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: pointLabel,
+            data: data,
+            fill: true,
+            backgroundColor: "#0251B7",
+            borderColor: "#6610f2"
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: title
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                precision: 0
+              }
             }
-        });
+          ]
+        }
+      }
+    });
+  };
+  return (
+    <div className={classes.graphContainer}>
+      <canvas id="myChart" ref={chartRef} />
+    </div>
+  );
+};
 
-    }
-
-    render() {
-
-        return (
-            <div className={classes.graphContainer}>
-                <canvas
-                    id="myChart"
-                    ref={this.chartRef}
-                />
-            </div>
-        )
-    }
-}
+export default ChartHelper;

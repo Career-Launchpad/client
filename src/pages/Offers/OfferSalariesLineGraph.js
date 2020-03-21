@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { createFragmentContainer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import ChartHelper from "../../components/ChartHelper";
