@@ -27,8 +27,10 @@ const MajorsPage = () => {
           setLoading(!props);
           if (!props) return <div />;
           return (
-            <div className={styles.content}>
-              <MajorTable data={props.store} />
+            <div>
+              <div className={styles.content}>
+                <MajorTable data={props.store} />
+              </div>
             </div>
           );
         }}

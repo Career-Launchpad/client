@@ -40,7 +40,11 @@ const OffersPage = () => {
           render={({ props }) => {
             setLoading(!props);
             if (!props) return <div />;
-            return <OfferTable offers={props.store.offers} />;
+            return (
+              <div>
+                <OfferTable offers={props.store.offers} />
+              </div>
+            );
           }}
         />
       </div>

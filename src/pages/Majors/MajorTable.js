@@ -1,16 +1,24 @@
 import React from "react";
 import { createFragmentContainer } from "react-relay";
+import { makeStyles } from "@material-ui/styles";
 import { graphql } from "babel-plugin-relay/macro";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 import NumberFormat from "react-number-format";
+import OffersPerMajorBarGraph from "./OffersPerMajorBarGraph";
 
 const headers = [
   { name: "Name", id: "name" },
   { name: "Number of Students", id: "nStudents" },
   { name: "Avg. Offer Compensation", id: "avgCompensation" }
 ];
+
+const useStyles = makeStyles(theme => ({
+  content: {
+    margin: 20
+  }
+}));
 
 const getAvgWageForMajor = (offers, students, major) => {
   let n_students = students.edges.filter(student => student.major === major)
@@ -30,32 +38,42 @@ const getAvgWageForMajor = (offers, students, major) => {
 };
 
 const MajorTable = ({ data: { majors, students, offers } }) => {
+  const styles = useStyles();
   return (
-    <DataTable headers={headers}>
-      {majors.map((major, i) => {
-        return (
-          <DataTableRow key={i}>
-            <TableRow>
-              <TableCell>{major}</TableCell>
-              <TableCell>
-                {
-                  students.edges.filter(student => student.major === major)
-                    .length
-                }
-              </TableCell>
-              <TableCell>
-                <NumberFormat
-                  value={getAvgWageForMajor(offers, students, major)}
-                  displayType="text"
-                  thousandSeparator
-                  prefix="$"
-                />
-              </TableCell>
-            </TableRow>
-          </DataTableRow>
-        );
-      })}
-    </DataTable>
+    <div>
+      <DataTable headers={headers}>
+        {majors.map((major, i) => {
+          return (
+            <DataTableRow key={i}>
+              <TableRow>
+                <TableCell>{major}</TableCell>
+                <TableCell>
+                  {
+                    students.edges.filter(student => student.major === major)
+                      .length
+                  }
+                </TableCell>
+                <TableCell>
+                  <NumberFormat
+                    value={getAvgWageForMajor(offers, students, major)}
+                    displayType="text"
+                    thousandSeparator
+                    prefix="$"
+                  />
+                </TableCell>
+              </TableRow>
+            </DataTableRow>
+          );
+        })}
+      </DataTable>
+      <div className={styles.content}>
+        <OffersPerMajorBarGraph
+          majors={majors}
+          students={students}
+          offers={offers}
+        />
+      </div>
+    </div>
   );
 };
 
