@@ -29,7 +29,9 @@ export default createFragmentContainer(OffersPerCompanyBarGraph, {
     fragment OffersPerCompanyBarGraph_offers on offerConnection {
       edges {
         wage_value
-        company_name
+        company {
+            name
+        }
       }
     }
   `

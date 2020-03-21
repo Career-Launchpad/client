@@ -24,7 +24,9 @@ export default createFragmentContainer(OfferSalariesLineGraph, {
     fragment OfferSalariesLineGraph_offers on offerConnection {
       edges {
         wage_value
-        company_name
+        company {
+            name
+        }
       }
     }
   `

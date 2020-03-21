@@ -119,7 +119,6 @@ type store {
   offer(id: String): offer
   offers(filters: [filter]): offerConnection
   students(filters: [filter]): studentConnection
-  company_names(filters: [filter]): [String]
   companies(filters: [filter]): companyConnection
   company(id: String): company
   majors(filters: [filter]): [String]
