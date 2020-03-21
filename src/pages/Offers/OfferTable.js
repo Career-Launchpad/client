@@ -6,17 +6,25 @@ import TableRow from "@material-ui/core/TableRow";
 import NumberFormat from "react-number-format";
 import { DataTable, DataTableRow } from "../../components/DataTable";
 
-const headers = [
-  { name: "Position", id: "position_title" },
-  { name: "Company Name", id: "company.name" },
-  { name: "Type", id: "position_type" },
-  { name: "Compensation Type", id: "wage_type" },
-  { name: "Compensation Value", id: "wage_value" }
+export const columns = [
+  { name: "Position", id: "position_title", type: "number" },
+  { name: "Company Name", id: "company.name", type: "string" },
+  {
+    name: "Type",
+    id: "position_type",
+    type: ["Full-time", "Part-time", "Internship", "Contractor"]
+  },
+  {
+    name: "Compensation Type",
+    id: "wage_type",
+    type: ["Salary", "Hourly", "On-completion"]
+  },
+  { name: "Compensation Value", id: "wage_value", type: "number" }
 ];
 
 const OfferTable = ({ offers }) => {
   return (
-    <DataTable headers={headers}>
+    <DataTable headers={columns}>
       {offers.edges.map((offer, i) => {
         return (
           <DataTableRow key={offer.id || i} data={offer}>

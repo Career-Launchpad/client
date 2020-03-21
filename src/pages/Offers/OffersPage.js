@@ -4,9 +4,10 @@ import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import { useEnvironment } from "../../utils/environment";
 
+import FilterControls from "../../components/FilterControls";
 import Layout from "../../components/Layout";
-import OfferTable from "./OfferTable";
 import OffersPerCompanyBarGraph from "./OffersPerCompanyBarGraph";
+import OfferTable, { columns } from "./OfferTable";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -16,39 +17,51 @@ const useStyles = makeStyles(theme => ({
 
 const OffersPage = () => {
   const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState([]);
   const environment = useEnvironment();
   const styles = useStyles();
   return (
     <Layout loading={loading}>
-      <QueryRenderer
-        environment={environment}
-        query={query}
-        cacheConfig={{ force: true }}
-        render={({ props }) => {
-          setLoading(!props);
-          if (!props) return <div />;
-          return (
-            <div>
-              <div className={styles.content}>
+      <div className={styles.content}>
+        <FilterControls
+          columnInfo={
+            columns.filter(
+              f => !f.id.includes(".")
+            ) /* This removes nested fields, which we can't filter by yet */
+          }
+          filters={filters}
+          onChange={setFilters}
+          onClear={() => setFilters(null)}
+        ></FilterControls>
+        <QueryRenderer
+          environment={environment}
+          query={query}
+          variables={{ filters: filters.length ? filters : null }}
+          cacheConfig={{ force: true }}
+          render={({ props }) => {
+            setLoading(!props);
+            if (!props) return <div />;
+            return (
+              <div>
                 <OfferTable offers={props.store.offers} />
+                <div className={styles.content}>
+                  <OffersPerCompanyBarGraph
+                    offers={props.store.offers}
+                  />
+                </div>
               </div>
-              <div className={styles.content}>
-                <OffersPerCompanyBarGraph
-                  offers={props.store.offers}
-                />
-              </div>
-            </div>
-          );
-        }}
-      />
+            );
+          }}
+        />
+      </div>
     </Layout>
   );
 };
 
 const query = graphql`
-  query OffersPage_Query {
+  query OffersPage_Query($filters: [filter]) {
     store {
-      offers {
+      offers(filters: $filters) {
         ...OfferTable_offers
       }
     }
