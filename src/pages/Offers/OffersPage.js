@@ -45,9 +45,7 @@ const OffersPage = () => {
               <div>
                 <OfferTable offers={props.store.offers} />
                 <div className={styles.content}>
-                  <OffersPerCompanyBarGraph
-                    offers={props.store.offers}
-                  />
+                  <OffersPerCompanyBarGraph offers={props.store.offers} />
                 </div>
               </div>
             );

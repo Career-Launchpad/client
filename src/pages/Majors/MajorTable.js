@@ -67,9 +67,12 @@ const MajorTable = ({ data: { majors, students, offers } }) => {
         })}
       </DataTable>
       <div className={styles.content}>
-        <OffersPerMajorBarGraph majors={majors} students={students} offers={offers} />
+        <OffersPerMajorBarGraph
+          majors={majors}
+          students={students}
+          offers={offers}
+        />
       </div>
-
     </div>
   );
 };

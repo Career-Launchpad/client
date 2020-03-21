@@ -1,15 +1,15 @@
 .graphContainer {
-    width: 40vw;
-    height: 40vh;
-    background: white;
-    display: 'flex';
-    align-items: 'center';
-    justify-content: 'center';
-    border-radius: 10px;
+  width: 40vw;
+  height: 40vh;
+  background: white;
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 600px) {
-    .graphContainer {
-        width: 80vw;
-    }
+  .graphContainer {
+    width: 80vw;
+  }
 }
