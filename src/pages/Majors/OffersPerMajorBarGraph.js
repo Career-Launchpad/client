@@ -47,6 +47,7 @@ export const OffersPerMajorBarGraph = ( majors, students, offers) => {
                 pointLabel={"Number of Student Offers"}
                 type={"bar"}
             />
+            {/* TODO: Show this chart as well */}
             {/* <ChartHelper
                 data={avgWages}
                 labels={majors}

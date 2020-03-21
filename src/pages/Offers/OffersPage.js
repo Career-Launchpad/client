@@ -6,7 +6,6 @@ import { useEnvironment } from "../../utils/environment";
 
 import Layout from "../../components/Layout";
 import OfferTable from "./OfferTable";
-import OfferSalariesLineGraph from "./OfferSalariesLineGraph";
 import OffersPerCompanyBarGraph from "./OffersPerCompanyBarGraph";
 
 const useStyles = makeStyles(theme => ({
@@ -28,9 +27,6 @@ const OffersPage = () => {
         render={({ props }) => {
           setLoading(!props);
           if (!props) return <div />;
-          // console.log(props.store.offers.edges[0]);
-          // var data = props.store.offers.edges.map(o => o.salary);
-          // var labels = props.store.offers.edges.map(o => o.firstName);
           return (
             <div>
               <div className={styles.content}>

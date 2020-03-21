@@ -31,9 +31,6 @@ const MajorsPage = () => {
               <div className={styles.content}>
                 <MajorTable data={props.store} />
               </div>
-              {/* <div className={styles.content}>
-                <OffersPerMajorBarGraph data={props.store} />
-            </div> */}
             </div>
           );
         }}

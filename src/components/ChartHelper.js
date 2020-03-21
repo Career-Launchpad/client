@@ -29,7 +29,6 @@ export default class ChartHelper extends Component {
         myLineChart = new Chart(myChartRef, {
             type: type,
             data: {
-                //Bring in data
                 labels: labels,
                 datasets: [
                     {
