@@ -35,7 +35,8 @@ export default class ChartHelper extends Component {
                     {
                         label: pointLabel,
                         data: data,
-                        fill: false,
+                        fill: true,
+                        backgroundColor: "#0251B7",
                         borderColor: "#6610f2"
                     },
                 ]
