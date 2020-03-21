@@ -21,8 +21,8 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const auth = useAuth();
   const { location } = useHistory();
-  const { auth } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

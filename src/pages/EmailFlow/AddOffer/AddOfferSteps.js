@@ -88,14 +88,25 @@ export const CompanyStep = {
           environment={environment}
           query={query}
           render={({ props }) => {
-            let loading = !props;
+            const loading = !props;
+            let companyNames = [];
+            if (!loading) {
+              companyNames = props.store.companies.edges
+                .reduce((acc, { name }) => {
+                  if (!acc.includes(name)) {
+                    acc.push(name);
+                  }
+                  return acc;
+                }, [])
+                .sort();
+            }
             return (
               <AutocompleteTextField
                 freeSolo
                 label="Company"
                 name="company_name"
                 className={cx(styles.smallField, styles.field)}
-                options={loading ? [] : props.store.company_names}
+                options={companyNames}
               />
             );
           }}
@@ -121,9 +132,13 @@ export const CompanyStep = {
 };
 
 const query = graphql`
-  query AddOfferSteps_Company_Query {
+  query AddOfferSteps_CompanyStep_Query {
     store {
-      company_names
+      companies {
+        edges {
+          name
+        }
+      }
     }
   }
 `;
