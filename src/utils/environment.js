@@ -21,7 +21,7 @@ const baseLookup = {
 
 ///////////////////////////////////////////////
 // const URL_BASE = baseLookup[process.env.NODE_ENV]; // Comment out for local testing
-   const URL_BASE = baseLookup["production"]; // Uncomment for local testing
+const URL_BASE = baseLookup["production"]; // Uncomment for local testing
 //   TODO: Work off prod after braden's PR is merged
 //
 //  DON'T INCLUDE THIS IN PULL REQUEST
