@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3d61fd3256308fbceb47c51bc85d0ad7
+ * @relayHash 781203e28493c6464e16b04d028ba38c
  */
 
 /* eslint-disable */
@@ -39,6 +39,31 @@ fragment CompanyTable_companies on companyConnection {
   edges {
     id
     name
+    offers {
+      ...OfferTable_offers
+      edges {
+        id
+        position_title
+        accepted
+      }
+    }
+  }
+}
+
+fragment OfferTable_offers on offerConnection {
+  edges {
+    id
+    position_type
+    position_title
+    location {
+      state
+    }
+    company {
+      name
+    }
+    academic_year
+    wage_type
+    wage_value
   }
 }
 */
@@ -48,6 +73,13 @@ var v0 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
   "args": null,
   "storageKey": null
 };
@@ -122,12 +154,101 @@ return {
                 "plural": true,
                 "selections": [
                   (v0/*: any*/),
+                  (v1/*: any*/),
                   {
-                    "kind": "ScalarField",
+                    "kind": "LinkedField",
                     "alias": null,
-                    "name": "name",
+                    "name": "offers",
+                    "storageKey": null,
                     "args": null,
-                    "storageKey": null
+                    "concreteType": "offerConnection",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "edges",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "offer",
+                        "plural": true,
+                        "selections": [
+                          (v0/*: any*/),
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "position_type",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "position_title",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "name": "location",
+                            "storageKey": null,
+                            "args": null,
+                            "concreteType": "location",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "name": "state",
+                                "args": null,
+                                "storageKey": null
+                              }
+                            ]
+                          },
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "name": "company",
+                            "storageKey": null,
+                            "args": null,
+                            "concreteType": "company",
+                            "plural": false,
+                            "selections": [
+                              (v1/*: any*/)
+                            ]
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "academic_year",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "wage_type",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "wage_value",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "accepted",
+                            "args": null,
+                            "storageKey": null
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -142,7 +263,7 @@ return {
     "operationKind": "query",
     "name": "CompaniesPage_Query",
     "id": null,
-    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_companies on companyConnection {\n  edges {\n    id\n    name\n  }\n}\n",
+    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_companies on companyConnection {\n  edges {\n    id\n    name\n    offers {\n      ...OfferTable_offers\n      edges {\n        id\n        position_title\n        accepted\n      }\n    }\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };
