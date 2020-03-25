@@ -7,7 +7,7 @@ const getAvgWageForMajor = (offers, students, major) => {
 
   let total_wage = offers.edges.reduce((total, offer) => {
     let student = students.edges.filter(s => s.id === offer.student_id)[0];
-    if (student.major === major) {
+    if (student?.major === major) {
       total += offer.wage_value;
       return total;
     } else {
