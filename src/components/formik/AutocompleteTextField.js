@@ -7,13 +7,14 @@ const AutocompleteTextField = ({ className, name, label, options }) => {
   const [field, meta, helpers] = useField(name);
   const error = !!meta.touched && !!meta.error;
   const helperText = error ? meta.error : " ";
+  const value = field.value || "";
   return (
     <Autocomplete
       className={className}
       margin="normal"
       freeSolo
-      filterOptions={o =>
-        o.filter(o => o.toLowerCase().startsWith(field.value.toLowerCase()))
+      filterOptions={options =>
+        options.filter(o => o.toLowerCase().startsWith(value.toLowerCase()))
       }
       disableClearable
       options={options}
