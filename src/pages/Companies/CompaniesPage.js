@@ -47,16 +47,18 @@ const Dialog = ({ open, company, onExited, onClose }) => {
           Offers Accepted: {numAccepted}/{offers.length}
         </div>
         <span className={styles.doughnutChart}>
-          <ChartHelper
-            data={[numAccepted, offers.length - numAccepted]}
-            backgroundColor={["#0251B7", "#ebebeb"]}
-            fillText={`${(numAccepted / (offers.length - numAccepted)) * 100}%`}
-            borderColor={"#ffffff"}
-            hoverBorderColor={"#ffffff"}
-            labels={["Accepted", "Total Offers"]}
-            title={"Offers Accepted"}
-            type={"doughnut"}
-          />
+          {offers.length > 0 && (
+            <ChartHelper
+              data={[numAccepted, offers.length - numAccepted]}
+              backgroundColor={["#0251B7", "#ebebeb"]}
+              fillText={`${(numAccepted / offers.length) * 100}%`}
+              borderColor={"#ffffff"}
+              hoverBorderColor={"#ffffff"}
+              labels={["Accepted", "Total Offers"]}
+              title={"Offers Accepted"}
+              type={"doughnut"}
+            />
+          )}
         </span>
       </div>
     </ClosableDialog>

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js";
 let chart;
+let myChartRef;
+let initRender = true;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
@@ -24,7 +26,7 @@ const ChartHelper = ({
 
   const chartRef = React.createRef();
   const buildChart = () => {
-    const myChartRef = chartRef.current.getContext("2d");
+    myChartRef = chartRef.current.getContext("2d");
 
     if (typeof chart !== "undefined") chart.destroy();
 
@@ -41,7 +43,8 @@ const ChartHelper = ({
             borderColor: borderColor || "#6610f2",
             hoverBorderColor: hoverBorderColor || "#6610f2"
           }
-        ]
+        ],
+        text: fillText || ""
       },
       options: {}
     };
@@ -58,10 +61,6 @@ const ChartHelper = ({
     }
 
     chart = new Chart(myChartRef, chartSettings);
-
-    if (type === "doughnut") {
-      doughnutPostSetup(chart, fillText);
-    }
   };
   return (
     <div>
@@ -70,20 +69,22 @@ const ChartHelper = ({
   );
 };
 
-const doughnutPostSetup = (chart, fillText) => {
-  // TODO: Need eyes on this, for some reason, it's not working
-  const ctx = chart.chart.ctx;
-  let height = chart.chart.height;
-  let width = chart.chart.width;
+const doughnutPostSetup = () => {
+  const ctx = chart.ctx;
+  const width = chart.width;
+  const height = chart.height;
 
-  ctx.font = `${(height / 290).toFixed(2)}em Verdana`;
+  let fontSize = (height / 100).toFixed(2);
+  ctx.font = fontSize + "em Verdana";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#000000";
 
-  const textX = Math.round((width - ctx.measureText(fillText).width) / 2);
-  const textY = height / 2;
+  let text = chart.config.data.text;
+  let textX = Math.round((width - ctx.measureText(text).width) / 2);
+  let textY = height / 2;
 
-  ctx.fillText(fillText, textX, textY);
+  ctx.fillText(text, textX, textY);
+  chart.update();
 };
 
 const appendBarChartSettings = (chartSettings, title) => {
@@ -119,6 +120,11 @@ const appendDoughnutSettings = chartSettings => {
     elements: {
       arc: {
         borderWidth: 0
+      }
+    },
+    animation: {
+      onProgress: () => {
+        doughnutPostSetup();
       }
     }
   };
