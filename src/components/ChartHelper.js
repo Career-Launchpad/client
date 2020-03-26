@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Chart from "chart.js";
 let chart;
 let myChartRef;
-let initRender = true;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
