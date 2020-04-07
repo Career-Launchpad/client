@@ -68,7 +68,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
 
   const classes = useStyles();
 
-  const [field, setField] = useState("");
+  const [column, setColumn] = useState("");
   const [value, setValue] = useState("");
   const [comp, setComp] = useState("");
   const [anchorEl, setAnchorEl] = useState();
@@ -78,8 +78,8 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   };
 
   const add = () => {
-    onChange([...filters, { field: field.id, comp: comp, value: value }]);
-    setField("");
+    onChange([...filters, { column: column.id, comp: comp, value: value }]);
+    setColumn("");
     setValue("");
     setComp("");
   };
@@ -132,7 +132,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
         {filters.map((f, i) => (
           <div key={i} className={classes.row}>
             <span className={classes.filterEntryColumn}>
-              {columnLabels[f.field]}
+              {columnLabels[f.column]}
             </span>
             <span className={classes.filterEntryColumn}>
               {operators.find(o => o.value === f.comp).name}
@@ -150,9 +150,9 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             variant="filled"
             label="Field"
             name="Field"
-            value={field}
+            value={column}
             size="small"
-            onChange={e => setField(e.target.value)}
+            onChange={e => setColumn(e.target.value)}
           >
             {columnInfo.map(col => (
               <MenuItem key={col.id} value={col}>
@@ -185,7 +185,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             size="small"
             onChange={e => setValue(e.target.value)}
           ></TextField>
-          <Button onClick={add} disabled={!value || !comp || !field}>
+          <Button onClick={add} disabled={!value || !comp || !column}>
             Add Filter
           </Button>
         </div>
