@@ -17,7 +17,8 @@ const ChartHelper = ({
   backgroundColor,
   borderColor,
   hoverBorderColor,
-  fillText
+  fillText,
+  chartIndex = 0
 }) => {
   useEffect(() => {
     buildChart();
@@ -63,7 +64,7 @@ const ChartHelper = ({
   };
   return (
     <div>
-      <canvas id="myChart" ref={chartRef} />
+      <canvas id={`myChart` + chartIndex} ref={chartRef} />
     </div>
   );
 };

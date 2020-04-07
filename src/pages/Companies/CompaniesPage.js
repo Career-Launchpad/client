@@ -29,8 +29,16 @@ const useStyles = makeStyles(theme => ({
 
 const Dialog = ({ open, company, onExited, onClose }) => {
   let offers = [];
+  let monthSorted = [];
+  const monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  for (let i = 0; i<12; i++) {monthSorted.push(0)}
+  
   if (company && company.offers) {
     offers = company.offers.edges;
+    offers.forEach(offer => {
+        const month = new Date(parseInt(offer.timestamp)).getMonth();
+        monthSorted[month]++
+    });
   }
   const numAccepted = offers.filter(offer => offer.accepted === true).length;
   const styles = useStyles();
@@ -50,6 +58,7 @@ const Dialog = ({ open, company, onExited, onClose }) => {
           {offers.length > 0 && (
             <ChartHelper
               data={[numAccepted, offers.length - numAccepted]}
+              chartIndex={0}
               backgroundColor={["#0251B7", "#ebebeb"]}
               fillText={`${(numAccepted / offers.length) * 100}%`}
               borderColor={"#ffffff"}
@@ -58,6 +67,21 @@ const Dialog = ({ open, company, onExited, onClose }) => {
               title={"Offers Accepted"}
               type={"doughnut"}
             />
+          )}
+        </span>
+      </div>
+      <div className={styles.offersByMonth}>
+      <div>Offers By Month:</div>
+        <span className={styles.doughnutChart}>
+          {offers.length > 0 && (
+            <ChartHelper
+            data={monthSorted}
+            chartIndex={1}
+            labels={monthMap}
+            title={"Student Offers Per Company"}
+            pointLabel={"Number of Student Offers"}
+            type={"bar"}
+          />
           )}
         </span>
       </div>

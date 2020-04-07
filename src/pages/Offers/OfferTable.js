@@ -65,7 +65,6 @@ const OfferTable = ({ offers }) => {
 
 const OffersPerCompanyBarGraph = ({ offers }) => {
   let data = {};
-  console.log(offers);
   const companyOffers = offers.edges?.map(o => o.company.name);
   for (let i in companyOffers) {
     if (data[companyOffers[i]]) {

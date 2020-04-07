@@ -86,6 +86,7 @@ type mutation {
 
 type offer {
   id: String
+  timestamp: String
   position_type: String
   position_title: String
   accepted: Boolean
