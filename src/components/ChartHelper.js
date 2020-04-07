@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js";
-let chart;
-let myChartRef;
+let charts = [];
+let chartRefs = [];
+let reactRefs = [];
+let curIndex = 0;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
@@ -18,17 +20,17 @@ const ChartHelper = ({
   borderColor,
   hoverBorderColor,
   fillText,
-  chartIndex = 0
+  chartIndex
 }) => {
   useEffect(() => {
     buildChart();
   });
-
-  const chartRef = React.createRef();
+  curIndex = chartIndex;
+  reactRefs[curIndex] = React.createRef();
   const buildChart = () => {
-    myChartRef = chartRef.current.getContext("2d");
+    chartRefs[curIndex] = reactRefs[curIndex].current.getContext("2d");
 
-    if (typeof chart !== "undefined") chart.destroy();
+    if (typeof charts[curIndex] !== "undefined") charts[curIndex].destroy();
 
     let chartSettings = {
       type: type,
@@ -60,31 +62,31 @@ const ChartHelper = ({
         break;
     }
 
-    chart = new Chart(myChartRef, chartSettings);
+    charts[curIndex] = new Chart(chartRefs[curIndex], chartSettings);
   };
   return (
     <div>
-      <canvas id={`myChart` + chartIndex} ref={chartRef} />
+      <canvas id={`myChart` + chartIndex} ref={reactRefs[curIndex]} />
     </div>
   );
 };
 
 const doughnutPostSetup = () => {
-  const ctx = chart.ctx;
-  const width = chart.width;
-  const height = chart.height;
+  const ctx = charts[curIndex].ctx;
+  const width = charts[curIndex].width;
+  const height = charts[curIndex].height;
 
   let fontSize = (height / 100).toFixed(2);
   ctx.font = fontSize + "em Verdana";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#000000";
 
-  let text = chart.config.data.text;
+  let text = charts[curIndex].config.data.text;
   let textX = Math.round((width - ctx.measureText(text).width) / 2);
   let textY = height / 2;
 
   ctx.fillText(text, textX, textY);
-  chart.update();
+  charts[curIndex].update();
 };
 
 const appendBarChartSettings = (chartSettings, title) => {
