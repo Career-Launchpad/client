@@ -78,7 +78,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   };
 
   const add = () => {
-    onChange([...filters, { column: column.id, comp: comp, value: value }]);
+    onChange([...filters, { field: column.id, comp: comp, value: value }]);
     setColumn("");
     setValue("");
     setComp("");
@@ -132,7 +132,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
         {filters.map((f, i) => (
           <div key={i} className={classes.row}>
             <span className={classes.filterEntryColumn}>
-              {columnLabels[f.column]}
+              {columnLabels[f.field]}
             </span>
             <span className={classes.filterEntryColumn}>
               {operators.find(o => o.value === f.comp).name}

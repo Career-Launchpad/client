@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const columns = [
-  { name: "Position", id: "position_title", type: "number" },
+  { name: "Position", id: "position_title", type: "string" },
   { name: "Company Name", id: "company.name", type: "string" },
   {
     name: "Type",
