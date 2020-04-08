@@ -5,7 +5,6 @@ import Popover from "@material-ui/core/Popover";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
-import CloseIcon from "@material-ui/icons/Close";
 import cx from "classnames";
 
 const useStyles = makeStyles(theme => ({
@@ -221,7 +220,6 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             <Button
               className={cx(classes.right, classes.margins)}
               onClick={clear}
-              endIcon={<CloseIcon />}
             >
               Clear Filters
             </Button>
