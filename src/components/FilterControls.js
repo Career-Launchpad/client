@@ -80,11 +80,12 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   const add = () => {
     onChange([
       ...filters,
-      { 
-        field: column.id, 
-        comp: comp, 
-        value: value, 
-        parseValueAs: Array.isArray(column.type) ? "string" : column.type }
+      {
+        field: column.id,
+        comp: comp,
+        value: value,
+        parseValueAs: Array.isArray(column.type) ? "string" : column.type
+      }
     ]);
     setColumn("");
     setValue("");
