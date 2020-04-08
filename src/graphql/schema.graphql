@@ -63,6 +63,7 @@ input filter {
   field: String
   value: String
   comp: String
+  parseValueAs: String
 }
 
 type location {
@@ -86,6 +87,7 @@ type mutation {
 
 type offer {
   id: String
+  timestamp: String
   position_type: String
   position_title: String
   accepted: Boolean

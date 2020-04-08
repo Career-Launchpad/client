@@ -27,7 +27,7 @@ export const columns = [
     id: "wage_type",
     type: ["Salary", "Hourly", "On-completion"]
   },
-  { name: "Compensation Value", id: "wage_value", type: "number" }
+  { name: "Compensation Value", id: "wage_value", type: "int" }
 ];
 
 const OfferTable = ({ offers }) => {

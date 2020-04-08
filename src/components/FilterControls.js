@@ -78,7 +78,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
   };
 
   const add = () => {
-    onChange([...filters, { field: column.id, comp: comp, value: value }]);
+    onChange([...filters, { field: column.id, comp: comp, value: value, parseValueAs: column.type }]);
     setColumn("");
     setValue("");
     setComp("");
