@@ -20,7 +20,7 @@ export const columns = [
   {
     name: "Type",
     id: "position_type",
-    type: ["Full-time", "Part-time", "Internship", "Contractor"]
+    type: ["Full time", "Part time", "Internship", "Contractor"]
   },
   {
     name: "Compensation Type",
