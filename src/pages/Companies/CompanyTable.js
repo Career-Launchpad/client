@@ -53,6 +53,7 @@ export default createFragmentContainer(CompanyTable, {
             id
             position_title
             accepted
+            timestamp
           }
         }
       }

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 781203e28493c6464e16b04d028ba38c
+ * @relayHash c6b9be7fc75027da0872fb8a39844c40
  */
 
 /* eslint-disable */
@@ -45,6 +45,7 @@ fragment CompanyTable_companies on companyConnection {
         id
         position_title
         accepted
+        timestamp
       }
     }
   }
@@ -245,6 +246,13 @@ return {
                             "name": "accepted",
                             "args": null,
                             "storageKey": null
+                          },
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "timestamp",
+                            "args": null,
+                            "storageKey": null
                           }
                         ]
                       }
@@ -263,7 +271,7 @@ return {
     "operationKind": "query",
     "name": "CompaniesPage_Query",
     "id": null,
-    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_companies on companyConnection {\n  edges {\n    id\n    name\n    offers {\n      ...OfferTable_offers\n      edges {\n        id\n        position_title\n        accepted\n      }\n    }\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
+    "text": "query CompaniesPage_Query {\n  store {\n    companies {\n      ...CompanyTable_companies\n    }\n    id\n  }\n}\n\nfragment CompanyTable_companies on companyConnection {\n  edges {\n    id\n    name\n    offers {\n      ...OfferTable_offers\n      edges {\n        id\n        position_title\n        accepted\n        timestamp\n      }\n    }\n  }\n}\n\nfragment OfferTable_offers on offerConnection {\n  edges {\n    id\n    position_type\n    position_title\n    location {\n      state\n    }\n    company {\n      name\n    }\n    academic_year\n    wage_type\n    wage_value\n  }\n}\n",
     "metadata": {}
   }
 };
