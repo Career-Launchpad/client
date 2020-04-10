@@ -8,7 +8,6 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.40",
     "@material-ui/pickers": "^3.2.8",
-    "aws-amplify": "^1.2.4",
     "babel-plugin-relay": "^7.1.0",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
@@ -30,14 +29,14 @@
   },
   "scripts": {
     "start": "env-cmd -f ./.env.build react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
+    "build": "react-scripts build",
     "lint": "prettier --check \"**/*.+(js|jsx|json|css|md)\"",
     "lint:fix": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "update-schema": "get-graphql-schema https://p8as5qg8r5.execute-api.us-east-1.amazonaws.com/schema/graphql > src/graphql/schema.graphql",
-    "update-schema-local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
     "relay": "npm run update-schema && npm run relay-compile",
-    "relay-local": "npm run update-schema-local && npm run relay-compile",
+    "relay:local": "npm run update-schema:local && npm run relay-compile",
+    "update-schema": "get-graphql-schema https://p8as5qg8r5.execute-api.us-east-1.amazonaws.com/schema/graphql > src/graphql/schema.graphql",
+    "update-schema:local": "get-graphql-schema http://127.0.0.1:8080 > src/graphql/schema.graphql",
     "relay-compile": "relay-compiler --config relay.config.json"
   },
   "eslintConfig": {
