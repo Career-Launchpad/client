@@ -118,7 +118,7 @@ const Students = () => {
     <Layout loading={loading}>
       <div className={styles.content}>
         <FilterControls
-          columnInfo={columns.filter(c => !c.disableFiltering)}
+          columnInfo={columns}
           filters={filters}
           onChange={setFilters}
           onClear={() => setFilters(null)}
