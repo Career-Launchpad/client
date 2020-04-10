@@ -60,9 +60,13 @@ const operators = [
   }
 ];
 
-const comparatorMustBeEquals = (column) => {
-  return column.type === 'boolean' || column.type === 'string' || Array.isArray(column.type);
-}
+const comparatorMustBeEquals = column => {
+  return (
+    column.type === "boolean" ||
+    column.type === "string" ||
+    Array.isArray(column.type)
+  );
+};
 
 const FilterControls = ({ onChange, columnInfo, filters }) => {
   if (!Array.isArray(filters)) {
@@ -164,7 +168,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             value={column}
             size="small"
             onChange={e => {
-              setColumn(e.target.value)
+              setColumn(e.target.value);
               if (comparatorMustBeEquals(e.target.value)) {
                 setComp("=");
               }
@@ -194,7 +198,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             ))}
           </TextField>
           <TextField
-            select={column.type === 'boolean' || Array.isArray(column.type)}
+            select={column.type === "boolean" || Array.isArray(column.type)}
             className={cx(classes.margins, classes.selectField)}
             variant="filled"
             label="Value"
@@ -202,12 +206,18 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             value={value}
             size="small"
             onChange={e => setValue(e.target.value)}
-            >
-              {column.type === 'boolean' && ['true','false'].map(o => (
-                <MenuItem key={o} value={o}>{o}</MenuItem>
+          >
+            {column.type === "boolean" &&
+              ["true", "false"].map(o => (
+                <MenuItem key={o} value={o}>
+                  {o}
+                </MenuItem>
               ))}
-              {Array.isArray(column.type) && column.type.map(o => (
-                <MenuItem key={o} value={o}>{o}</MenuItem>
+            {Array.isArray(column.type) &&
+              column.type.map(o => (
+                <MenuItem key={o} value={o}>
+                  {o}
+                </MenuItem>
               ))}
           </TextField>
           <Button onClick={add} disabled={!value || !comp || !column}>
