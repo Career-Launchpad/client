@@ -63,6 +63,7 @@ input filter {
   field: String
   value: String
   comp: String
+  parseValueAs: String
 }
 
 type location {

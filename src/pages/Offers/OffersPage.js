@@ -23,11 +23,7 @@ const OffersPage = () => {
     <Layout loading={loading}>
       <div className={styles.content}>
         <FilterControls
-          columnInfo={
-            columns.filter(
-              f => !f.id.includes(".")
-            ) /* This removes nested fields, which we can't filter by yet */
-          }
+          columnInfo={columns}
           filters={filters}
           onChange={setFilters}
           onClear={() => setFilters(null)}

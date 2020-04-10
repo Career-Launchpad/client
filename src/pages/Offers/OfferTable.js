@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const columns = [
-  { name: "Position", id: "position_title", type: "number" },
+  { name: "Position", id: "position_title", type: "string" },
   { name: "Company Name", id: "company.name", type: "string" },
   {
     name: "Type",
@@ -27,7 +27,7 @@ export const columns = [
     id: "wage_type",
     type: ["Salary", "Hourly", "On-completion"]
   },
-  { name: "Compensation Value", id: "wage_value", type: "number" }
+  { name: "Compensation Value", id: "wage_value", type: "int" }
 ];
 
 const OfferTable = ({ offers }) => {
