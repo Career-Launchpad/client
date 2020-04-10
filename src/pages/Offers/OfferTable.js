@@ -5,8 +5,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import NumberFormat from "react-number-format";
 import { DataTable, DataTableRow } from "../../components/DataTable";
+import Bar from "../../components/charts/Bar";
 import { makeStyles } from "@material-ui/styles";
-import ChartHelper from "../../components/ChartHelper";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -74,12 +74,11 @@ const OffersPerCompanyBarGraph = ({ offers }) => {
     }
   }
   return (
-    <ChartHelper
-      data={Object.values(data)}
-      labels={Object.keys(data)}
-      title={"Student Offers Per Company"}
-      pointLabel={"Number of Student Offers"}
-      type={"bar"}
+    <Bar 
+        labels={Object.keys(data)}
+        data={Object.values(data)}
+        label="Offers Made"
+        title="Number of Offers per Employer"
     />
   );
 };

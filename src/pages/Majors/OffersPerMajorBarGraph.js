@@ -1,5 +1,5 @@
 import React from "react";
-import ChartHelper from "../../components/ChartHelper";
+import Bar from "../../components/charts/Bar";
 
 const getAvgWageForMajor = (offers, students, major) => {
   let n_students = students.edges.filter(student => student.major === major)
@@ -48,12 +48,11 @@ const OffersPerMajorBarGraph = ({ majors, students, offers }) => {
   });
   return (
     <div>
-      <ChartHelper
-        data={numOffers}
-        labels={majors}
-        title={"Number of Student Offers Received By Major"}
-        pointLabel={"Number of Student Offers"}
-        type={"bar"}
+      <Bar 
+              labels={majors}
+              data={numOffers}
+              label="Offers Made"
+              title="Offers by Major"
       />
       {/* TODO: Show this chart as well */}
       {/* <ChartHelper
