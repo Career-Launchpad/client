@@ -5,7 +5,6 @@ import Popover from "@material-ui/core/Popover";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
-import CloseIcon from "@material-ui/icons/Close";
 import cx from "classnames";
 
 const useStyles = makeStyles(theme => ({
@@ -60,6 +59,14 @@ const operators = [
     value: ">="
   }
 ];
+
+const comparatorMustBeEquals = column => {
+  return (
+    column.type === "boolean" ||
+    column.type === "string" ||
+    Array.isArray(column.type)
+  );
+};
 
 const FilterControls = ({ onChange, columnInfo, filters }) => {
   if (!Array.isArray(filters)) {
@@ -156,11 +163,16 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             select
             className={cx(classes.margins, classes.selectField)}
             variant="filled"
-            label="Field"
-            name="Field"
+            label="Column"
+            name="Column"
             value={column}
             size="small"
-            onChange={e => setColumn(e.target.value)}
+            onChange={e => {
+              setColumn(e.target.value);
+              if (comparatorMustBeEquals(e.target.value)) {
+                setComp("=");
+              }
+            }}
           >
             {columnInfo.map(col => (
               <MenuItem key={col.id} value={col}>
@@ -169,6 +181,7 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             ))}
           </TextField>
           <TextField
+            disabled={comparatorMustBeEquals(column)}
             select
             className={cx(classes.marginsVertical, classes.selectField)}
             variant="filled"
@@ -185,14 +198,28 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             ))}
           </TextField>
           <TextField
-            className={classes.margins}
+            select={column.type === "boolean" || Array.isArray(column.type)}
+            className={cx(classes.margins, classes.selectField)}
             variant="filled"
             label="Value"
             name="Value"
             value={value}
             size="small"
             onChange={e => setValue(e.target.value)}
-          ></TextField>
+          >
+            {column.type === "boolean" &&
+              ["true", "false"].map(o => (
+                <MenuItem key={o} value={o}>
+                  {o}
+                </MenuItem>
+              ))}
+            {Array.isArray(column.type) &&
+              column.type.map(o => (
+                <MenuItem key={o} value={o}>
+                  {o}
+                </MenuItem>
+              ))}
+          </TextField>
           <Button onClick={add} disabled={!value || !comp || !column}>
             Add Filter
           </Button>
@@ -203,7 +230,6 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             <Button
               className={cx(classes.right, classes.margins)}
               onClick={clear}
-              endIcon={<CloseIcon />}
             >
               Clear Filters
             </Button>

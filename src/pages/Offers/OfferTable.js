@@ -20,14 +20,14 @@ export const columns = [
   {
     name: "Type",
     id: "position_type",
-    type: ["Full-time", "Part-time", "Internship", "Contractor"]
+    type: ["Full time", "Part time", "Internship", "Contractor"]
   },
   {
     name: "Compensation Type",
     id: "wage_type",
     type: ["Salary", "Hourly", "On-completion"]
   },
-  { name: "Compensation Value", id: "wage_value", type: "int" }
+  { name: "Compensation Value", id: "wage_value", type: "float" }
 ];
 
 const OfferTable = ({ offers }) => {
