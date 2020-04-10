@@ -5,9 +5,10 @@ import graphql from "babel-plugin-relay/macro";
 import { useEnvironment } from "../../utils/environment";
 import Typography from "@material-ui/core/Typography";
 
+import FilterControls from "../../components/FilterControls";
 import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
-import StudentTable from "./StudentTable";
+import StudentTable, { columns } from "./StudentTable";
 import OfferTable from "../Offers/OfferTable";
 
 const useStyles = makeStyles(theme => ({
@@ -95,6 +96,7 @@ const Students = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [student, setStudent] = useState(null);
+  const [filters, setFilters] = useState([]);
   const environment = useEnvironment();
   const styles = useStyles();
 
@@ -114,39 +116,46 @@ const Students = () => {
 
   return (
     <Layout loading={loading}>
-      <QueryRenderer
-        environment={environment}
-        query={query}
-        cacheConfig={{ force: true }}
-        render={({ props }) => {
-          setLoading(!props);
-          if (!props) return <div />;
-          return (
-            <>
-              <div className={styles.content}>
+      <div className={styles.content}>
+        <FilterControls
+          columnInfo={columns.filter(c => !c.disableFiltering)}
+          filters={filters}
+          onChange={setFilters}
+          onClear={() => setFilters(null)}
+        ></FilterControls>
+        <QueryRenderer
+          environment={environment}
+          query={query}
+          variables={{ filters: filters.length ? filters : null }}
+          cacheConfig={{ force: true }}
+          render={({ props }) => {
+            setLoading(!props);
+            if (!props) return <div />;
+            return (
+              <>
                 <StudentTable
                   students={props.store.students}
                   onStudentClicked={openDialog}
                 />
-              </div>
-              <Dialog
-                student={student}
-                open={open}
-                onClose={handleClose}
-                onExited={handleDialogExited}
-              />
-            </>
-          );
-        }}
-      />
+                <Dialog
+                  student={student}
+                  open={open}
+                  onClose={handleClose}
+                  onExited={handleDialogExited}
+                />
+              </>
+            );
+          }}
+        />
+      </div>
     </Layout>
   );
 };
 
 const query = graphql`
-  query StudentsPage_Query {
+  query StudentsPage_Query($filters: [filter]) {
     store {
-      students {
+      students(filters: $filters) {
         ...StudentTable_students
       }
     }

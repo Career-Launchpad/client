@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8f477e75ebe6af195a6031b99ca66531
+ * @relayHash c45103b58d86cfa03664c49a70ec0a67
  */
 
 /* eslint-disable */
@@ -14,6 +14,7 @@ export type filter = {|
   field?: ?string,
   value?: ?string,
   comp?: ?string,
+  parseValueAs?: ?string,
 |};
 export type OffersPage_QueryVariables = {|
   filters?: ?$ReadOnlyArray<?filter>
