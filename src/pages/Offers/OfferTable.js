@@ -74,11 +74,11 @@ const OffersPerCompanyBarGraph = ({ offers }) => {
     }
   }
   return (
-    <Bar 
-        labels={Object.keys(data)}
-        data={Object.values(data)}
-        label="Offers Made"
-        title="Number of Offers per Employer"
+    <Bar
+      labels={Object.keys(data)}
+      data={Object.values(data)}
+      label="Offers Made"
+      title="Number of Offers per Employer"
     />
   );
 };

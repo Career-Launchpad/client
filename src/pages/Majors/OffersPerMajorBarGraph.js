@@ -48,11 +48,11 @@ const OffersPerMajorBarGraph = ({ majors, students, offers }) => {
   });
   return (
     <div>
-      <Bar 
-              labels={majors}
-              data={numOffers}
-              label="Offers Made"
-              title="Offers by Major"
+      <Bar
+        labels={majors}
+        data={numOffers}
+        label="Offers Made"
+        title="Offers by Major"
       />
       {/* TODO: Show this chart as well */}
       {/* <ChartHelper
