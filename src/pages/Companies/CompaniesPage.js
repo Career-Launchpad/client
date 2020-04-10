@@ -6,11 +6,15 @@ import ClosableDialog from "../../components/ClosableDialog";
 import Layout from "../../components/Layout";
 import CompanyTable from "./CompanyTable";
 import { useEnvironment } from "../../utils/environment";
-import ChartHelper from "../../components/ChartHelper";
+import Bar from "../../components/charts/Bar";
+import Doughnut from "../../components/charts/Doughnut";
 
 const useStyles = makeStyles(theme => ({
   content: {
     margin: 20
+  },
+  modalContent: {
+    padding: "20px"
   },
   dialog: {
     overflowX: "hidden"
@@ -29,8 +33,31 @@ const useStyles = makeStyles(theme => ({
 
 const Dialog = ({ open, company, onExited, onClose }) => {
   let offers = [];
+  let monthSorted = [];
+  const monthMap = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  for (let i = 0; i < 12; i++) {
+    monthSorted.push(0);
+  }
+
   if (company && company.offers) {
     offers = company.offers.edges;
+    offers.forEach(offer => {
+      const month = new Date(parseInt(offer.timestamp)).getMonth();
+      monthSorted[month]++;
+    });
   }
   const numAccepted = offers.filter(offer => offer.accepted === true).length;
   const styles = useStyles();
@@ -42,24 +69,33 @@ const Dialog = ({ open, company, onExited, onClose }) => {
       title={company ? company.name : "Company Information"}
       onExited={onExited}
     >
-      <div className={styles.acceptedOffers}>
-        <div>
-          Offers Accepted: {numAccepted}/{offers.length}
+      <div className={styles.modalContent}>
+        {offers.length > 0 && (
+          <div className={styles.acceptedOffers}>
+            <div>
+              Offer Acceptance Rate: {(numAccepted / offers.length) * 100 + "%"}
+            </div>
+            <span>
+              <Doughnut
+                data={[numAccepted, offers.length - numAccepted]}
+                labels={["Accepted", "Rejected"]}
+                title={""}
+              />
+            </span>
+          </div>
+        )}
+        <div className={styles.offersByMonth}>
+          <span className={styles.doughnutChart}>
+            {offers.length > 0 && (
+              <Bar
+                labels={monthMap}
+                data={monthSorted}
+                label="Number of Student Offers"
+                title="Offers by Month"
+              />
+            )}
+          </span>
         </div>
-        <span className={styles.doughnutChart}>
-          {offers.length > 0 && (
-            <ChartHelper
-              data={[numAccepted, offers.length - numAccepted]}
-              backgroundColor={["#0251B7", "#ebebeb"]}
-              fillText={`${(numAccepted / offers.length) * 100}%`}
-              borderColor={"#ffffff"}
-              hoverBorderColor={"#ffffff"}
-              labels={["Accepted", "Total Offers"]}
-              title={"Offers Accepted"}
-              type={"doughnut"}
-            />
-          )}
-        </span>
       </div>
     </ClosableDialog>
   );

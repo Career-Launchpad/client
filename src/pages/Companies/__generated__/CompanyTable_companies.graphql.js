@@ -21,6 +21,7 @@ export type CompanyTable_companies = {|
         +id: ?string,
         +position_title: ?string,
         +accepted: ?boolean,
+        +timestamp: ?string,
       |}>,
       +$fragmentRefs: OfferTable_offers$ref,
     |},
@@ -100,6 +101,13 @@ return {
                   "name": "accepted",
                   "args": null,
                   "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "timestamp",
+                  "args": null,
+                  "storageKey": null
                 }
               ]
             },
@@ -116,5 +124,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'bf699de3360e195b250dfd69c8af04cc';
+(node/*: any*/).hash = '52737eb20659572c00537849a04df31c';
 module.exports = node;
