@@ -19,19 +19,33 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const headers = [
-  { name: "First Name", id: "firstname" },
-  { name: "Last Name", id: "lastname" },
-  { name: "Academic Year", id: "academic_year" },
-  { name: "Major", id: "major" },
-  { name: "Offers Received", id: "offerCount" },
-  { name: "Offer Accepted", id: "offerAccepted" }
+export const columns = [
+  { name: "First Name", id: "firstname", type: "string" },
+  { name: "Last Name", id: "lastname", type: "string" },
+  {
+    name: "Academic Year",
+    id: "academic_year",
+    type: ["PhD", "Masters", "Senior", "Junior", "Sophomore", "Freshman"]
+  },
+  { name: "Major", id: "major", type: "string" },
+  {
+    name: "Offers Received",
+    id: "offerCount",
+    type: "int",
+    disableFiltering: true
+  },
+  {
+    name: "Offer Accepted",
+    id: "offerAccepted",
+    type: "boolean",
+    disableFiltering: true
+  }
 ];
 
 const StudentTable = ({ students, onStudentClicked }) => {
   const styles = useStyles();
   return (
-    <DataTable headers={headers}>
+    <DataTable headers={columns}>
       {students.edges.map((rawStudent, i) => {
         let student = { ...rawStudent };
         const offers = student.offers.edges || [];

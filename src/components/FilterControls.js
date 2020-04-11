@@ -175,7 +175,11 @@ const FilterControls = ({ onChange, columnInfo, filters }) => {
             }}
           >
             {columnInfo.map(col => (
-              <MenuItem key={col.id} value={col}>
+              <MenuItem
+                key={col.id}
+                value={col}
+                disabled={!!col.disableFiltering}
+              >
                 {col.name}
               </MenuItem>
             ))}
