@@ -12,14 +12,6 @@ const options = {
         }
       }
     ]
-  },
-  layout: {
-    padding: {
-        top: 15,
-        left: 15,
-        right: 15,
-        bottom: 15
-    }
   }
 };
 
