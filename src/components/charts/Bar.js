@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar as ChartJSBar } from "react-chartjs-2";
+import classes from "./LineGraph.module.css";
 
 const options = {
   scales: {
@@ -11,12 +12,20 @@ const options = {
         }
       }
     ]
+  },
+  layout: {
+    padding: {
+        top: 15,
+        left: 15,
+        right: 15,
+        bottom: 15
+    }
   }
 };
 
 const Bar = ({ labels, label, data, title }) => {
   return (
-    <div>
+    <div class={classes.graphContainer}>
       <h2>{title}</h2>
       <ChartJSBar
         data={{
