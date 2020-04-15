@@ -1,7 +1,6 @@
 .graphContainer {
   width: 40vw;
   height: 40vh;
-  background: white;
   display: "flex";
   align-items: "center";
   justify-content: "center";
