@@ -8,11 +8,11 @@ const options = {
       {
         ticks: {
           beginAtZero: true,
-          precision: 0
-        }
-      }
-    ]
-  }
+          precision: 0,
+        },
+      },
+    ],
+  },
 };
 
 const Bar = ({ labels, label, data, title }) => {
@@ -28,9 +28,9 @@ const Bar = ({ labels, label, data, title }) => {
               backgroundColor: "#0251B7",
               borderColor: "#0251B7",
               borderWidth: 1,
-              data
-            }
-          ]
+              data,
+            },
+          ],
         }}
         options={options}
       />
